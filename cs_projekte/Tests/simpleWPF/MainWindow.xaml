@@ -1,0 +1,79 @@
+﻿<Window x:Class="simpleWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="648" MinWidth="530" MinHeight="300">
+    <Grid>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="198,37,0,0" VerticalAlignment="Top" Width="107" RenderTransformOrigin="0.5,0.5">
+        </Label>
+        <Rectangle Margin="89,7,0,18" Stroke="Black" RenderTransformOrigin="0.5,0.5" Opacity="0.5" StrokeThickness="0" RadiusY="25.178" RadiusX="25.178" HorizontalAlignment="Left" Width="94">
+            <Rectangle.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FFE6ECE8" Offset="0"/>
+                    <GradientStop Color="#FFA5C8B4" Offset="1"/>
+                </RadialGradientBrush>
+            </Rectangle.Fill>
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-35.453"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <StackPanel HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="139">
+            <Button Content="Button"/>
+            <Button Content="Button"/>
+            <ComboBox/>
+            <CheckBox Content="CheckBox"/>
+            <Button Content="Button"/>
+            <Label Content="Label"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="TextBox"/>
+            <ProgressBar Height="10"/>
+            <Slider/>
+            <TextBlock TextWrapping="Wrap" Text="TextBlock"/>
+            <RadioButton Content="RadioButton"/>
+        </StackPanel>
+        <TabControl HorizontalAlignment="Right" Margin="0,10,10,10" Width="262">
+            <TabItem Header="TabItem" UseLayoutRounding="False">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100">
+                        <ListBoxItem Content="eintrag1"/>
+                        <ListBoxItem Content="eintrag2"/>
+                    </ListBox>
+                    <ListView HorizontalAlignment="Left" Height="143" Margin="10,115,0,0" VerticalAlignment="Top" Width="232">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Spalte 1"/>
+                                <GridViewColumn Header="Spalte 2"/>
+                            </GridView>
+                        </ListView.View>
+                        <ListViewItem Content="wert2;wert22"/>
+                        <ListViewItem Content="12121"/>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem" RenderTransformOrigin="0.5,0.5">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <Grid Background="#FFE5E5E5">
+                    <TreeView HorizontalAlignment="Left" Height="248" Margin="10,10,0,0" VerticalAlignment="Top" Width="232">
+                        <TreeViewItem Header="Root" IsExpanded="True">
+                            <TreeViewItem Header="sub1" HorizontalAlignment="Left" Width="209"/>
+                            <TreeViewItem Header="sub2" HorizontalAlignment="Left" Width="209"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Root 2">
+                            <TreeViewItem Header="sub1" HorizontalAlignment="Left" Width="209"/>
+                        </TreeViewItem>
+                    </TreeView>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

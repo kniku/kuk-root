@@ -1,0 +1,16 @@
+﻿<DBI_DATA_DESCRIPTION>
+
+	<!-- ##### types ##### -->
+	
+	<Type Name="STR035" Descr="String(35)" Type="string" Length="35"/>
+
+	<Type Name="BLZ" Descr="Bankleitzahl" Type="string" Length="10"/>
+	<Type Name="DATUM" Descr="Datum" Type="date"/>
+	<Type Name="ID" Descr="Integer ID" Type="numeric" Length="9" Scale="0"/>
+	<Type Name="AUTOID" Descr="Auto ID" Type="auto"/>
+	<Type Name="WAEHRUNG" Descr="Waehrungscode" Type="string" Length="3"/>
+	<Type Name="MEMO" Descr="Auszugstext" Type="string" Length="512"/>
+	<Type Name="BETRAG" Descr="Betrag" Type="numeric" Length="13" Scale="2"/>
+	<Type Name="MD5" Descr="MD5 Signatur" Type="string" Length="32"/>
+
+</DBI_DATA_DESCRIPTION>

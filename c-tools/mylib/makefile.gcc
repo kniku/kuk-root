@@ -1,0 +1,9 @@
+
+all: obj/tools.o obj/getopts.o
+	ar cru obj/tools.a obj/tools.o obj/getopts.o
+	
+obj/tools.o: tools.c tools.h ptools.h
+	gcc -c -g tools.c -oobj/tools.o
+obj/getopts.o: getopts.c tools.h ptools.h
+	gcc -c -g getopts.c -oobj/getopts.o
+

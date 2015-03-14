@@ -1,0 +1,32 @@
+<DBI_DATA_DESCRIPTION>
+
+	<Structure Name="Positionen" Descr="Auszugspositionen">
+		<Member Name="Id" Descr="Konto Id" RefType="MD5"/>
+		<Member Name="EffDt" Descr="Valutadatum" RefType="DATUM"/>
+		<Member Name="Amt" Descr="Betrag" RefType="BETRAG"/>
+		<Member Name="Memo" Descr="Auszugstext" RefType="MEMO"/>
+		<Member Name="CurCode" Descr="Waehrung" RefType="WAEHRUNG"/>
+		<Member Name="PostedDt" Descr="Buchungsdatum" RefType="DATUM"/>
+		<Member Name="KtoId" Descr="Konto Id" RefType="ID"/>
+	</Structure>
+
+	<Table Name="Positionen" Descr="Auszugspositionen" RefType="Positionen">
+		<PrimKey>
+			<Column>Id</Column>
+		</PrimKey>
+		<ForKey>
+			<Column>KtoId</Column>
+			<ForTable Name='Konten'>
+				<Column>Id</Column>
+			</ForTable>
+		</ForKey>
+<!--
+		<Index Unique='true'>
+			<Column>EffDt</Column>
+			<Column>Amt</Column>
+			<Column>Memo</Column>
+		</Index>
+-->
+	</Table>
+
+</DBI_DATA_DESCRIPTION>

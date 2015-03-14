@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+
+<DBI_DATA_DESCRIPTION>
+
+	<Type Name="Typ1" Descr="TestTyp 1"	Type="string" Length="10">
+		<Sql>
+			<Default>Hi</Default>
+		</Sql>
+	</Type>
+
+	<Type Name="Typ2" Descr="TestTyp 2" Type="numeric" Length="10" Scale="2">
+		<Sql>
+			<Default>-9.12</Default>
+		</Sql>
+	</Type>
+
+	<Type Name="Typ3" Descr="TestTyp 3" Type="date">
+		<Sql>
+			<Default>20010512141516</Default>
+		</Sql>
+	</Type>
+
+	<Type Name="Typ4" Descr="TestTyp 4"	Type="string" Length="35">
+		<Sql>
+			<Default>#default#</Default>
+		</Sql>
+	</Type>
+	
+	<Type Name="Typ5" Descr="TestTyp 5" Type="numeric" Length="9" Scale="0"/>
+	<Type Name="AUTOID" Descr="auto increment test" Type="auto"/>
+
+</DBI_DATA_DESCRIPTION>

@@ -1,0 +1,238 @@
+
+# parsing input
+{ build.xml }
+  < DBI_DATA_DESCRIPTION
+   < Module
+    < Generator
+     Target='generated/c_table_mysql.sql'
+     Name='GenSql'
+     Mode='mysql5'
+    >
+    < Generator
+     Target='generated/c_table_oracle.sql'
+     Name='GenSql'
+     Mode='oracle9'
+    >
+    < Generator
+     Name='GenCDecl'
+     Target='generated/c'
+    >
+    < Import
+     File='types.xml'
+    >
+    < Import
+     File='structs.xml'
+    >
+    < Import
+     File='tables.xml'
+    >
+    Name='Mod1'
+   >
+  >
+{ types.xml }
+  < DBI_DATA_DESCRIPTION
+   < Type
+    < Sql
+     < Default
+     >
+    >
+    Length='10'
+    Type='string'
+    Name='Typ1'
+    Descr='TestTyp 1'
+   >
+   < Type
+    < Sql
+     < Default
+     >
+    >
+    Length='10'
+    Scale='2'
+    Type='numeric'
+    Name='Typ2'
+    Descr='TestTyp 2'
+   >
+   < Type
+    < Sql
+     < Default
+     >
+    >
+    Type='date'
+    Name='Typ3'
+    Descr='TestTyp 3'
+   >
+   < Type
+    < Sql
+     < Default
+     >
+    >
+    Length='35'
+    Type='string'
+    Name='Typ4'
+    Descr='TestTyp 4'
+   >
+   < Type
+    Length='9'
+    Scale='0'
+    Type='numeric'
+    Name='Typ5'
+    Descr='TestTyp 5'
+   >
+   < Type
+    Type='auto'
+    Name='AUTOID'
+    Descr='auto increment test'
+   >
+  >
+{ structs.xml }
+  < DBI_DATA_DESCRIPTION
+   < Structure
+    < Member
+     RefType='AUTOID'
+     Name='S1C0'
+     Descr='automatic id test'
+    >
+    < Member
+     RefType='Typ1'
+     Name='S1C1'
+     Descr='Spalte 1'
+    >
+    < Member
+     RefType='Typ2'
+     Name='S1C2'
+     Descr='Spalte 2'
+    >
+    < Member
+     < Sql
+      < Default
+      >
+     >
+     RefType='Typ3'
+     Name='S1C3'
+     Descr='Spalte 3'
+    >
+    < Member
+     RefType='Typ4'
+     Name='S1C4'
+     Descr='Spalte 4'
+    >
+    < Member
+     < Sql
+      < Default
+      >
+     >
+     RefType='Typ4'
+     Name='S1C5'
+     Descr='Spalte 5'
+    >
+    < Member
+     < Sql
+      < Default
+      >
+     >
+     RefType='Typ4'
+     Name='S1C6'
+     Descr='Spalte 6'
+    >
+    Name='S1'
+    Descr='TestStruct 1'
+   >
+   < Structure
+    < Member
+     RefType='Typ1'
+     Name='S2C1'
+     Descr='Spalte 1'
+    >
+    < Member
+     < Sql
+      < Default
+      >
+     >
+     RefType='Typ3'
+     Null='true'
+     Name='S2C2'
+     Descr='Spalte 2'
+    >
+    < Member
+     RefType='Typ3'
+     Null='false'
+     Name='S2C3'
+     Descr='Spalte 3'
+    >
+    Name='S2'
+    Descr='TestStruct 2'
+   >
+   < Structure
+    < Member
+     RefType='Typ1'
+     Name='S3C1'
+     Descr='Spalte 1'
+    >
+    < Member
+     RefType='Typ4'
+     Name='S3C2'
+     Descr='Spalte 2'
+    >
+    Name='S3'
+    Descr='TestStruct 3'
+   >
+  >
+{ tables.xml }
+  < DBI_DATA_DESCRIPTION
+   < Table
+    < PrimKey
+     < Column
+     >
+     < Column
+     >
+    >
+    < Index
+     < Column
+     >
+     < Column
+     >
+     Unique='true'
+     Name='idxT1'
+    >
+    RefType='S1'
+    Name='T1'
+    Descr='Testtabelle 1'
+   >
+   < Table
+    < PrimKey
+     < Column
+     >
+    >
+    < ForKey
+     < Column
+     >
+     < ForTable
+      < Column
+      >
+      Name='T1'
+     >
+     Name='fk01_T2_T1'
+    >
+    RefType='S2'
+    Name='T2'
+    Descr='Testtabelle 2'
+   >
+   < Table
+    < PrimKey
+     < Column
+     >
+    >
+    < Index
+     < Column
+     >
+     < Column
+     >
+    >
+    RefType='S1'
+    Name='TX'
+   >
+  >
+# done.
+# generator: GenSql -> generated/c_table_mysql.sql
+# generator: GenSql -> generated/c_table_oracle.sql
+# generator: GenCDecl -> generated/c

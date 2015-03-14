@@ -1,0 +1,33 @@
+<DBI_DATA_DESCRIPTION>
+	
+	<Table Name="T1" Descr="Testtabelle 1" RefType="S1">
+		<PrimKey>
+			<Column>S1C1</Column>
+			<Column>S1C2</Column>
+		</PrimKey>
+		<Index Name="idxT1" Unique='true'>
+			<Column>S1C2</Column>
+			<Column>S1C3</Column>
+		</Index>
+	</Table>
+	<Table Name="T2" Descr="Testtabelle 2" RefType="S2">
+		<PrimKey>
+			<Column>S2C1</Column>
+		</PrimKey>
+		<ForKey Name="fk01_T2_T1">
+			<Column>S2C2</Column>
+			<ForTable Name="T1">
+				<Column>S1C3</Column>
+			</ForTable>
+		</ForKey>
+	</Table>
+	<Table Name="TX" RefType="S1">
+		<PrimKey>
+			<Column>S1C2</Column>
+		</PrimKey>
+		<Index>
+			<Column>S1C2</Column>
+			<Column>S1C3</Column>
+		</Index>
+	</Table>
+</DBI_DATA_DESCRIPTION>

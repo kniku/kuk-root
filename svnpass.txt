@@ -1,1 +1,12 @@
-kurt.kniely@gmail.com's googlecode.com password: hF2Dy4Wf8eU5
+google code (outdated):
+==========================
+https://kuk-root.googlecode.com/svn/
+user: google std. email; googlecode.com password: hF2Dy4Wf8eU5
+
+github:
+==========================
+user: kniku, password: anlusa10
+email: google std. email
+https://github.com/kniku/kuk-root
+
+

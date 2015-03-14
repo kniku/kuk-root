@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project bitools">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="c:/develop/kuk/dev/bankinfoj/test/xml2db.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="bitools.xml2db.xml2db"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset excludes="*.properties" dir="C:/develop/kuk/Dev/BankInfoJ/bitools/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/develop/kuk/Dev/BankInfoJ/bitools/lib/hsqldb.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/develop/kuk/Dev/BankInfoJ/bitools/lib/log4j-1.2.12.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/develop/kuk/Dev/BankInfoJ/bitools/lib/ojdbc6.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/develop/kuk/Dev/BankInfoJ/bitools/lib/postgresql-8.3-603.jdbc4.jar"/>
+        </jar>
+    </target>
+</project>

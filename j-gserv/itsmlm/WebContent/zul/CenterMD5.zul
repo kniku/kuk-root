@@ -1,0 +1,30 @@
+<window id="win_CenterMD5" apply="controller.inc.CenterMD5" title="MD5 Check" height="100%" width="100%"
+	border="normal" closable="true">
+	<timer id="timer_progress" delay="1000" repeats="true" running="false"></timer>
+	<vbox>
+		<hbox>
+			<button id="but_ok" label="Starte Überprüfung" />
+		</hbox>
+		<grid>
+			<rows>
+				<row>	
+					<label id="XXX">Übersetzungen:</label>		
+					<progressmeter id="progress_check_trans" value="0" width="500px"/>
+					<label id="lab_progress_check_trans"></label>		
+				</row>
+				<row>
+					<label>Texte:</label>		
+					<progressmeter id="progress_check_text" value="0" width="500px"/>
+					<label id="lab_progress_check_text"></label>		
+				</row>	
+			</rows>
+		</grid>
+<!--		<panel id="panel_list" width="100%" border="normal"-->
+<!--			title="Texte/Übersetzungen" visible="false">-->
+<!--			<panelchildren style="padding:5px;">-->
+<!--				<listbox id="lb_translations" mold="paging" height="400px"/>-->
+<!--			</panelchildren>-->
+<!--		</panel>-->
+		<listbox id="lb_translations" mold="paging" height="400px"/>
+	</vbox>
+</window>

@@ -1,0 +1,6 @@
+Projekte ins eclipse importieren:
+================================
+1)	eclipse starten, als workspace dieses Verzeichnis angeben
+2)	Unter "Import" "General/Existig Projects into Workspace" auswählen und
+	als root-Verzeichnis ebenfalls dieses Verzeichnis auswählen -> fertig
+	

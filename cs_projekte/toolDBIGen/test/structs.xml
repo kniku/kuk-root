@@ -1,0 +1,40 @@
+<DBI_DATA_DESCRIPTION>
+	<Structure Name="S1" Descr="TestStruct 1">
+		<Member Name="S1C0" RefType="AUTOID" Descr="automatic id test"></Member>
+		<Member Name="S1C1" RefType="Str1" Descr="Spalte 1"/>
+		<Member Name="S1C2" RefType="Num1" Descr="Spalte 2"></Member>
+		<Member Name="S1C3" RefType="DateTime1" Descr="Spalte 3">
+			<Default>20121021141211</Default>
+		</Member>
+		<Member Name="S1C4" RefType="Str2" Descr="Spalte 4"></Member>
+		<Member	Descr="Spalte 5" Name="S1C5" RefType="Str2">
+			<Default>test overloading</Default>
+		</Member>
+		<Member	Descr="Spalte 6" Name="S1C6" RefType="Str1">
+			<Default>xxx</Default>
+		</Member>
+    <Member Name="S1C7" RefType="GUID" Descr="guid test"></Member>
+  </Structure>
+	
+	<Structure Name="S2" Descr="TestStruct 2">
+		<Member Name="S2C1" RefType="Str1" Descr="Spalte 1"/>
+		<Member Name="S2C2" RefType="DateTime1" Descr="Spalte 2" Null='true'>
+			<Default>20031213</Default>
+		</Member>
+		<Member Name="S2C3" RefType="Num2" Descr="Spalte 3" Null='false'></Member>
+	</Structure>
+	
+	<Structure Name="S3" Descr="TestStruct 3">
+		<Member	Name="S3C1"	RefType="Str1" Descr="Spalte 1"/>
+		<Member Name="S3C2" RefType="Str2" Descr="Spalte 2"/>
+		<Member Name="S3C3" RefType="Num1" Descr="Spalte 3"/>
+	</Structure>
+
+  <Structure Name="S_Standard" Descr="Standard Struct">
+    <Member	Name="col_auto"	RefType="AUTOID" Descr="Standard SERIAL"/>
+    <Member Name="col_string" RefType="String" Descr="Standard String"/>
+    <Member Name="col_numeric" RefType="Numeric" Descr="Standard Numeric"/>
+    <Member Name="col_datetime" RefType="DateTime" Descr="Standard Zeitstempel"/>
+  </Structure>
+
+</DBI_DATA_DESCRIPTION>

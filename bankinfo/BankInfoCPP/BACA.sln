@@ -1,0 +1,84 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BACA - xml2db", "xml2db\xml2db.vcproj", "{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28} = {8C3FFD63-C22D-44F5-8487-551C71EDCF28}
+		{381C4085-6405-45F9-96AA-1EFF422AB202} = {381C4085-6405-45F9-96AA-1EFF422AB202}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Gui", "Gui\Gui.vcproj", "{D87E6EF2-541B-4F4B-A384-A7AD15233808}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28} = {8C3FFD63-C22D-44F5-8487-551C71EDCF28}
+		{381C4085-6405-45F9-96AA-1EFF422AB202} = {381C4085-6405-45F9-96AA-1EFF422AB202}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\klibs\base\base.vcproj", "{381C4085-6405-45F9-96AA-1EFF422AB202}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dbi", "..\klibs\dbi\dbi.vcproj", "{8C3FFD63-C22D-44F5-8487-551C71EDCF28}"
+	ProjectSection(ProjectDependencies) = postProject
+		{381C4085-6405-45F9-96AA-1EFF422AB202} = {381C4085-6405-45F9-96AA-1EFF422AB202}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_mysql|Win32 = Debug_mysql|Win32
+		Debug|Win32 = Debug|Win32
+		Release_mysql|Win32 = Release_mysql|Win32
+		Release_oracle|Win32 = Release_oracle|Win32
+		Release_sqlite|Win32 = Release_sqlite|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Debug_mysql|Win32.ActiveCfg = Debug|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Debug_mysql|Win32.Build.0 = Debug|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Debug|Win32.Build.0 = Debug|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Release_mysql|Win32.ActiveCfg = Release|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Release_mysql|Win32.Build.0 = Release|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Release_oracle|Win32.ActiveCfg = Release|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Release_oracle|Win32.Build.0 = Release|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Release_sqlite|Win32.ActiveCfg = Release|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Release_sqlite|Win32.Build.0 = Release|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Release|Win32.ActiveCfg = Release|Win32
+		{42FF7A30-562B-456B-BA7C-7F0A7A992DFA}.Release|Win32.Build.0 = Release|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Debug_mysql|Win32.ActiveCfg = Debug|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Debug_mysql|Win32.Build.0 = Debug|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Debug|Win32.Build.0 = Debug|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Release_mysql|Win32.ActiveCfg = Release|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Release_mysql|Win32.Build.0 = Release|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Release_oracle|Win32.ActiveCfg = Release|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Release_oracle|Win32.Build.0 = Release|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Release_sqlite|Win32.ActiveCfg = Release|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Release_sqlite|Win32.Build.0 = Release|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Release|Win32.ActiveCfg = Release|Win32
+		{D87E6EF2-541B-4F4B-A384-A7AD15233808}.Release|Win32.Build.0 = Release|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Debug_mysql|Win32.ActiveCfg = Debug|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Debug_mysql|Win32.Build.0 = Debug|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Debug|Win32.ActiveCfg = Debug|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Debug|Win32.Build.0 = Debug|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Release_mysql|Win32.ActiveCfg = Release|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Release_mysql|Win32.Build.0 = Release|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Release_oracle|Win32.ActiveCfg = Release|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Release_oracle|Win32.Build.0 = Release|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Release_sqlite|Win32.ActiveCfg = Release|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Release_sqlite|Win32.Build.0 = Release|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Release|Win32.ActiveCfg = Release|Win32
+		{381C4085-6405-45F9-96AA-1EFF422AB202}.Release|Win32.Build.0 = Release|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Debug_mysql|Win32.ActiveCfg = Debug|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Debug_mysql|Win32.Build.0 = Debug|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Debug|Win32.Build.0 = Debug|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Release_mysql|Win32.ActiveCfg = Release|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Release_mysql|Win32.Build.0 = Release|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Release_oracle|Win32.ActiveCfg = Release|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Release_oracle|Win32.Build.0 = Release|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Release_sqlite|Win32.ActiveCfg = Release|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Release_sqlite|Win32.Build.0 = Release|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Release|Win32.ActiveCfg = Release|Win32
+		{8C3FFD63-C22D-44F5-8487-551C71EDCF28}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

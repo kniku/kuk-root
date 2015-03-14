@@ -1,0 +1,7 @@
+
+TOOLDIR=../mylib
+
+all: obj/crypt
+
+obj/crypt: crypt.c $(TOOLDIR)/obj/tools.o
+	gcc -I$(TOOLDIR) crypt.c $(TOOLDIR)/obj/tools.o $(TOOLDIR)/obj/getopts.o -oobj/crypt

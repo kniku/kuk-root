@@ -1,0 +1,219 @@
+PZA:1138713026
+00,0000004702,06:32:58,31-01-06,IN,00,Rumpl           ,Astrid          ,
+00,0000004702,07:02:58,31-01-06,IN,00,Zapf            ,Nicole          ,
+00,0000004702,07:21:37,31-01-06,IN,00,Paar            ,Martin          ,
+00,0000004702,07:21:40,31-01-06,OU,00,Paar            ,Martin          ,
+00,0000004702,07:21:43,31-01-06,IN,00,Paar            ,Martin          ,
+00,0000004702,07:23:27,31-01-06,IN,00,Reissner        ,Thomas          ,
+00,0000004702,07:27:33,31-01-06,IN,00,Rauch           ,Jürgen          ,
+00,0000004702,07:31:00,31-01-06,IN,00,Ortner          ,Robert          ,
+00,0000004702,07:32:57,31-01-06,IN,00,Putz            ,Werner          ,
+00,0000004702,07:33:21,31-01-06,IN,00,Geratitsch      ,Ruth            ,
+00,0000004702,07:33:21,31-01-06,OU,00,Geratitsch      ,Ruth            ,
+00,0000004702,07:33:22,31-01-06,IN,00,Geratitsch      ,Ruth            ,
+00,0000004702,07:36:22,31-01-06,IN,00,Ortner          ,Robert          ,
+00,0000004702,07:37:34,31-01-06,IN,00,Zeller          ,Dieter          ,
+00,0000004702,07:42:35,31-01-06,IN,00,Klammler        ,Franz           ,
+00,0000004702,07:52:04,31-01-06,IN,00,Draxler         ,Eleonore        ,
+00,0000004702,07:57:21,31-01-06,IN,00,Fladischer      ,Andreas         ,
+00,0000004702,08:00:37,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,08:07:13,31-01-06,IN,00,Dreisiebner     ,Werner          ,
+00,0000004702,08:08:31,31-01-06,IN,00,Schuster        ,Christine       ,
+00,0000004702,08:08:54,31-01-06,IN,00,Weiß            ,Franz           ,
+00,0000004702,08:09:26,31-01-06,IN,00,Rath            ,Dominikus       ,
+00,0000004702,08:15:05,31-01-06,IN,00,Holzer          ,Johannes        ,
+00,0000004702,08:15:28,31-01-06,IN,00,Klammler        ,Franz           ,bei nik
+00,0000004702,08:16:38,31-01-06,OU,00,Hopfer          ,Bernhard        ,Rauchpause
+00,0000004702,08:19:44,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,08:20:37,31-01-06,IN,00,Langmann        ,Philipp         ,
+00,0000004702,08:20:56,31-01-06,IN,00,Göri            ,Peter           ,
+00,0000004702,08:21:51,31-01-06,IN,00,Peer            ,Günther         ,
+00,0000004702,08:22:26,31-01-06,IN,00,Kerschenbauer   ,Christian       ,
+00,0000004702,08:22:30,31-01-06,IN,00,Breyer          ,Alfred          ,
+00,0000004702,08:23:46,31-01-06,IN,00,Unger           ,Erwin           ,
+00,0000004702,08:26:08,31-01-06,IN,00,Jahrer          ,Arnold          ,
+00,0000004702,08:27:13,31-01-06,IN,00,Bauer           ,Gernot          ,
+00,0000004702,08:28:53,31-01-06,IN,00,Haberler        ,Georg           ,
+00,0000004702,08:35:45,31-01-06,IN,00,Springer        ,Helmut          ,
+00,0000004702,08:36:52,31-01-06,IN,00,Bachmann        ,Wolfgang        ,
+00,0000004702,08:37:18,31-01-06,IN,00,Herzog          ,Reinhard        ,
+00,0000004702,08:40:47,31-01-06,IN,00,Jahrbacher      ,Gerit           ,
+00,0000004702,08:42:19,31-01-06,IN,00,Pichler         ,Michael         ,
+00,0000004702,08:44:32,31-01-06,IN,00,Kniely          ,Kurt            ,
+00,0000004702,08:44:56,31-01-06,OU,00,Putz            ,Werner          ,Rauchpause
+00,0000004702,08:49:20,31-01-06,IN,00,Putz            ,Werner          ,
+00,0000004702,08:50:03,31-01-06,IN,00,Klammler        ,Franz           ,
+00,0000004702,08:51:21,31-01-06,IN,00,Göri            ,Peter           ,pwb
+00,0000004702,08:52:43,31-01-06,IN,00,Breyer          ,Alfred          ,Firmenweg
+00,0000004702,08:57:39,31-01-06,IN,00,Holzapfel       ,Bernd           ,
+00,0000004702,08:59:10,31-01-06,OU,00,Mähr            ,Reinhard        ,
+00,0000004702,08:59:12,31-01-06,IN,00,Mähr            ,Reinhard        ,
+00,0000004702,09:03:42,31-01-06,OU,00,Hopfer          ,Bernhard        ,Rauchpause
+00,0000004702,09:04:36,31-01-06,IN,00,Karner          ,Harald          ,
+00,0000004702,09:06:11,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,09:07:35,31-01-06,IN,00,Bauer           ,Gernot          ,bin bei lap
+00,0000004702,09:15:17,31-01-06,IN,00,Leitner         ,Philipp         ,
+00,0000004702,09:19:11,31-01-06,IN,00,Bauer           ,Gernot          ,
+00,0000004702,09:35:31,31-01-06,IN,00,Schellauf       ,Heinz           ,
+00,0000004702,09:36:18,31-01-06,IN,00,Göri            ,Peter           ,
+00,0000004702,09:38:58,31-01-06,IN,00,Mir             ,Georg           ,
+00,0000004702,09:40:44,31-01-06,OU,00,Fladischer      ,Andreas         ,www
+00,0000004702,09:41:26,31-01-06,IN,00,Gsell           ,Manfred         ,
+00,0000004702,09:41:34,31-01-06,IN,00,Fladischer      ,Andreas         ,
+00,0000004702,09:54:00,31-01-06,IN,00,Haberler        ,Peter           ,
+00,0000004702,09:59:54,31-01-06,IN,00,Hrebejk         ,Roland          ,
+00,0000004702,10:05:46,31-01-06,IN,00,Jerolitsch      ,Thomas          ,
+00,0000004702,10:08:08,31-01-06,IN,00,Hrebejk         ,Roland          ,bin bei eur
+00,0000004702,10:10:04,31-01-06,IN,00,Breyer          ,Alfred          ,
+00,0000004702,10:11:29,31-01-06,OU,00,Gsell           ,Manfred         ,Rauchpause
+00,0000004702,10:13:29,31-01-06,IN,00,Budde           ,Christoph       ,
+00,0000004702,10:13:33,31-01-06,OU,00,Hopfer          ,Bernhard        ,
+00,0000004702,10:14:20,31-01-06,OU,00,Fladischer      ,Andreas         ,www
+00,0000004702,10:15:11,31-01-06,IN,00,Gsell           ,Manfred         ,
+00,0000004702,10:15:12,31-01-06,IN,00,Fladischer      ,Andreas         ,
+00,0000004702,10:19:44,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,10:21:02,31-01-06,IN,00,Schlögl         ,Karlheinz       ,
+00,0000004702,10:22:56,31-01-06,IN,00,Franic          ,Tea             ,
+00,0000004702,10:23:08,31-01-06,OU,00,Fladischer      ,Andreas         ,Rauchpause
+00,0000004702,10:28:27,31-01-06,OU,00,Rieder          ,Willibald       ,
+00,0000004702,10:28:29,31-01-06,IN,00,Fladischer      ,Andreas         ,
+00,0000004702,10:30:47,31-01-06,IN,00,Rauch           ,Jürgen          ,bin bei chb
+00,0000004702,10:31:09,31-01-06,IN,00,Rieder          ,Willibald       ,
+00,0000004702,10:34:45,31-01-06,OU,00,Hopfer          ,Bernhard        ,
+00,0000004702,10:35:17,31-01-06,IN,00,Hrebejk         ,Roland          ,
+00,0000004702,10:37:15,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,10:43:30,31-01-06,IN,00,Rauch           ,Jürgen          ,
+00,0000004702,10:45:41,31-01-06,IN,00,Rath            ,Dominikus       ,bei rhg
+00,0000004702,10:46:55,31-01-06,OU,00,Hopfer          ,Bernhard        ,
+00,0000004702,10:51:18,31-01-06,OU,00,Putz            ,Werner          ,Rauchpause
+00,0000004702,10:53:09,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,10:55:20,31-01-06,IN,00,Putz            ,Werner          ,
+00,0000004702,10:59:39,31-01-06,OU,00,Hopfer          ,Bernhard        ,
+00,0000004702,10:59:41,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,11:01:00,31-01-06,OU,00,Reissner        ,Thomas          ,
+00,0000004702,11:01:07,31-01-06,IN,00,Reissner        ,Thomas          ,
+00,0000004702,11:01:13,31-01-06,IN,00,Reissner        ,Thomas          ,lep
+00,0000004702,11:09:01,31-01-06,OU,00,Franic          ,Tea             ,Rauchpause
+00,0000004702,11:13:01,31-01-06,IN,00,Franic          ,Tea             ,
+00,0000004702,11:16:15,31-01-06,IN,00,Riegler         ,Klaus           ,
+00,0000004702,11:16:28,31-01-06,OU,00,Bauer           ,Gernot          ,www
+00,0000004702,11:18:02,31-01-06,IN,00,Bauer           ,Gernot          ,
+00,0000004702,11:20:46,31-01-06,IN,00,Paar            ,Martin          ,bei eur
+00,0000004702,11:20:47,31-01-06,IN,00,Zeller          ,Dieter          ,
+00,0000004702,11:21:34,31-01-06,OU,00,Zeller          ,Dieter          ,
+00,0000004702,11:22:46,31-01-06,IN,00,Zeller          ,Dieter          ,
+00,0000004702,11:23:20,31-01-06,IN,00,Rath            ,Dominikus       ,
+00,0000004702,11:27:36,31-01-06,OU,00,Gsell           ,Manfred         ,
+00,0000004702,11:28:17,31-01-06,OU,00,Hopfer          ,Bernhard        ,Rauchpause
+00,0000004702,11:30:38,31-01-06,IN,00,Gsell           ,Manfred         ,
+00,0000004702,11:32:46,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,11:34:00,31-01-06,OU,00,Herzog          ,Reinhard        ,bin beim Mittagessen
+00,0000004702,11:34:33,31-01-06,OU,00,Kerschenbauer   ,Christian       ,bin beim Mittagessen
+00,0000004702,11:35:29,31-01-06,OU,00,Klammler        ,Franz           ,bin beim Mittagessen
+00,0000004702,11:36:33,31-01-06,OU,00,Mir             ,Georg           ,
+00,0000004702,11:39:02,31-01-06,OU,00,Karner          ,Harald          ,bin beim Mittagessen
+00,0000004702,11:44:32,31-01-06,OU,00,Ortner          ,Robert          ,
+00,0000004702,11:45:19,31-01-06,OU,00,Franic          ,Tea             ,bin beim Mittagessen
+00,0000004702,11:45:36,31-01-06,OU,00,Pichler         ,Michael         ,bin beim Mittagessen
+00,0000004702,11:45:51,31-01-06,OU,00,Bachmann        ,Wolfgang        ,bin beim Mittagessen
+00,0000004702,11:52:52,31-01-06,OU,00,Zapf            ,Nicole          ,bin beim Mittagessen
+00,0000004702,11:52:55,31-01-06,OU,00,Geratitsch      ,Ruth            ,bin beim Mittagessen
+00,0000004702,11:53:20,31-01-06,OU,00,Riegler         ,Klaus           ,Rauchpause
+00,0000004702,11:57:15,31-01-06,OU,00,Hopfer          ,Bernhard        ,bin beim Mittagessen
+00,0000004702,11:58:07,31-01-06,IN,00,Hojas           ,August          ,
+00,0000004702,11:58:24,31-01-06,OU,00,Dreisiebner     ,Werner          ,mittagessen
+00,0000004702,11:58:27,31-01-06,OU,00,Jahrer          ,Arnold          ,bin beim Mittagessen
+00,0000004702,11:58:38,31-01-06,OU,00,Zeller          ,Dieter          ,bin beim Mittagessen
+00,0000004702,11:58:41,31-01-06,OU,00,Putz            ,Werner          ,bin beim Mittagessen
+00,0000004702,11:59:18,31-01-06,OU,00,Langmann        ,Philipp         ,bin beim Mittagessen
+00,0000004702,12:00:25,31-01-06,OU,00,Breyer          ,Alfred          ,bin beim Mittagessen
+00,0000004702,12:00:50,31-01-06,OU,00,Weiß            ,Franz           ,
+00,0000004702,12:02:18,31-01-06,IN,00,Riegler         ,Klaus           ,
+00,0000004702,12:04:16,31-01-06,IN,00,Riegler         ,Klaus           ,bin bei ram
+00,0000004702,12:08:56,31-01-06,IN,00,Ortner          ,Robert          ,
+00,0000004702,12:10:22,31-01-06,OU,00,Holzapfel       ,Bernd           ,bin beim Mittagessen
+00,0000004702,12:10:53,31-01-06,OU,00,Bauer           ,Gernot          ,bin beim Mittagessen
+00,0000004702,12:11:36,31-01-06,IN,00,Reissner        ,Thomas          ,
+00,0000004702,12:11:39,31-01-06,OU,00,Reissner        ,Thomas          ,bin beim Mittagessen
+00,0000004702,12:12:10,31-01-06,IN,00,Reissner        ,Thomas          ,
+00,0000004702,12:13:40,31-01-06,IN,00,Franic          ,Tea             ,
+00,0000004702,12:14:23,31-01-06,IN,00,Bachmann        ,Wolfgang        ,
+00,0000004702,12:14:34,31-01-06,IN,00,Pichler         ,Michael         ,
+00,0000004702,12:16:48,31-01-06,IN,00,Riegler         ,Klaus           ,
+00,0000004702,12:17:26,31-01-06,OU,00,Schuster        ,Christine       ,bin beim Mittagessen
+00,0000004702,12:17:53,31-01-06,IN,00,Geratitsch      ,Ruth            ,
+00,0000004702,12:18:28,31-01-06,OU,00,Reissner        ,Thomas          ,bin beim Mittagessen
+00,0000004702,12:19:30,31-01-06,OU,00,Leitner         ,Philipp         ,bin beim Mittagessen
+00,0000004702,12:19:44,31-01-06,OU,00,Peer            ,Günther         ,bin beim Mittagessen
+00,0000004702,12:19:49,31-01-06,OU,00,Springer        ,Helmut          ,bin beim Mittagessen
+00,0000004702,12:20:53,31-01-06,OU,00,Bachmann        ,Wolfgang        ,www
+00,0000004702,12:22:31,31-01-06,IN,00,Bachmann        ,Wolfgang        ,
+00,0000004702,12:24:41,31-01-06,IN,00,Zapf            ,Nicole          ,
+00,0000004702,12:24:59,31-01-06,IN,00,Mir             ,Georg           ,
+00,0000004702,12:25:05,31-01-06,IN,00,Karner          ,Harald          ,
+00,0000004702,12:25:48,31-01-06,IN,00,Kerschenbauer   ,Christian       ,
+00,0000004702,12:25:56,31-01-06,IN,00,Herzog          ,Reinhard        ,
+00,0000004702,12:29:08,31-01-06,OU,00,Zapf            ,Nicole          ,
+00,0000004702,12:29:13,31-01-06,IN,00,Zapf            ,Nicole          ,
+00,0000004702,12:31:10,31-01-06,IN,00,Langmann        ,Philipp         ,
+00,0000004702,12:32:15,31-01-06,OU,00,Paar            ,Martin          ,
+00,0000004702,12:32:17,31-01-06,IN,00,Paar            ,Martin          ,
+00,0000004702,12:32:45,31-01-06,IN,00,Breyer          ,Alfred          ,
+00,0000004702,12:35:22,31-01-06,OU,00,Göri            ,Peter           ,bin beim Mittagessen
+00,0000004702,12:36:02,31-01-06,OU,00,Paar            ,Martin          ,
+00,0000004702,12:36:58,31-01-06,OU,00,Ortner          ,Robert          ,
+00,0000004702,12:39:19,31-01-06,IN,00,Klammler        ,Franz           ,
+00,0000004702,12:39:46,31-01-06,IN,00,Holzer          ,Johannes        ,
+00,0000004702,12:40:02,31-01-06,OU,00,Holzer          ,Johannes        ,bin beim Mittagessen
+00,0000004702,12:40:21,31-01-06,IN,00,Zeller          ,Dieter          ,
+00,0000004702,12:40:24,31-01-06,IN,00,Putz            ,Werner          ,
+00,0000004702,12:40:30,31-01-06,IN,00,Dreisiebner     ,Werner          ,
+00,0000004702,12:40:38,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,12:40:50,31-01-06,IN,00,Jahrer          ,Arnold          ,
+00,0000004702,12:40:51,31-01-06,IN,00,Weiß            ,Franz           ,
+00,0000004702,12:48:01,31-01-06,IN,00,Göri            ,Peter           ,
+00,0000004702,12:48:03,31-01-06,IN,00,Holzer          ,Johannes        ,
+00,0000004702,12:48:25,31-01-06,OU,00,Riegler         ,Klaus           ,
+00,0000004702,12:48:33,31-01-06,IN,00,Riegler         ,Klaus           ,
+00,0000004702,12:49:37,31-01-06,IN,00,Paar            ,Martin          ,
+00,0000004702,12:52:03,31-01-06,IN,00,Holzapfel       ,Bernd           ,
+00,0000004702,12:52:17,31-01-06,IN,00,Bauer           ,Gernot          ,
+00,0000004702,12:53:28,31-01-06,OU,00,Hrebejk         ,Roland          ,bin beim Mittagessen
+00,0000004702,12:54:51,31-01-06,OU,00,Jahrbacher      ,Gerit           ,bin beim Mittagessen
+00,0000004702,12:56:48,31-01-06,IN,00,Ortner          ,Robert          ,
+00,0000004702,13:01:32,31-01-06,OU,00,Riegler         ,Klaus           ,Rauchpause
+00,0000004702,13:01:46,31-01-06,IN,00,Riegler         ,Klaus           ,
+00,0000004702,13:07:42,31-01-06,OU,00,Riegler         ,Klaus           ,Rauchpause
+00,0000004702,13:08:57,31-01-06,OU,00,Franic          ,Tea             ,krank
+00,0000004702,13:12:03,31-01-06,OU,00,Hopfer          ,Bernhard        ,
+00,0000004702,13:12:04,31-01-06,OU,00,Haberler        ,Georg           ,bin beim Mittagessen
+00,0000004702,13:12:05,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,13:15:04,31-01-06,IN,00,Jahrbacher      ,Gerit           ,
+00,0000004702,13:16:53,31-01-06,IN,00,Riegler         ,Klaus           ,
+00,0000004702,13:20:08,31-01-06,IN,00,Leitner         ,Philipp         ,
+00,0000004702,13:20:15,31-01-06,IN,00,Peer            ,Günther         ,
+00,0000004702,13:20:20,31-01-06,IN,00,Springer        ,Helmut          ,
+00,0000004702,13:20:43,31-01-06,IN,00,Schuster        ,Christine       ,
+00,0000004702,13:22:42,31-01-06,OU,00,Zapf            ,Nicole          ,
+00,0000004702,13:22:44,31-01-06,IN,00,Zapf            ,Nicole          ,
+00,0000004702,13:23:19,31-01-06,IN,00,Reissner        ,Thomas          ,
+00,0000004702,13:23:33,31-01-06,OU,00,Gsell           ,Manfred         ,Rauchpause
+00,0000004702,13:24:25,31-01-06,IN,00,Langmann        ,Philipp         ,bei ret
+00,0000004702,13:26:13,31-01-06,IN,00,Gsell           ,Manfred         ,
+00,0000004702,13:32:02,31-01-06,OU,00,Hopfer          ,Bernhard        ,Rauchpause
+00,0000004702,13:34:41,31-01-06,OU,00,Bauer           ,Gernot          ,www
+00,0000004702,13:36:16,31-01-06,IN,00,Bauer           ,Gernot          ,
+00,0000004702,13:39:12,31-01-06,IN,00,Hopfer          ,Bernhard        ,
+00,0000004702,13:41:10,31-01-06,IN,00,Langmann        ,Philipp         ,
+00,0000004702,13:43:44,31-01-06,IN,00,Haberler        ,Georg           ,
+00,0000004702,13:45:07,31-01-06,IN,00,Breyer          ,Alfred          ,bin bei rlg
+00,0000004702,13:46:55,31-01-06,OU,00,Hojas           ,August          ,
+00,0000004702,13:48:21,31-01-06,OU,00,Budde           ,Christoph       ,bin beim Mittagessen
+00,0000004702,13:52:51,31-01-06,IN,00,Breyer          ,Alfred          ,
+00,0000004702,13:56:28,31-01-06,OU,00,Jerolitsch      ,Thomas          ,bin beim Mittagessen
+00,0000004702,13:56:46,31-01-06,IN,00,Riegler         ,Klaus           ,bin bei ror
+00,0000004702,13:59:04,31-01-06,IN,00,Holzapfel       ,Bernd           ,bin bei ret
+00,0000004702,14:02:36,31-01-06,OU,00,Schlögl         ,Karlheinz       ,bin beim Mittagessen
+00,0000004702,14:08:18,31-01-06,IN,00,Hrebejk         ,Roland          ,
+00,0000004702,14:10:26,31-01-06,IN,00,Göri            ,Peter           ,dre
+

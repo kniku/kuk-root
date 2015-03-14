@@ -1,0 +1,10 @@
+VERSION 1.0.1
+- Erste Version. Unterstützung von oracle9 und mysql5
+
+VERSION 1.1.0
+- Unterstützung von sqlite3
+
+VERSION 1.1.x
+- ???
+
+VERSION 1.2.0

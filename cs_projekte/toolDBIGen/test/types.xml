@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<DBI_DATA_DESCRIPTION>
+
+  <Type Name="AUTOID" Descr="Standard Auto Increment" Type="auto"/>
+  <Type Name="GUID" Descr="Unique Identifier" Type="guid"/>
+  <Type Name="String" Descr="Standard String"	Type="string"/>
+  <Type Name="Numeric" Descr="Standard Numeric"	Type="numeric"/>
+  <Type Name="DateTime" Descr="Standard DateTime" Type="datetime"/>
+
+  <Type Name="String256" Descr="Standard String 256"	Type="string" Length="256"/>
+  <Type Name="Numeric-15.2" Descr="Standard Numeric 15/2" Type="numeric" Precision="15" Scale="2"/>
+
+  <Type Name="Str1" Descr="TestTyp 1"	Type="string" Length="10">
+		<Default>Hi</Default>
+	</Type>
+
+	<Type Name="Num1" Descr="TestTyp 2" Type="numeric" Precision="10" Scale="2">
+		<Default>-9.12</Default>
+	</Type>
+
+	<Type Name="DateTime1" Descr="TestTyp 3" Type="datetime">
+		<Default>20010512141516</Default>
+	</Type>
+
+	<Type Name="Str2" Descr="TestTyp 4"	Type="string" Length="35">
+		<Default>#default#</Default>
+	</Type>
+	
+	<Type Name="Num2" Descr="TestTyp 5" Type="numeric" Precision="9" Scale="0"/>
+</DBI_DATA_DESCRIPTION>

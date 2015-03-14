@@ -1,0 +1,11 @@
+<window mode="overlapped" position="center" title="BLANK Check" border="normal">
+	<vbox>
+		<grid width="250px">
+			<rows>
+				<row spans="1,2">Benutzer:<textbox id="ef_login" focus="true" /></row>
+				<row spans="1,2">Kennwort:<textbox type="password"/></row>
+			</rows>
+		</grid>
+		<hbox><button id="but_ok" label="Login" /></hbox>
+	</vbox>
+</window>

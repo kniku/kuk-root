@@ -1,0 +1,42 @@
+TODO: Beschreibung aktualisieren!
+
+
+Environment Variable QTDIR auf dir QT-Installation setzen (ab QT4.3.0)
+
+Linux:
+
+qmake src/src.pro ausführen (erstellt Makefiles)
+make
+
+setenv QTDIR /usr/local/Trolltech/Qt-4.3.0
+setenv PATH $QTDIR/bin:$PATH
+
+
+Windows:
+
+qmake src/src.pro ausführen (erstellt Makefiles)
+mingw32-make
+
+set PATH=e:\pam\companylog\mingw\bin;d:\pam\companylog\mingw\lib;E:\pam\companylog\qt-win-opensource-src-4.3.0\bin;E:\pam\companylog\qt-win-opensource-src-4.3.0\lib;%PATH%
+set QTDIR=E:\pam\companylog\qt-win-opensource-src-4.3.0
+
+
+
+RPM-erstellen:
+
+Inhalt von companylog/bin/*
++ $QTDIR/lib/libQtNetwork.so.4
++ $QTDIR/lib/libQtCore.so.4
++ $QTDIR/lib/libQtGui.so.4
++ companylog/companylog.desktop
+
+... in ein Verzeichnis kopieren
+Gesamtes Verzeichnis in companylog-x.x-RC1.tar.gz zippen
+companylog-x.x-RC1.tar.gz nach /usr/src/redhat/SOURCES kopieren u. Version anpassen
+companylog/companylog-x.x-RC1.spec nach /usr/src/redhat/SPECS kopieren
+rpmbuild -bb /usr/src/redhat/SPECS/companylog-x.x-RC1.spec ausführen
+
+in /usr/src/redhat/RPMS/i386/ liegt das fertige RPM Paket
+
+Für Windows ist zusätzlich die Lib mingw10.lib notwendig!
+

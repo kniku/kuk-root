@@ -1,0 +1,8 @@
+
+TOOLDIR=../mylib
+
+all: obj/xd
+
+obj/xd: xd.c $(TOOLDIR)/obj/tools.o
+	gcc -I$(TOOLDIR) xd.c $(TOOLDIR)/obj/tools.o -oobj/xd
+

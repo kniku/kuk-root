@@ -1,0 +1,33 @@
+<DBI_DATA_DESCRIPTION>
+
+  <Table Name="T_Standard" RefType="S_Standard"/>
+
+  <Table Name="TEST3" RefType="S3"/>
+  
+  <Table Name="TEST1" Descr="Testtabelle 1" RefType="S1">
+		<PrimKey>S1C0,S1C1</PrimKey>
+		<Index Name="idxT1" Unique="true">S1C2,S1C3</Index>
+	</Table>
+  
+	<Table Name="TEST2" Descr="Testtabelle 2" RefType="S2">
+		<PrimKey>S2C1</PrimKey>
+<!--
+		<ForKey>
+			<Column>S2C2</Column>
+			<ForTable Name="T1">
+				<Column>S1C3</Column>
+			</ForTable>
+		</ForKey>
+-->
+	</Table>
+  
+	<Table Name="TEST4" RefType="S1">
+		<PrimKey>S1C2</PrimKey>
+		<Index>S1C2,S1C3</Index>
+	</Table>
+	
+	<Table Name="TEST5" RefType="S1">
+		<PrimKey>S1C2,S1C3</PrimKey>
+		<Index>S1C2,S1C3</Index>
+	</Table>
+</DBI_DATA_DESCRIPTION>

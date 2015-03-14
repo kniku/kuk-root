@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5C38A1B2-FF90-4A84-929E-A3C72B8BD694}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCS</RootNamespace>
+    <AssemblyName>DCS_Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configurator\ConfiguratorXML.cs" />
+    <Compile Include="Configurator\Interfaces.cs" />
+    <Compile Include="Logger\AbstractLogger.cs" />
+    <Compile Include="Logger\Interfaces.cs" />
+    <Compile Include="Logger\LoggerConsole.cs" />
+    <Compile Include="ManagedBeans\AbstractManagedBean.cs" />
+    <Compile Include="ManagedBeans\AbstractManagedThreadedBean.cs" />
+    <Compile Include="ManagedBeans\BeanManager.cs" />
+    <Compile Include="ManagedBeans\Implementations\DB_dummy.cs" />
+    <Compile Include="ManagedBeans\Implementations\LoggingBean.cs" />
+    <Compile Include="ManagedBeans\Implementations\MB_ControllerBean.cs" />
+    <Compile Include="ManagedBeans\Implementations\MB_DBLogger.cs" />
+    <Compile Include="ManagedBeans\Implementations\MB_DCSController.cs" />
+    <Compile Include="ManagedBeans\Implementations\MB_dummy.cs" />
+    <Compile Include="ManagedBeans\Implementations\MB_dummyThreaded.cs" />
+    <Compile Include="ManagedBeans\Implementations\MB_Logger.cs" />
+    <Compile Include="ManagedBeans\Implementations\MB_MasterBean.cs" />
+    <Compile Include="ManagedBeans\Interfaces.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

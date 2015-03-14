@@ -1,0 +1,12 @@
+<DBI_DATA_DESCRIPTION>
+
+	<Module Name="Mod1">
+		<Generator Name="GenSql" Mode="mysql5" Target="generated/c_table_mysql.sql"/>
+		<Generator Name="GenSql" Mode="oracle9" Target="generated/c_table_oracle.sql"/>
+		<Generator Name="GenCDecl" Target="generated/c"/>
+		<Import File="types.xml"/>
+		<Import File="structs.xml"/>
+		<Import File="tables.xml"/>
+	</Module>
+	
+</DBI_DATA_DESCRIPTION>

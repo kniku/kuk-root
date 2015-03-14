@@ -1,0 +1,43 @@
+
+<DBI_DATA_DESCRIPTION>
+
+	<Module Name="M1">
+		<!-- ##### Generators ##### -->
+		<Generator Name="GenSql" Mode="mysql5" Target="generated/c_table_mysql.sql"/>
+		<Generator Name="GenSql" Mode="oracle9" Target="generated/c_table_oracle.sql"/>
+		<Generator Name="GenCDecl" Target="generated/database"/>
+	</Module>
+
+	<!-- ##### Types ##### -->
+
+	<Type Name="STR10" Descr="String(10)"	Type="string" Length="10"/>
+	<Type Name="STR200" Descr="String(200)"	Type="string" Length="200"/>
+	<Type Name="DATUM" Descr="Datum" Type="date"/>
+	<Type Name="LONG" Descr="Long" Type="numeric" Length="9" Scale="0"/>
+	<Type Name="DOUBLE" Descr="Double" Type="numeric" Length="13" Scale="2"/>
+
+	<!-- ##### Strutures ##### -->
+	
+	<Structure Name="S1" Descr="TestStruct 1">
+		<Member	Name="Id" RefType="STR10"/>
+		<Member	Name="inum"	RefType="LONG" Null='true'/>
+		<Member	Name="dnum"	RefType="DOUBLE" Null='true'/>
+		<Member Name="adate" RefType="DATUM" Null='true'/>
+		<Member	Name="astring" RefType="STR200"	Null='true'/>
+	</Structure>
+
+	<!-- ##### Tables ##### -->
+
+	<Table Name="T1" Descr="Testtabelle 1" RefType="S1">
+		<PrimKey>
+			<Column>Id</Column>
+		</PrimKey>
+	</Table>
+	<Table Name="T2" Descr="Testtabelle 2" RefType="S1">
+		<PrimKey>
+			<Column>Id</Column>
+			<Column>inum</Column>
+		</PrimKey>
+	</Table>
+
+</DBI_DATA_DESCRIPTION>

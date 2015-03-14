@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Net.Sockets;
+
+namespace ClientServer
+{
+	interface IConnectionHandler
+	{
+		bool handle(NetworkStream clientStream, string [] InitialMessageArray);
+	}
+}

@@ -1,0 +1,16 @@
+<DBI_DATA_DESCRIPTION>
+
+	<Module Name="dbitest">
+		<Generator Name="GenSql" Mode="create" Dialect="postgres" Target="generated/c_table_postgres.sql"/>
+		<Generator Name="GenSql" Mode="create" Dialect="oracle" Target="generated/c_table_oracle.sql"/>
+    <Generator Name="GenSql" Mode="create" Dialect="mssql" Target="generated/c_table_mssql.sql"/>
+    <Generator Name="GenSql" Mode="drop" Dialect="mssql" Target="generated/d_table_mssql.sql"/>
+    <Generator Name="GenC++" Target="generated/gen.c"/>
+    <Generator Name="GenC#" Target="generated/gen.cs"/>
+    <Import File="types.xml"></Import>
+		<Import File="structs.xml"/>
+		<Import File="tables.xml"/>
+<!--    <xxxxx a ="10">ahgdfashgdf</xxxxx> -->
+	</Module>
+	
+</DBI_DATA_DESCRIPTION>

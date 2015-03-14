@@ -1,0 +1,126 @@
+<?page title="ITS Translations..."?>
+<zk>
+	<window id="main" width="100%" height="100%" apply="controller.Main">
+		<borderlayout>
+			<west width="350px" splittable="true" flex="false" collapsible="true" border="none" title="Filter">
+				<vbox>
+					<vbox>
+						<tabbox>
+							<tabs>
+								<tab label="Standard" />
+								<tab label="Erweitert" />
+							</tabs>
+							<tabpanels>
+								<tabpanel>
+									<grid>
+										<rows>
+											<row spans="4,8">Sprache:<combobox id="ef_filter_language" readonly="true" /></row>
+											<row spans="4,8">Version (ITSWEB):<combobox id="ef_filter_version" /></row>
+											<row spans="4,8">
+												<vbox>
+													<label>Originaltext:</label>
+													<label>Übersetzung:</label>
+													<space />
+													<label>Suchbereich:</label>
+													<space />
+												</vbox>
+												<vbox>
+													<textbox id="ef_filter_text" width="200px" tooltiptext="Filter auf Originaltext." />
+													<textbox id="ef_filter_translation" width="200px" disabled="true" tooltiptext="Filter auf übersetzten Text. Beim Zugriff auf Texte ohne Wirkung." />
+													<radiogroup	id="radio_filter_source" orient="vertical">
+														<radio
+															label="Texte"
+															onCheck="ef_filter_translation.setDisabled(true);ef_filter_version.setDisabled(false);" />
+														<radio
+															label="Nicht übersetzte Texte" selected="true"
+															onCheck="ef_filter_translation.setDisabled(true);ef_filter_version.setDisabled(false);" />
+														<radio
+															label="Bestehende Übersetzungen"
+															onCheck="ef_filter_translation.setDisabled(false);ef_filter_version.setDisabled(true);" />
+													</radiogroup>
+												</vbox>
+											</row>
+											<row spans="4,8">Max. Anzahl:<intbox id="ef_filter_count" value="100" /></row>
+										</rows>
+									</grid>
+								</tabpanel>
+								<tabpanel>
+									<groupbox>
+										<vbox>
+											<checkbox
+												id="chk_filter_case" label="Groß-/Kleinschreibung beachten"
+												checked="false" />
+											<checkbox
+												id="chk_filter_instr" label="Oracle instr() verwenden"
+												checked="true" />
+										</vbox>
+									</groupbox>
+									<toolbarbutton label="Wartung..." href="wartung.zul"/>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+					</vbox>
+				</vbox>
+			</west>
+			<center flex="false" border="none" title="Selektierter Eintrag">
+				<div id="contentDiv">
+					<grid>
+						<rows>
+							<row spans="10,90">
+								<label>Originaltext:</label>
+								<textbox
+									tooltiptext="Feld Originaltext, freischalten mit rechter Maustaste - ask kuk ;-)"
+									context="popup_ef_text" id="ef_text" readonly="true"
+									width="100%" style="color:#000000 !important;" multiline="true"
+									rows="3" />
+							</row>
+							<row spans="10,90">
+								<label id="lab_translation"	style="font-weight:bold;">Übersetzung:</label>
+								<textbox id="ef_translation" width="100%" multiline="true" rows="3" style="font-weight:bold;"
+									tooltiptext="Feld Übersetzung, History über rechte Maustaste - ask kuk ;-)"
+									context="popup_ef_trans" />
+							</row>
+						</rows>
+					</grid>
+					<textbox id="ef_structure" readonly="true" multiline="true" rows="3" width="100%" style="color:#000000 !important;" />
+					<hbox>
+						<button id="but_refresh"
+							image="images/Database_refresh.png" type="submit"
+							label="Liste aktualisieren"
+							tooltiptext="Übersetzungsliste mit der aktuellen Filterung aus der Datenbank laden" />
+						<button id="but_save"
+							image="images/Database_save.png" label="Übersetzung speichern"
+							tooltiptext="Speichert den aktuellen Eintrag in der Datenbank" />
+						<button id="but_delete"
+							image="images/Database_delete.png" label="Übersetzung löschen"
+							tooltiptext="Löscht den aktuellen Eintrag aus der Datenbank" />
+						<button id="but_tradosupload"
+							image="images/Trados_import.png" label="TRADOS Upload"
+							tooltiptext="Übersetzungen aus Trados einspielen..." />
+					</hbox>
+				</div>
+			</center>
+			<south splittable="true" flex="true" border="none" title="Texte/Übersetzungen">
+				<div>
+ 					<listbox vflex="true" id="lb_translations" mold="paging" height="500px"/>
+					<hbox width="100%" style="background-color:#ddeeff;">
+						<label id="lab_database" />
+						<hbox pack="end" width="100%">
+							Version 0.7; Powered by kuk ;-) ... and ZK ${desktop.webApp.version}
+						</hbox>
+					</hbox>
+				</div>
+			</south>
+		</borderlayout>
+	<menupopup id="popup_ef_text">
+		<menuitem label="Feld aktivieren..." onClick="ef_text.setReadonly(false)"/>
+		<menuitem label="Feld deaktivieren..." onClick="ef_text.setReadonly(true)"/>
+	</menupopup>
+	<menupopup id="popup_ef_trans">
+		<menuitem id="popup_ef_trans_history" label="History anzeigen..."/>
+<!--
+	  	<menuitem label="sonstwas..." onClick="if (lb_translations.getSelectedItem()!=null) lb_translations.getSelectedItem().setVisible(false)"/>
+-->	
+	</menupopup>
+	</window>
+</zk>

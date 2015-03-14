@@ -1,0 +1,25 @@
+<window maximizable="true" sizable="true" closable="true" title="TRADOS Upload" width="550px" border="normal" position="center,denter" mode="modal" apply="controller.TradosUpload">
+	<hbox><label>Sprache:</label><combobox id="ef_language" value="en" readonly="true"/></hbox>
+	<grid>
+	<columns><column/><column/><column/></columns>
+		<rows>
+			<row spans="20,60,20">
+				<label>Textdatei:</label>
+				<textbox id="ef_text" tooltiptext="Datei mit Originaltexten..." width="100%" disabled="true"/>
+				<toolbarbutton id="but_select_text" label="Auswählen..." upload="true"/>
+			</row>
+			<row spans="20,60,20">
+				<label>Übersetzungen:</label>
+				<textbox id="ef_trans" tooltiptext="Datei mit Übersetzungen..." width="100%" disabled="true"/>
+				<toolbarbutton id="but_select_trans" label="Auswählen..." upload="true"/>
+			</row>
+		</rows>
+	</grid>
+	<textbox id="ef_status" visible="false" disabled="true"></textbox>
+	<listbox id="lb_transcheck" mold="paging" height="300px" visible="false" />
+	<hbox>
+		<button id="but_upload" disabled="true">(1) UploadCheck</button>
+		<button id="but_import" disabled="true">(2) Import</button>
+		<button onClick="((Window )self.getRoot()).detach()">Abbruch</button>
+	</hbox>	
+</window>

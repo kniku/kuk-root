@@ -1,0 +1,35 @@
+<!-- datetime format fix: "ccyymmddhhmmss" -->
+<!-- double comma fix: "." -->
+
+
+<!-- request -->
+<esm t="sql">
+    <stmt>select * from XXX where adate=:a and name=:b order by abc</stmt>
+    <values>
+		<value type="string|int|double|datetime">20091001120000</value>
+		<value type="string|int|double|datetime">Huber</value>
+    </values>
+</esm>
+
+<!-- response (result set) -->
+
+<ecm t="sql">
+    <header>
+		<col type="string|int|double|datetime|blob">date</col>
+		<col type="string|int|double|datetime|blob">name</col>
+		<col type="string|int|double|datetime|blob">count</col>
+    </header>
+    <rows>
+		<row>
+			<value>20091001120000</value>
+			<value>Huber</value>
+			<value>100</value>
+		</row>
+		<row>
+			<value>20091001120000</value>
+			<value>Kremser</value>
+			<value>250</value>
+		</row>
+    </rows>
+</ecm>
+  

@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: clserv/importer
+Class-Path: . ./lib/log4j-1.2.12.jar ./lib/ojdbc14.jar ./lib/postgresql-8.2-504.jdbc3.jar
+

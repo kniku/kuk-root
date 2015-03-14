@@ -1,0 +1,73 @@
+<logoptions>
+	<logactions>
+		<entry name="bin beim Mittagessen" text="bin beim Mittagessen" icon="mittag.png" in="OUT" />
+		<entry name="Pause" text="Pause" icon="rauch.png" in="OUT" />
+		<entry name="www" text="www" icon="www.png" in="OUT" />
+		<entry name="Conference 1" text="Conference 1" icon="conference1.png" in="IN" />
+		<entry name="Conference 2" text="Conference 2" icon="conference2.png" in="IN" />
+		<entry name="Conference 3" text="Conference 3" icon="conference3.png" in="IN" />
+		<entry name="Conference 4" text="Conference 4" icon="conference4.png" in="IN" />
+		<entry name="Wartungsraum" text="Wartungsraum" icon="wartung.png" in="IN" />
+        <entry name="LOGIN" text="LOGIN" icon="in.png" in="IN" locked="1"/>
+        <entry name="LOGOUT" text="LOGOUT" icon="out.png" in="OUT" locked="1"/>
+        <entry name="LOGIN mit sonstigen Eintrag" text="LOGIN mit sonstigen Eintrag" icon="sonstin.png" in="IN" locked="1"/>
+        <entry name="LOGOUT mit sonstigen Eintrag" text="LOGOUT mit sonstigen Eintrag" icon="sonstout.png" in="OUT" locked="1"/>
+    </logactions>
+	<logidetifiers>
+		<entry icon="www.png">
+			<token pattern="*Internet*"/>
+			<token pattern="*surfen*"/>
+			<token pattern="*www*"/>
+			<token pattern="www"/>
+		</entry>
+		<entry icon="mittag.png">
+			<token pattern="*mittag*"/>
+			<token pattern="*bin beim Mittagessen*"/>
+			<token pattern="bin beim Mittagessen"/>
+		</entry>
+		<entry icon="rauch.png">
+			<token pattern="*Rauchpause*"/>
+			<token pattern="*Pause*"/>
+			<token pattern="Pause"/>
+		</entry>
+		<entry icon="binbei.png">
+			<token pattern="*bei *"/>
+		</entry>
+		<entry icon="wartung.png">
+			<token pattern="*Wartungsraum*"/>
+			<token pattern="Wartungsraum"/>
+		</entry>
+		<entry icon="conference1.png">
+			<token pattern="*Conference 1*"/>
+			<token pattern="Conference 1"/>
+		</entry>
+		<entry icon="conference2.png">
+			<token pattern="*Conference 2*"/>
+			<token pattern="Conference 2"/>
+		</entry>
+		<entry icon="conference3.png">
+			<token pattern="*Conference 3*"/>
+			<token pattern="Conference 3"/>
+		</entry>
+		<entry icon="conference4.png">
+			<token pattern="*Conference 4*"/>
+			<token pattern="Conference 4"/>
+		</entry>
+		<entry icon="conference0.png">
+			<token pattern="*bespr*"/>
+			<token pattern="*bspr.*"/>
+			<token pattern="*bspr*"/>
+			<token pattern="*raum*"/>
+			<token pattern="*b.r.*"/>
+			<token pattern="*BR *"/>
+			<token pattern="*BR.*"/>
+			<token pattern="*gr. Besprechungsraum*"/>
+			<token pattern="*kl. Besprechungsraum*"/>
+			<token pattern="*jour*"/>
+			<token pattern="*fix*"/>
+			<token pattern="*JF*"/>
+			<token pattern="*J.F.*"/>
+			<token pattern="*Jourfix*"/>
+		</entry>
+	</logidetifiers>
+</logoptions>

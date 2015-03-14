@@ -1,0 +1,39 @@
+<DBI_DATA_DESCRIPTION>
+	<Structure Name="S1" Descr="TestStruct 1">
+		<Member Name="S1C0" RefType="AUTOID" Descr="automatic id test"></Member>
+		<Member Name="S1C1" RefType="Typ1" Descr="Spalte 1"></Member>
+		<Member Name="S1C2" RefType="Typ2" Descr="Spalte 2"></Member>
+		<Member Name="S1C3" RefType="Typ3" Descr="Spalte 3">
+			<Sql>
+				<Default>#default#</Default>
+			</Sql>
+		</Member>
+		<Member Name="S1C4" RefType="Typ4" Descr="Spalte 4"></Member>
+		<Member	Descr="Spalte 5" Name="S1C5" RefType="Typ4">
+			<Sql>
+				<Default>test overloading</Default>
+			</Sql>
+		</Member>
+		<Member	Descr="Spalte 6" Name="S1C6" RefType="Typ4">
+			<Sql>
+				<Default>xxx</Default>
+			</Sql>
+		</Member>		
+	</Structure>
+	
+	<Structure Name="S2" Descr="TestStruct 2">
+		<Member Name="S2C1" RefType="Typ1" Descr="Spalte 1"/>
+		<Member Name="S2C2" RefType="Typ3" Descr="Spalte 2" Null='true'>
+			<Sql>
+				<Default>20031213</Default>
+			</Sql>
+		</Member>
+		<Member Name="S2C3" RefType="Typ3" Descr="Spalte 3" Null='false'></Member>
+	</Structure>
+	
+	<Structure Name="S3" Descr="TestStruct 3">
+		<Member	Name="S3C1"	RefType="Typ1" Descr="Spalte 1"/>
+		<Member Name="S3C2" RefType="Typ4" Descr="Spalte 2"/>
+	</Structure>
+	
+</DBI_DATA_DESCRIPTION>

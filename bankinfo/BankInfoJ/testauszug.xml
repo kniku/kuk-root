@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE IFX PUBLIC "-//IFX/DTD IFX 1.1.0//EN" "https://online.bankaustria.at/misc/iffx/iffxml_uci_v200.txt">
+<IFX>
+  <BankSvc>
+    <DepAcctTrnInqRs>
+      <EffDt>20100208</EffDt>
+      <DepAcctRec>
+        <AcctType>DDA</AcctType>
+        <AcctId>08835436001</AcctId>
+        <AcctCur>EUR</AcctCur> 
+        <Memo>Kurt Kniely</Memo> 
+        <AcctBal>
+          <BalType>Ledger</BalType>
+          <CurAmt>
+            <Amt>1518.12</Amt>
+            <CurCode>EUR</CurCode>
+          </CurAmt>
+        </AcctBal>
+        <AcctBal>
+          <BalType>Avail</BalType>
+          <CurAmt>
+            <Amt>1518.12</Amt>
+            <CurCode>EUR</CurCode>
+          </CurAmt>
+        </AcctBal>
+        <AcctBal>
+          <BalType>Current</BalType>
+          <CurAmt>
+            <Amt>3518.12</Amt>
+            <CurCode>EUR</CurCode>
+          </CurAmt>
+        </AcctBal>
+      </DepAcctRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>29.01.2010</PostedDt>
+        <EffDt> 29.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-250,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>AUTOMAT  04682 KARTE1 29.01.UM 13.38     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>29.01.2010</PostedDt>
+        <EffDt> 29.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>2298,14</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Gutschrift a/Ecofinance Finanzsoftware                    Gehalt</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>28.01.2010</PostedDt>
+        <EffDt> 28.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-130,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Online-Auftrag vom 28.01.                                 Empf&#xE4;nger:    mj. Sandra Kniely                                         Kontonummer: 91068 370 815 BLZ: 12000       Sandra WP-Plan 91068370815</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>28.01.2010</PostedDt>
+        <EffDt> 28.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>2500,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Gutschrift a/Kniely,Anita                                 Auszahlung ING-DiBa  bertrag f r Lebensversicherung</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>26.01.2010</PostedDt>
+        <EffDt> 26.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-25,50</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>MERKUR 8330  6550  K1 26.01.UM 17.56     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>25.01.2010</PostedDt>
+        <EffDt> 25.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-35,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Online-Auftrag vom 25.01.                                 Empf&#xE4;nger:    &#xD6;AMTC                                                     Kontonummer: 00000156109   BLZ: 31000       &#xD6;AMTC-Schutzbrief 2010      200500249262</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>21.01.2010</PostedDt>
+        <EffDt> 21.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-12,27</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>BILLA DANKT  6775  K1 21.01.UM 18.02     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>20.01.2010</PostedDt>
+        <EffDt> 20.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-67,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Online-Auftrag vom 20.01.                                 Empf&#xE4;nger:    Verlagsgruppe Beltz                                       Kontonummer: 00016011413   BLZ: 35000       KNr:698757/Blg:952142809/07.01.10</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>20.01.2010</PostedDt>
+        <EffDt> 20.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-200,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>DA-NR.: 009                                               Empf&#xE4;nger:    Anita Kniely                                              Kontonummer: 59189 115 997 BLZ: 12000       WP-Plan</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>20.01.2010</PostedDt>
+        <EffDt> 20.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-100,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>DA-NR.: 006                                               Empf&#xE4;nger:    Anita Kniely                                              Kontonummer: 59118 628 797 BLZ: 12000       WP-Plan</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>19.01.2010</PostedDt>
+        <EffDt> 19.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-150,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>AUTOMAT  72185 KARTE1 19.01.UM 07.31     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>18.01.2010</PostedDt>
+        <EffDt> 18.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-7,75</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>HOFER 8344   0268P K1 16.01.UM 13.27</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>18.01.2010</PostedDt>
+        <EffDt> 18.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-45,27</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>HOFER 8344   0268P K1 15.01.UM 10.18</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>18.01.2010</PostedDt>
+        <EffDt> 18.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-350,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>EZE-Lastschrift a/Kniely,Anita                            Einzug ING-DiBa EINZUGSPAREN</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>18.01.2010</PostedDt>
+        <EffDt> 18.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-9,43</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>EZE-Lastschrift a/VERS.ANST.OEFFENTLICH BEDIENSTETER      Konto.010000422363, SVNr.1468120168                       BEHANDLUNGSBEITRAG 08/09, FAKTURA.801001469257            FALL.11567172, BETRAG EUR     9,43</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>18.01.2010</PostedDt>
+        <EffDt> 18.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-100,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>DA-NR.: 005                                               Empf&#xE4;nger:    mj. Lukas Kniely                                          Kontonummer: 91140 628 107 BLZ: 12000       WP-Plan 91140628107</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>18.01.2010</PostedDt>
+        <EffDt> 18.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-100,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>DA-NR.: 004                                               Empf&#xE4;nger:    mj. Sandra Kniely                                         Kontonummer: 91068 370 815 BLZ: 12000       WP-Plan 91068370815</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>18.01.2010</PostedDt>
+        <EffDt> 18.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>826,40</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Gutschrift a/FINANZAMT               DVR 0009679          BG 100113671468120168                                      FAMILIENBEIHILFE 01/10-02/10                              KINDERABSETZBETRAG 01/10-02/10                            Info zu Leistungen www.bmwfj.gv.at                       BG 100113671468120168</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>15.01.2010</PostedDt>
+        <EffDt> 15.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-190,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>BANKOMAT 17591 KARTE1 15.01.UM 09.47     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>15.01.2010</PostedDt>
+        <EffDt> 15.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-100,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Lastschrift a/BAUSPARKASSE WUESTENROT AG                  Bausparkasse W&#xFC;stenrot AG   071024709615                  Kurt Kniely</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>15.01.2010</PostedDt>
+        <EffDt> 15.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-300,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>DA-NR.: 003                                               Empf&#xE4;nger:    Kurt Kniely                                               Kontonummer: 91081 555 012 BLZ: 12000       WP-Plan 91081555012</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>15.01.2010</PostedDt>
+        <EffDt> 15.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>1740,60</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Gutschrift a/LAND STEIERMARK                              LOHN/GEHALT 00917960/ 1001</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>14.01.2010</PostedDt>
+        <EffDt> 14.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-9,37</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>EZE-Lastschrift a/T-MOBILE AUSTRIA GMBH                   KUNDENNUMMER 4.3537.26.00.10500708937180                  T-MOBILE RECHNG. 900245680110 VOM 08.01.2010              IHRE RECHNUNG JETZT AUCH AUF WWW.T-MOBILE.AT</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>13.01.2010</PostedDt>
+        <EffDt> 13.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-47,42</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>EZE-Lastschrift a/GIS Geb&#xFC;hren Info Service GmbH          Teilnehmernummer 0900125651                               Vorschreibung 01/10-02/10                                 in H&#xF6;he von EUR 47,42 (10% Ust 3,02)                      Kniely Kurt                                               8344, Bairisch K&#xF6;lldorfer Stra&#xDF;e 19                       Tel. 0810 00 10 80 - www.orf-gis.at</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>11.01.2010</PostedDt>
+        <EffDt> 11.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-1340,19</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Lastschrift a/AirPlus Air Travel Card                     Diners Club Kontoauszug - 900000014854668</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>08.01.2010</PostedDt>
+        <EffDt> 08.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-79,95</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>TRUMMER      0002  K1 08.01.UM 15.27     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>07.01.2010</PostedDt>
+        <EffDt> 07.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>19,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Gutschrift a/Postenprovision                              Verg&#xFC;tung f&#xFC;r Kontopaket tp</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>07.01.2010</PostedDt>
+        <EffDt> 07.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-34,02</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>UNIMARKT8330 0978P K1 05.01.UM 11.30</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>07.01.2010</PostedDt>
+        <EffDt> 07.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-23,23</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>HOFER 8344   0268P K1 05.01.UM 12.10</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>07.01.2010</PostedDt>
+        <EffDt> 07.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-190,60</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>EZE-Lastschrift a/MERKURVERSAG                            MERKUR V.10/01 847016 2113</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>07.01.2010</PostedDt>
+        <EffDt> 07.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-90,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>BANKOMAT 19091 KARTE1 07.01.UM 10.10     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>07.01.2010</PostedDt>
+        <EffDt> 07.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-198,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Lastschrift a/enw                                         ENW VS 01.01.2010 EDV98374                                ENW VS 01.01.2010</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>07.01.2010</PostedDt>
+        <EffDt> 07.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-111,95</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>AT   111,95 MAESTRO POS 05.01.10 10.14K1 O            SCH UHHAUS KALCHER      FEHRING       8350</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>07.01.2010</PostedDt>
+        <EffDt> 07.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-31,24</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>EZE-Lastschrift a/TELEKOM AUSTRIA                         0103990672 / 200006004110   090703202332                  TELEKOM AUSTRIA WIEN, TELEKOMRECHNUNG                     RECHNUNGSNR. 0000295016685666 VOM 23.12.2009              FAELLIG 07.01.2010 BETRAG EUR 31,24</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>05.01.2010</PostedDt>
+        <EffDt> 05.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-1,38</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>BIPA 8344    6256  K1 05.01.UM 14.07     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>05.01.2010</PostedDt>
+        <EffDt> 05.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-115,96</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>PICHER       0003  K1 05.01.UM 11.12     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>05.01.2010</PostedDt>
+        <EffDt> 05.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-59,90</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>AT    59,90 MAESTRO POS 02.01.10 13.40K1 O            GOL DMANN MODEHAUS      FELDBACH      8330</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>05.01.2010</PostedDt>
+        <EffDt> 05.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-64,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>DA-NR.: 002                                               Empf&#xE4;nger:    BG Energie GmbH.                                          Kontonummer: 00001000165   BLZ: 38497       Akonto Monat; KundenNr: 2465100000002465</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>05.01.2010</PostedDt>
+        <EffDt> 05.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-100,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Lastschrift a/BAUSPARKASSE WUESTENROT AG                  Bausparkasse W&#xFC;stenrot AG   069184766615</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>05.01.2010</PostedDt>
+        <EffDt> 05.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-100,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Lastschrift a/BAUSPARKASSE WUESTENROT AG                  Bausparkasse W&#xFC;stenrot AG   069184707615                  Sandra Kniely</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>05.01.2010</PostedDt>
+        <EffDt> 05.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-84,38</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Lastschrift a/WIENER STAEDTISCHE VERSICHERUNG AG          V066952                                                   V066952</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>04.01.2010</PostedDt>
+        <EffDt> 31.12.2009</EffDt> 
+        <CurAmt>
+          <Amt>-388,22</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>AP-&#xDC;bertrag von 08835 436 002 CHF                               574,170-</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>04.01.2010</PostedDt>
+        <EffDt> 31.12.2009</EffDt> 
+        <CurAmt>
+          <Amt>-5,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Spesen zu EUR          388,22- vom 04.01</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>04.01.2010</PostedDt>
+        <EffDt> 04.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-60,75</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>HUBER 8330   0035P K1 02.01.UM 12.21</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>04.01.2010</PostedDt>
+        <EffDt> 04.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-200,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>ABHEBUNG AM AUTOMAT NR. 52665 AM 04.01. UM 11.58 UHR GRAZ -HERRENGASSE BANKCARD 1</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>04.01.2010</PostedDt>
+        <EffDt> 04.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-17,96</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>LEINER 8020  0106  K1 04.01.UM 10.58     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>04.01.2010</PostedDt>
+        <EffDt> 04.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-55,96</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>EZE-Lastschrift a/MERKURVERSAG                            MERKUR VERS.2010/01 3452524</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>04.01.2010</PostedDt>
+        <EffDt> 04.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-20,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>DA-NR.: 015                                               Empf&#xE4;nger:    Sandra Kniely                                             Kontonummer: 26229750000   BLZ: 48150       Taschengeld</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>04.01.2010</PostedDt>
+        <EffDt> 04.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-17,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>DA-NR.: 013                                               Empf&#xE4;nger:    Robert Gutmann                                            Kontonummer: 26041550000   BLZ: 48150       Wasserbeitrag Anita</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>04.01.2010</PostedDt>
+        <EffDt> 04.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-320,00</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>DA-NR.: 008                                               Empf&#xE4;nger:    Lukas Kniely                                              Kontonummer: 00000090886   BLZ: 38497       Taschengeld</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>04.01.2010</PostedDt>
+        <EffDt> 04.01.2010</EffDt> 
+        <CurAmt>
+          <Amt>-33,50</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>HOFER 8344   0268  K1 02.01.UM 14.39     O</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>01.01.2010</PostedDt>
+        <EffDt> 31.12.2009</EffDt> 
+        <CurAmt>
+          <Amt>-43,75</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Kontopaket</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>01.01.2010</PostedDt>
+        <EffDt> 31.12.2009</EffDt> 
+        <CurAmt>
+          <Amt>-0,12</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>KEST</Memo> 
+      </BankAcctTrnRec>
+      <BankAcctTrnRec>
+        <TrnType>Transfer</TrnType>
+        <PostedDt>01.01.2010</PostedDt>
+        <EffDt> 31.12.2009</EffDt> 
+        <CurAmt>
+          <Amt>0,48</Amt>
+          <CurCode>EUR</CurCode>
+        </CurAmt>
+        <Memo>Habenzinsen</Memo> 
+      </BankAcctTrnRec>
+    </DepAcctTrnInqRs>
+  </BankSvc>
+</IFX>
