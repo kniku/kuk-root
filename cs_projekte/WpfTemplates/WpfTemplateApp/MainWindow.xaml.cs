@@ -22,9 +22,12 @@ namespace WpfTemplateApp
 	/// </summary>
 	public partial class MainWindow : MetroWindow
 	{
+		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 		public MainWindow()
 		{
 			InitializeComponent();
+			log.Error("MainWindow initialized");
 		}
 
 		private void mcClose(object sender, RoutedEventArgs e)

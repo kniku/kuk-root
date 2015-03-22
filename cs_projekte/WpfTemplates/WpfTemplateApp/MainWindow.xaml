@@ -31,7 +31,6 @@
         <TextBox Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="This is a textbox" HorizontalAlignment="Left" Height="23" Margin="10,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.156,-0.048"/>
         <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top"/>
-        <Button Style="{DynamicResource MetroCircleButtonStyle}" Content="circle button" HorizontalAlignment="Left" Margin="171,79,0,0" VerticalAlignment="Top" Width="140" Height="140"/>
         <StatusBar Height="32" VerticalAlignment="Bottom">
             <Label Content="current state: ok"/>
         </StatusBar>
