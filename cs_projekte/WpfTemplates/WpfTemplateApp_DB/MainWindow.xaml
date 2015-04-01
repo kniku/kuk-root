@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="WpfTemplateApp.MainWindow"
-        Title="WpfTemplate" Height="346.762" Width="486.561"
+        Title="WpfTemplate DB" Height="346.762" Width="486.561"
         GlowBrush="{DynamicResource AccentColorBrush}"
         EnableDWMDropShadow="True"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen">
@@ -27,7 +27,7 @@
             </MenuItem>
 
         </Menu>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnConnect" Content="Connect DB" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Width="120" Click="btnConnect_Click"/>
         <TextBox Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="This is a textbox" HorizontalAlignment="Left" Height="23" Margin="10,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.156,-0.048"/>
         <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top"/>

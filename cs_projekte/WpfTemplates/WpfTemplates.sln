@@ -5,6 +5,15 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTemplateApp", "WpfTemplateApp\WpfTemplateApp.csproj", "{BB77EAF7-F207-449A-A87D-C3CDA8D3621B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTemplateApp_DB", "WpfTemplateApp_DB\WpfTemplateApp_DB.csproj", "{D9021868-D85B-4255-ABF3-E369332F3B6A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB232C50-6838-4157-B7C4-8A83510C716E} = {BB232C50-6838-4157-B7C4-8A83510C716E}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KLib", "KLib", "{E5ED3880-103B-4CD3-B184-433FEA655DB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02Sql", "..\KLib\02Sql\02Sql.csproj", "{BB232C50-6838-4157-B7C4-8A83510C716E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +24,19 @@ Global
 		{BB77EAF7-F207-449A-A87D-C3CDA8D3621B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB77EAF7-F207-449A-A87D-C3CDA8D3621B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB77EAF7-F207-449A-A87D-C3CDA8D3621B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9021868-D85B-4255-ABF3-E369332F3B6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9021868-D85B-4255-ABF3-E369332F3B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9021868-D85B-4255-ABF3-E369332F3B6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9021868-D85B-4255-ABF3-E369332F3B6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB232C50-6838-4157-B7C4-8A83510C716E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB232C50-6838-4157-B7C4-8A83510C716E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB232C50-6838-4157-B7C4-8A83510C716E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB232C50-6838-4157-B7C4-8A83510C716E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BB232C50-6838-4157-B7C4-8A83510C716E} = {E5ED3880-103B-4CD3-B184-433FEA655DB4}
 	EndGlobalSection
 EndGlobal

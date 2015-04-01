@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls.Dialogs;
+//using KLib;
 
 namespace WpfTemplateApp
 {
@@ -32,7 +33,8 @@ namespace WpfTemplateApp
 			txtInfo.Text = @"
 Aktive Packages:
 - MahApps.Metro: L&F Paket
-- log4net: Log Tool";
+- log4net: Log Tool
+-> KLib eingebunden";
 		}
 
 		private void mcClose(object sender, RoutedEventArgs e)
@@ -42,6 +44,16 @@ Aktive Packages:
 		private void mcAbout(object sender, RoutedEventArgs e)
 		{
 			this.ShowMessageAsync("WpfTemplateApp", "Einfaches Anwendungsgerüst einer Wpf Applikation im Metro-Stil...");
+		}
+
+		private void btnConnect_Click(object sender, RoutedEventArgs e)
+		{
+			KLib.Sql.DbConnectionManager dbManager = new KLib.Sql.DbConnectionManager(KLib.Sql.DbConnectionManager.ProviderType.Postgres, null, "rcsdb", "admin", "sorting");
+			KLib.Sql.DbConnection conn = dbManager.getConnection();
+
+			conn.open();
+
+			conn.close();
 		}
 	}
 }
