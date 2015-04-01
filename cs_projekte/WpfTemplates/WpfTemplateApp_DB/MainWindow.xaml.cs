@@ -48,7 +48,12 @@ Aktive Packages:
 
 		private void btnConnect_Click(object sender, RoutedEventArgs e)
 		{
-			KLib.Sql.DbConnectionManager dbManager = new KLib.Sql.DbConnectionManager(KLib.Sql.DbConnectionManager.ProviderType.Postgres, null, "rcsdb", "admin", "sorting");
+			KLib.Sql.DbConnectionManager dbManager = new KLib.Sql.DbConnectionManager(
+				KLib.Sql.DbConnectionManager.ProviderType.Postgres,
+				null,
+				"bankinfo_echt",
+				"kuk",
+				"anlusa");
 			KLib.Sql.DbConnection conn = dbManager.getConnection();
 
 			conn.open();
