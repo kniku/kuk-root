@@ -48,7 +48,7 @@ namespace Test_WPF
 
 		void _testPostgres()
 		{
-			DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "bankinfo", "admin", "sorting", 0);
+			DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "bankinfo_echt", "kuk", "anlusa", 0);
 			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.MySql, null, "testdb", "root", null, 0);
 
 			DbConnection con1 = cm.getConnection();
@@ -57,12 +57,13 @@ namespace Test_WPF
 			con1.open();
 //			MessageBox.Show("ok, con1=" + con1.getState());
 
-			con2.open();
+			//con2.open();
 //			MessageBox.Show("ok, con2=" + con2.getState());
 
 			//MessageBox.Show(con1.execSQL("select now()"));
 			//MessageBox.Show(con2.execSQL("select now()"));
-			Object x = con1.execSQL("select count(*) from positionen where amt<:2 and amt>:1", 100, 200);
+			Object xx = con1.execSQL("select count(*) from positionen");
+			Object x = con1.execSQL("select count(*) from positionen where amt>:1", 200);
 			//MessageBox.Show(x.ToString());
 			//MessageBox.Show(con2.execSQL("select count(*) from positionen"));
 
