@@ -59,7 +59,14 @@ namespace KLib.Sql
 		public void open()
 		{
 			Logger.DebugFormat("DbConnection open: {0}", GetHashCode());
-			if (NativeConnection != null && NativeConnection.State != ConnectionState.Open) NativeConnection.Open();
+			try
+			{
+				if (NativeConnection != null && NativeConnection.State != ConnectionState.Open) NativeConnection.Open();
+			}
+			catch (Exception _ex)
+			{
+				Logger.ErrorFormat("DbConnection open: {0} ERROR: {1}", GetHashCode(), _ex.Message);
+			}
 		}
 
 		public void close()
