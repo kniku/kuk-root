@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls.Dialogs;
-//using KLib;
+using KLib.Sql;
 
 namespace WpfTemplateApp
 {
@@ -48,13 +48,8 @@ Aktive Packages:
 
 		private void btnConnect_Click(object sender, RoutedEventArgs e)
 		{
-			KLib.Sql.DbConnectionManager dbManager = new KLib.Sql.DbConnectionManager(
-				KLib.Sql.DbConnectionManager.ProviderType.Postgres,
-				null,
-				"bankinfo_echt",
-				"kuk",
-				"anlusa");
-			KLib.Sql.DbConnection conn = dbManager.getConnection();
+			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, "192.168.0.230", "rcsdb", "admin", "sorting");
+			DbConnection conn = dbManager.getConnection();
 
 			conn.open();
 
