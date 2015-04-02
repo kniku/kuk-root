@@ -1,7 +1,6 @@
 ﻿//#define DbTypeNeeded
 using Npgsql;
 using MySql;
-//using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +11,8 @@ namespace KLib.Sql
 {
 	public partial class DbConnection
 	{
-		static log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(DbConnectionManager));
+		//static log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(DbConnectionManager));
+		private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		private IDbConnection NativeConnection { set; get; }
 		DbConnectionManager mConnectionManager;
@@ -162,6 +162,18 @@ namespace KLib.Sql
 					throw new NotImplementedException("Datentyp nicht unterstützt: " + iObjectType);
 			}
 #else
+			// seems to be a bug of npgsql (postgres)
+			if (mConnectionManager.Provider == DbConnectionManager.ProviderType.Postgres)
+			{
+				if (iObject is Int16)
+				{
+					iParam.DbType = DbType.Int16;
+				}
+				else if (iObject is Int32)
+				{
+					iParam.DbType = DbType.Int32;
+				}
+			}
 			iParam.ParameterName = iParamName;
 			iParam.Value = iObject;
 #endif
@@ -207,38 +219,25 @@ namespace KLib.Sql
 			return r;
 		}
 
-		public IEnumerator<DataRow> execSQL_select(string iSql, params object[] iSqlParams)
+		IDataAdapter createDataAdapter(IDbCommand iCmd)
 		{
-			IEnumerator<DataRow> r = null;
-
-			DataSet ds = new DataSet();
-			IDataAdapter da = null;
-
-			IDbCommand cmd = prepareSQL(iSql, iSqlParams);
-
-			switch (mConnectionManager.Provider)
+			IDataAdapter r = null;
+			
+			if (iCmd != null)
 			{
-				case DbConnectionManager.ProviderType.Postgres:
-					da = new NpgsqlDataAdapter(cmd as NpgsqlCommand);
-					//da = new NpgsqlDataAdapter(iSql, (NpgsqlConnection)NativeConnection);
-					break;
-				case DbConnectionManager.ProviderType.SqlServer:
-					da = new System.Data.SqlClient.SqlDataAdapter(cmd as System.Data.SqlClient.SqlCommand);
-					//da = new SqlDataAdapter(iSql, (SqlConnection)NativeConnection);
-					break;
-				default:
-					throw new NotImplementedException("Providertyp nicht unterstützt: " + mConnectionManager.Provider);
+				switch (mConnectionManager.Provider)
+				{
+					case DbConnectionManager.ProviderType.Postgres:
+						r = new NpgsqlDataAdapter(iCmd as NpgsqlCommand);
+						break;
+					case DbConnectionManager.ProviderType.SqlServer:
+						r = new System.Data.SqlClient.SqlDataAdapter(iCmd as System.Data.SqlClient.SqlCommand);
+						break;
+					default:
+						throw new NotImplementedException("Providertyp nicht unterstützt: " + mConnectionManager.Provider);
+				}
 			}
-
-			da.Fill(ds);
-
-			if (ds.Tables[0] != null)
-			{
-				r = ds.Tables[0].Rows.GetEnumerator() as IEnumerator<DataRow>;
-			}
-
 			return r;
 		}
-
 	}
 }

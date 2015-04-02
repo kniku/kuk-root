@@ -17,6 +17,7 @@
     <Grid>
         <TextBlock x:Name="txtInfo" HorizontalAlignment="Left" Margin="10,10,0,10" TextWrapping="Wrap" Text="TextBlock" Width="185"/>
         <Button x:Name="btnConnect" Content="Connect" HorizontalAlignment="Left" Margin="357,10,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="btnConnect_Click"/>
+        <Button x:Name="btnLog" Content="Log" HorizontalAlignment="Left" Margin="357,45,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="btnLog_Click"/>
 
     </Grid>
 </Controls:MetroWindow>

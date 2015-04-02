@@ -1,0 +1,16 @@
+﻿<Window x:Name="WndLogger1" x:Class="_03WpfMetroDB.Tools.WndLogger"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Log" Height="409" Width="451" Closing="WndLogger1_Closing" Loaded="WndLogger1_Loaded">
+    <Grid>
+        <ListBox x:Name="listLog" Margin="10,10,10,40">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Height" Value="15" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <Button Content="Schließen" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" RenderTransformOrigin="1.2,0.56" Click="Button_Click"/>
+
+    </Grid>
+</Window>
