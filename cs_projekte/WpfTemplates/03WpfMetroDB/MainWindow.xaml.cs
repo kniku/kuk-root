@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using KLib.Sql;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,35 +14,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls.Dialogs;
 
-namespace WpfTemplateApp
+namespace _03WpfMetroDB
 {
 	/// <summary>
 	/// Interaktionslogik für MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : MetroWindow
 	{
-		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
 		public MainWindow()
 		{
 			InitializeComponent();
-			log.Error("MainWindow initialized");
 
 			txtInfo.Text = @"
 Aktive Packages:
 - log4net: Log Tool
-- MahApps:Metro: Metro L&F";
+- MahApps:Metro: Metro L&F
+- KLib.Sql: SQL Lib";
 		}
 
-		private void mcClose(object sender, RoutedEventArgs e)
+		private void btnConnect_Click(object sender, RoutedEventArgs e)
 		{
-			Close();
-		}
-		private void mcAbout(object sender, RoutedEventArgs e)
-		{
-			this.ShowMessageAsync("WpfTemplateApp", "Einfaches Anwendungsgerüst einer Wpf Applikation im Metro-Stil...");
+			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, "192.168.0.230", "rcsdb", "admin", "sorting");
+			DbConnection conn = dbManager.getConnection();
+
+			conn.open();
+
+			conn.close();
 		}
 	}
 }

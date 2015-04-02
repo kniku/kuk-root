@@ -1,0 +1,22 @@
+﻿<Controls:MetroWindow x:Class="_03WpfMetroDB.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="03WpfMetro" Height="350" Width="525"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        EnableDWMDropShadow="True"
+        ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen">
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="settings" />
+            <Button Content="about"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <Grid>
+        <TextBlock x:Name="txtInfo" HorizontalAlignment="Left" Margin="10,10,0,10" TextWrapping="Wrap" Text="TextBlock" Width="185"/>
+        <Button x:Name="btnConnect" Content="Connect" HorizontalAlignment="Left" Margin="357,10,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="btnConnect_Click"/>
+
+    </Grid>
+</Controls:MetroWindow>
