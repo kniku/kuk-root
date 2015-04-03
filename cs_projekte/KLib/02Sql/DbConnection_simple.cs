@@ -58,7 +58,19 @@ namespace KLib.Sql
 		/// <returns></returns>
 		public Object execSQL(string iSql, params object[] iParams)
 		{
-			return execSQL(prepareSQL(iSql, iParams));
+			Object r = null;
+
+			try
+			{
+				r = execSQL(prepareSQL(iSql, iParams));
+			}
+			catch (Exception _ex)
+			{
+				Logger.ErrorFormat("DbConnection {0}: execSQL ERROR: stmt=[{1}], exception={2}", GetHashCode(), iSql, _ex.Message);
+				if (mConnectionManager.setThrowExceptions) throw;	// weiterwerfen, wenn gewünscht...
+			}
+
+			return r;
 		}
 
 
@@ -80,17 +92,24 @@ namespace KLib.Sql
 		{
 			IEnumerator<DataRow> r = null;
 
-			IDataAdapter da = createDataAdapter(prepareSQL(iSql, iSqlParams));
-			if (da != null)
+			try
 			{
-				DataSet ds = new DataSet();
-
-				da.Fill(ds);
-
-				if (ds.Tables[0] != null)
+				IDataAdapter da = createDataAdapter(prepareSQL(iSql, iSqlParams));
+				if (da != null)
 				{
-					r = ds.Tables[0].Rows.GetEnumerator() as IEnumerator<DataRow>;
+					DataSet ds = new DataSet();
+					da.Fill(ds);
+
+					if (ds.Tables[0] != null)
+					{
+						r = ds.Tables[0].Rows.GetEnumerator() as IEnumerator<DataRow>;
+					}
 				}
+			}
+			catch (Exception _ex)
+			{
+				Logger.ErrorFormat("DbConnection {0}: execSQL_select ERROR: stmt=[{1}], exception={2}", GetHashCode(), iSql, _ex.Message);
+				if (mConnectionManager.setThrowExceptions) throw;	// weiterwerfen, wenn gewünscht...
 			}
 
 			return r;

@@ -43,8 +43,6 @@ Aktive Packages:
 		private void btnConnect_Click(object sender, RoutedEventArgs e)
 		{
 
-			Logger.Error("XXXXX");
-
 			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, "192.168.0.230", "rcsdb", "admin", "sorting");
 			DbConnection conn = dbManager.getConnection();
 
@@ -88,6 +86,49 @@ Aktive Packages:
 				}
 				wnd.Activate();
 			}
+		}
+
+		private void btnSql_Click(object sender, RoutedEventArgs e)
+		{
+			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, "192.168.0.230", "rcsdb", "admin", "sorting");
+			DbConnection conn = dbManager.getConnection();
+
+			conn.open();
+
+			Logger.InfoFormat("Results of: {0}", txtSql.Text);
+			long cnt = 0;
+
+			IEnumerator<DataRow> List = conn.execSQL_select(txtSql.Text);
+			while (List != null && List.MoveNext())
+			{
+				string x = "|";
+
+				if (cnt == 0)
+				{
+					foreach (DataColumn item in List.Current.Table.Columns)
+					{
+						x += item.ColumnName + '|';
+					}
+					Logger.InfoFormat("{0}", x);
+					x = "|";
+				}
+				
+				foreach (var item in List.Current.ItemArray)
+				{
+					x += item.ToString() + '|';
+				}
+				//object Value = List.Current[0];
+				Logger.InfoFormat("{0}", x);
+				cnt++;
+			}
+			Logger.InfoFormat("Rows: {0}", cnt);
+
+			conn.close();
+		}
+
+		private void btnExit_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
 		}
 	}
 }

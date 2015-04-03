@@ -56,23 +56,42 @@ namespace KLib.Sql
 			}
 		}
 
-		public void open()
+		public bool open()
 		{
-			Logger.DebugFormat("DbConnection open: {0}", GetHashCode());
+			bool r = false;
+
+			Logger.DebugFormat("DbConnection {0}: open", GetHashCode());
 			try
 			{
 				if (NativeConnection != null && NativeConnection.State != ConnectionState.Open) NativeConnection.Open();
+				r = NativeConnection.State == ConnectionState.Open;
 			}
 			catch (Exception _ex)
 			{
-				Logger.ErrorFormat("DbConnection open: {0} ERROR: {1}", GetHashCode(), _ex.Message);
+				Logger.ErrorFormat("DbConnection {0}: ERROR: {1}", GetHashCode(), _ex.Message);
+				if (mConnectionManager.setThrowExceptions) throw;	// weiterwerfen, wenn gewünscht...
 			}
+
+			return r;
 		}
 
-		public void close()
+		public bool close()
 		{
-			Logger.DebugFormat("DbConnection close: {0}", GetHashCode());
-			if (NativeConnection != null && NativeConnection.State != ConnectionState.Closed) NativeConnection.Close();
+			bool r = false;
+
+			Logger.DebugFormat("DbConnection {0}: close", GetHashCode());
+			try
+			{
+				if (NativeConnection != null && NativeConnection.State != ConnectionState.Closed) NativeConnection.Close();
+				r = NativeConnection.State == ConnectionState.Closed;
+			}
+			catch (Exception _ex)
+			{
+				Logger.ErrorFormat("DbConnection {0}: ERROR: {1}", GetHashCode(), _ex.Message);
+				if (mConnectionManager.setThrowExceptions) throw;	// weiterwerfen, wenn gewünscht...
+			}
+
+			return r;
 		}
 
 		public ConnectionState getState()

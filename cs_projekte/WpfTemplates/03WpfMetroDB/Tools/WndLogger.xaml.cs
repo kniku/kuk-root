@@ -16,6 +16,7 @@ using log4net.Appender;
 using log4net.Core;
 using log4net.Repository.Hierarchy;
 using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace _03WpfMetroDB.Tools
 {
@@ -24,6 +25,7 @@ namespace _03WpfMetroDB.Tools
 	/// </summary>
 	public partial class WndLogger : Window
 	{
+		private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 		static MemoryAppender LogMemAppender;
 		static DispatcherTimer dispatcherTimer;
 
@@ -62,14 +64,13 @@ namespace _03WpfMetroDB.Tools
 		{
 			InitializeComponent();
 
+			Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
+
 			if (LogMemAppender == null)
 			{
 				// Memory Appender ins Logging einhaengen
 				LogMemAppender = new MemoryAppender();
-//				LogMemAppender.Threshold = Level.All;
 				LogMemAppender.ActivateOptions();
-
-				Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
 				hierarchy.Root.AddAppender(LogMemAppender);
 
 				//configure the logging at the root.  
@@ -83,6 +84,16 @@ namespace _03WpfMetroDB.Tools
 			dispatcherTimer = new DispatcherTimer();
 			dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+
+			comboLevel.Items.Add(Level.All);
+			comboLevel.Items.Add(Level.Debug);
+			comboLevel.Items.Add(Level.Info);
+			comboLevel.Items.Add(Level.Warn);
+			comboLevel.Items.Add(Level.Error);
+			comboLevel.Items.Add(Level.Fatal);
+			comboLevel.Items.Add(Level.Off);
+			comboLevel.Text = hierarchy.Root.Level.ToString();
+
 		}
 
 		//~WndLogger()
@@ -126,6 +137,44 @@ namespace _03WpfMetroDB.Tools
 		private void WndLogger1_Loaded(object sender, RoutedEventArgs e)
 		{
 			dispatcherTimer.Start();
+		}
+
+		private void comboLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
+			hierarchy.Root.Level = Level.Info;
+			Logger.InfoFormat("Log level changed to {0}", comboLevel.SelectedItem);
+			hierarchy.Root.Level = comboLevel.SelectedItem as Level;
+			hierarchy.RaiseConfigurationChanged(EventArgs.Empty);
+		}
+
+		private void Button_Click_1(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void btnEditor_Click(object sender, RoutedEventArgs e)
+		{
+
+			string fn = System.IO.Path.GetTempPath() + @"\mylog.txt";
+
+			using (System.IO.StreamWriter file = new System.IO.StreamWriter(fn))
+			{
+				foreach (var item in listLog.Items)
+				{
+					file.WriteLine(item.ToString());
+				}
+			}
+
+			Process P = new Process();
+			P.StartInfo.FileName = fn;
+//			P.StartInfo.Arguments = (file_log as knk.shared.logger.impl.RollingFile).getFileName();
+			P.Start();
+		}
+
+		private void btnClear_Click(object sender, RoutedEventArgs e)
+		{
+			listLog.Items.Clear();
 		}
 	}
 }
