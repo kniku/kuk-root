@@ -6,6 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
+// initialisiert Log4Net
+//[assembly: log4net.Config.XmlConfigurator(ConfigFile="Log4Net.config", Watch = true)]
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+
 namespace _02WpfMetro
 {
 	/// <summary>
