@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using KLib.Sql;
+using KLib.Wpf;
 using System.Data;
 using log4net;
 using log4net.Core;
@@ -26,7 +27,6 @@ namespace Test_WPF
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		public static MemoryAppender LogMemAppender;
 		static readonly ILog log = LogManager.GetLogger(typeof(MainWindow));
 
 		public MainWindow()
@@ -34,27 +34,34 @@ namespace Test_WPF
 			InitializeComponent();
 
 			BasicConfigurator.Configure();
-			//log4net.GlobalContext.Properties["LogFileName"] = "tcp-client.log";
-			//XmlConfigurator.Configure(new System.IO.FileInfo("log4net-config.xml"));
-
-			LogMemAppender = new MemoryAppender();
-			LogMemAppender.ActivateOptions();
-			Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
-			hierarchy.Root.AddAppender(LogMemAppender);
 
 			log.Info("starting tcp client");
 
 		}
 
+
+		class CTestObj
+		{
+			public string valsql_id { get; set; }
+			public int valsql_Test { get; set; }
+			public static int MyProperty3 { get; set; }
+		}
+
 		void _testPostgres()
 		{
-			DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "bankinfo_echt", "kuk", "anlusa", 0);
+			Button_Click(btnLog, null);
+			DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "bankinfo_echt", "admin", "sorting", 0);
 			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.MySql, null, "testdb", "root", null, 0);
 
 			DbConnection con1 = cm.getConnection();
 			DbConnection con2 = cm.getConnection();
 
-			con1.open();
+			if (con1.open())
+			{
+				CTestObj testObj = new CTestObj();
+				con1.execSQL_selectIntoObject(testObj, "select * from konten");
+			}
+
 //			MessageBox.Show("ok, con1=" + con1.getState());
 
 			//con2.open();
@@ -138,16 +145,22 @@ namespace Test_WPF
 				log.Fatal(ex.Message, ex);
 				//MessageBox.Show(ex.Message);
 			}
-			foreach (LoggingEvent logevent in LogMemAppender.GetEvents())
-			{
-				listLogger.SelectedIndex = listLogger.Items.Add(string.Format("{2} {0}: {1}", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp));
-			}
-			LogMemAppender.Clear();
 		}
 
 		private void MenuItem_Click(object sender, RoutedEventArgs e)
 		{
 			Close();
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			if (!WndLogger.IsAlreadyOpen())
+			{
+				KLib.Wpf.WndLogger dlg = WndLogger.CreateOrGetWndLogger(this);
+				dlg.Top = this.Top;
+				dlg.Left = this.Left + this.Width;
+				dlg.Show();
+			}
 		}
 	}
 }
