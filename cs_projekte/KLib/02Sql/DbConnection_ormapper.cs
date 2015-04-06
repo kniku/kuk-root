@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -49,11 +50,12 @@ namespace KLib.Sql
 			return r;
 		}
 
-		public bool execSQL_insertFromObject(string iTableName, Object iObj)
+		public Object execSQL_insertFromObject(string iTableName, Object iObj)
 		{
-			bool r = false;
+			Object r = null;
 
-			object[] vals;
+			ArrayList lVal = new ArrayList();
+
 			PropertyInfo[] propertyInfos;
 			propertyInfos = iObj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
@@ -69,7 +71,7 @@ namespace KLib.Sql
 				if (cnt > 0) insertSql += ",";
 				insertSql += sqlname;
 
-				vals[cnt] = propertyInfo.GetValue(iObj);
+				lVal.Add(propertyInfo.GetValue(iObj));
 				cnt++;
 			}
 			insertSql += ") values (";
@@ -81,7 +83,8 @@ namespace KLib.Sql
 			}
 			insertSql += ")";
 
-			execSQL(insertSql, vals);
+			r = execSQL(insertSql, lVal.ToArray());
+
 			return r;
 		}
 	}

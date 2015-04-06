@@ -43,15 +43,15 @@ namespace Test_WPF
 		class CTestObj
 		{
 			public string valsql_id { get; set; }
-			public int valsql_Test { get; set; }
+			public string valsql_ValStr { get; set; }
 			public static int MyProperty3 { get; set; }
 		}
 
 		void _testPostgres()
 		{
 			Button_Click(btnLog, null);
-			DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "bankinfo_echt", "admin", "sorting", 0);
-			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.MySql, null, "testdb", "root", null, 0);
+			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "bankinfo_echt", "admin", "sorting", 0);
+			DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "kuk", "anlusa", 0);
 
 			DbConnection con1 = cm.getConnection();
 			DbConnection con2 = cm.getConnection();
@@ -59,9 +59,17 @@ namespace Test_WPF
 			if (con1.open())
 			{
 				CTestObj testObj = new CTestObj();
-				con1.execSQL_selectIntoObject(testObj, "select * from konten");
+				con1.execSQL_selectIntoObject(testObj, "select * from test");
+
+				testObj.valsql_id = "new";
+				testObj.valsql_ValStr = "knk_" + testObj.valsql_id;
+
+				con1.execSQL_insertFromObject("test", testObj);
+
+				con1.close();
 			}
 
+#if false
 //			MessageBox.Show("ok, con1=" + con1.getState());
 
 			//con2.open();
@@ -94,6 +102,7 @@ namespace Test_WPF
 			*/
 			con2.close();
 			con1.close();
+#endif
 		}
 
 		void _testSqlServer()
