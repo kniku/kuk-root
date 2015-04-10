@@ -1,4 +1,5 @@
 ﻿using KLib.Sql;
+using KLib.Wpf;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -33,10 +34,8 @@ namespace _03WpfMetroDB
 Aktive Packages:
 - log4net: Log Tool
 - MahApps:Metro: Metro L&F
-- KLib.Sql: SQL Lib";
-
-
-
+- KLib.Sql: SQL Lib
+- KLib.Wpf: Wpf Tools";
 
 		}
 
@@ -70,7 +69,7 @@ Aktive Packages:
 
 		private void btnLog_Click(object sender, RoutedEventArgs e)
 		{
-			Tools.WndLogger wnd = Tools.WndLogger.CreateOrGetWndLogger(this);
+			WndLogger wnd = WndLogger.CreateOrGetWndLogger(this);
 
 			if (!wnd.IsVisible)
 			{
