@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03WpfMetroDB", "03WpfMetroD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06ToolsWPF", "..\KLib\06ToolsWPF\06ToolsWPF.csproj", "{B43352E1-CA2E-4C64-B6DC-B1AB5BD17DA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04WpfOwnBaseWindowClass", "04WpfOwnBaseWindowClass\04WpfOwnBaseWindowClass.csproj", "{4F663B44-C6F5-4292-8B0E-C31044ADA1CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{B43352E1-CA2E-4C64-B6DC-B1AB5BD17DA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B43352E1-CA2E-4C64-B6DC-B1AB5BD17DA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B43352E1-CA2E-4C64-B6DC-B1AB5BD17DA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F663B44-C6F5-4292-8B0E-C31044ADA1CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F663B44-C6F5-4292-8B0E-C31044ADA1CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F663B44-C6F5-4292-8B0E-C31044ADA1CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F663B44-C6F5-4292-8B0E-C31044ADA1CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
