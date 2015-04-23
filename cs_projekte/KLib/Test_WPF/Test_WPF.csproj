@@ -105,7 +105,7 @@
       <Project>{bb232c50-6838-4157-b7c4-8a83510c716e}</Project>
       <Name>02Sql</Name>
     </ProjectReference>
-    <ProjectReference Include="..\06ToolsWPF\05ToolsWPF.csproj">
+    <ProjectReference Include="..\05ToolsWPF\05ToolsWPF.csproj">
       <Project>{b43352e1-ca2e-4c64-b6dc-b1ab5bd17da4}</Project>
       <Name>05ToolsWPF</Name>
     </ProjectReference>
