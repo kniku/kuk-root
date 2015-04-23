@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01Base", "01Base\01Base.csproj", "{385DBB6C-DD83-4F45-818C-1638671D2B12}"
 EndProject
@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_Forms", "Test_Forms\Te
 		{8D19258D-375D-48A5-9BAC-0A3BD5BDAA0D} = {8D19258D-375D-48A5-9BAC-0A3BD5BDAA0D}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06ToolsWPF", "06ToolsWPF\06ToolsWPF.csproj", "{B43352E1-CA2E-4C64-B6DC-B1AB5BD17DA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05ToolsWPF", "05ToolsWPF\05ToolsWPF.csproj", "{B43352E1-CA2E-4C64-B6DC-B1AB5BD17DA4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{385DBB6C-DD83-4F45-818C-1638671D2B12} = {385DBB6C-DD83-4F45-818C-1638671D2B12}
 	EndProjectSection
