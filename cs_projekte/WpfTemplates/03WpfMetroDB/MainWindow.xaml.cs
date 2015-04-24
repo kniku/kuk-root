@@ -37,18 +37,36 @@ Aktive Packages:
 - KLib.Sql: SQL Lib
 - KLib.Wpf: Wpf Tools";
 
+
+			txtDBtype.Items.Add(DbConnectionManager.ProviderType.MySql);
+			txtDBtype.Items.Add(DbConnectionManager.ProviderType.Postgres);
+			txtDBtype.Items.Add(DbConnectionManager.ProviderType.SQLite);
+			txtDBtype.Items.Add(DbConnectionManager.ProviderType.SqlServer);
+
 			txtDBtype.Text = DbConnectionManager.ProviderType.Postgres.ToString();
-			txtDBserver.Text = "127.0.0.1";
-			txtDBdbase.Text = "rcsdb";
+			txtDBserver.Text = "192.168.0.6";// "127.0.0.1";
+			txtDBdbase.Text = "TAIFUN software";// "rcsdb";
 			txtDBport.Text = "0";
-			txtDBuser.Text = "admin";
-			txtDBpass.Text = "sorting";
+			txtDBuser.Text = "axavia";// "admin";
+			txtDBpass.Text = "axavia";// "sorting";
+		}
+
+
+		DbConnectionManager.ProviderType getProviderType(string iName)
+		{
+			if (DbConnectionManager.ProviderType.MySql.ToString().Equals(iName)) return DbConnectionManager.ProviderType.MySql;
+			if (DbConnectionManager.ProviderType.Postgres.ToString().Equals(iName)) return DbConnectionManager.ProviderType.Postgres;
+			if (DbConnectionManager.ProviderType.SQLite.ToString().Equals(iName)) return DbConnectionManager.ProviderType.SQLite;
+			if (DbConnectionManager.ProviderType.SqlServer.ToString().Equals(iName)) return DbConnectionManager.ProviderType.SqlServer;
+
+			return DbConnectionManager.ProviderType.NONE;
 		}
 
 		private void btnConnect_Click(object sender, RoutedEventArgs e)
 		{
 
-			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, txtDBserver.Text, txtDBdbase.Text, txtDBuser.Text, txtDBpass.Text, Convert.ToUInt32(txtDBport.Text));
+//			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, txtDBserver.Text, txtDBdbase.Text, txtDBuser.Text, txtDBpass.Text, Convert.ToUInt32(txtDBport.Text));
+			DbConnectionManager dbManager = new DbConnectionManager(getProviderType(txtDBtype.Text), txtDBserver.Text, txtDBdbase.Text, txtDBuser.Text, txtDBpass.Text, Convert.ToUInt32(txtDBport.Text));
 			DbConnection conn = dbManager.getConnection();
 
 			conn.open();
@@ -96,7 +114,8 @@ Aktive Packages:
 		private void btnSql_Click(object sender, RoutedEventArgs e)
 		{
 //			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, "192.168.0.230", "rcsdb", "admin", "sorting");
-			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, txtDBserver.Text, txtDBdbase.Text, txtDBuser.Text, txtDBpass.Text, Convert.ToUInt32(txtDBport.Text));
+//			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, txtDBserver.Text, txtDBdbase.Text, txtDBuser.Text, txtDBpass.Text, Convert.ToUInt32(txtDBport.Text));
+			DbConnectionManager dbManager = new DbConnectionManager(getProviderType(txtDBtype.Text), txtDBserver.Text, txtDBdbase.Text, txtDBuser.Text, txtDBpass.Text, Convert.ToUInt32(txtDBport.Text));
 			DbConnection conn = dbManager.getConnection();
 
 			conn.open();
