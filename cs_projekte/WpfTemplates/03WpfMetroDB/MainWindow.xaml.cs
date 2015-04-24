@@ -37,12 +37,18 @@ Aktive Packages:
 - KLib.Sql: SQL Lib
 - KLib.Wpf: Wpf Tools";
 
+			txtDBtype.Text = DbConnectionManager.ProviderType.Postgres.ToString();
+			txtDBserver.Text = "127.0.0.1";
+			txtDBdbase.Text = "rcsdb";
+			txtDBport.Text = "0";
+			txtDBuser.Text = "admin";
+			txtDBpass.Text = "sorting";
 		}
 
 		private void btnConnect_Click(object sender, RoutedEventArgs e)
 		{
 
-			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, "192.168.0.230", "rcsdb", "admin", "sorting");
+			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, txtDBserver.Text, txtDBdbase.Text, txtDBuser.Text, txtDBpass.Text, Convert.ToUInt32(txtDBport.Text));
 			DbConnection conn = dbManager.getConnection();
 
 			conn.open();
@@ -89,7 +95,8 @@ Aktive Packages:
 
 		private void btnSql_Click(object sender, RoutedEventArgs e)
 		{
-			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, "192.168.0.230", "rcsdb", "admin", "sorting");
+//			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, "192.168.0.230", "rcsdb", "admin", "sorting");
+			DbConnectionManager dbManager = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, txtDBserver.Text, txtDBdbase.Text, txtDBuser.Text, txtDBpass.Text, Convert.ToUInt32(txtDBport.Text));
 			DbConnection conn = dbManager.getConnection();
 
 			conn.open();
