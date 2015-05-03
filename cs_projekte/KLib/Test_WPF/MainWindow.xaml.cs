@@ -19,6 +19,7 @@ using log4net.Core;
 using log4net.Config;
 using log4net.Appender;
 using log4net.Repository.Hierarchy;
+using System.ComponentModel;
 
 namespace Test_WPF
 {
@@ -47,9 +48,45 @@ namespace Test_WPF
 			public static int MyProperty3 { get; set; }
 		}
 
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int max = (int)e.Argument;
+            int result = 0;
+            for (int i = 0; i < max; i++)
+            {
+                int progressPercentage = Convert.ToInt32(((double)i / max) * 100);
+                if (i % 42 == 0)
+                {
+                    result++;
+                    (sender as BackgroundWorker).ReportProgress(progressPercentage, i);
+                }
+                else
+                    (sender as BackgroundWorker).ReportProgress(progressPercentage);
+                System.Threading.Thread.Sleep(1);
+
+            }
+            e.Result = result;
+        }
+
+
 		void _testPostgres()
 		{
 			Button_Click(btnLog, null);
+            // ############### TEST ###############
+
+            WndProgress xxx = new WndProgress();
+            xxx.AddWorker(worker_DoWork, "worker 1", 5000);
+            xxx.AddWorker(worker_DoWork, "worker 2", 7000);
+            xxx.AddWorker(worker_DoWork, "worker 3", 5000);
+            xxx.RunAsync();
+
+            return;
+            // ############### TEST END ###############
+
+
+
+
 			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "bankinfo_echt", "admin", "sorting", 0);
 			DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "kuk", "anlusa", 0);
 
@@ -172,4 +209,5 @@ namespace Test_WPF
 			}
 		}
 	}
+
 }
