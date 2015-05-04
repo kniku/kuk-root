@@ -16,123 +16,128 @@ using System.Windows.Shapes;
 
 namespace KLib.Wpf
 {
-    /// <summary>
-    /// Interaktionslogik für WndProgress.xaml
-    /// </summary>
-    public partial class WndProgress : Window, INotifyPropertyChanged
-    {
-        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+	/// <summary>
+	/// Interaktionslogik für WndProgress.xaml
+	/// </summary>
+	public partial class WndProgress : Window, INotifyPropertyChanged
+	{
+		private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public double Progress1 { get; set; }
-        public double Progress2 { get; set; }
-        public double Progress3 { get; set; }
-        public double Progress4 { get; set; }
-        public double Progress5 { get; set; }
+		//public double Progress1 { get; set; }
+		//public double Progress2 { get; set; }
+		//public double Progress3 { get; set; }
+		//public double Progress4 { get; set; }
+		//public double Progress5 { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(string sProp)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(sProp));
-            }
-        }
+		protected void NotifyPropertyChanged(string sProp)
+		{
+			if (PropertyChanged != null)
+			{
+				PropertyChanged(this, new PropertyChangedEventArgs(sProp));
+			}
+		}
 
-        public WndProgress()
-        {
-            InitializeComponent();
-            PanelProgress.DataContext = this;
-        }
+		public WndProgress()
+		{
+			InitializeComponent();
+			PanelProgress.DataContext = this;
+		}
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+		}
 
 
-        ArrayList listWorker = new ArrayList();
-        
-        class CWorkerInfo
-        {
-            public DoWorkEventHandler mHandler; public string mTitle; public object mCalldata;
-            public BackgroundWorker mWorker; public ProgressBar mProgressBar;
-            public bool isCompleted;
-        }
+		ArrayList listWorker = new ArrayList();
+		
+		class CWorkerInfo
+		{
+			public DoWorkEventHandler mHandler; public string mTitle; public object mCalldata;
+			public BackgroundWorker mWorker; public Label mLabel;  public ProgressBar mProgressBar;
+			public bool isCompleted;
+		}
 
-        public void AddWorker(DoWorkEventHandler iHandler, string iTitle, object iCalldata)
-        {
-            listWorker.Add(new CWorkerInfo() { mHandler = iHandler, mTitle = iTitle, mCalldata = iCalldata, isCompleted = false });
-        }
+		public void AddWorker(DoWorkEventHandler iHandler, string iTitle, object iCalldata)
+		{
+			listWorker.Add(new CWorkerInfo() { mHandler = iHandler, mTitle = iTitle, mCalldata = iCalldata, isCompleted = false });
+		}
 
-        public void RunAsync()
-        {
-            Logger.Info("worker starts");
+		public void RunAsync()
+		{
+			Logger.Info("worker starts");
 
-            int idx = 1;
-            foreach (CWorkerInfo ci in listWorker)
-            {
+			int idx = 1;
+			foreach (CWorkerInfo ci in listWorker)
+			{
 
-                Label lbl = new Label();
-                lbl.Content = ci.mTitle;
+				Label lbl = new Label();
+				lbl.Content = ci.mTitle;
 
-                ProgressBar pb = new ProgressBar();
-                pb.Width = 200;
-                pb.Height = 10;
-                var binding = new Binding("Progress" + idx++);
-                BindingOperations.SetBinding(pb, ProgressBar.ValueProperty, binding);
+				ProgressBar pb = new ProgressBar();
+				pb.Width = 200;
+				pb.Height = 15;
+				var binding = new Binding("Progress" + idx++);
+				BindingOperations.SetBinding(pb, ProgressBar.ValueProperty, binding);
 
-                PanelProgress.Children.Add(lbl);
-                PanelProgress.Children.Add(pb);
-                ci.mProgressBar = pb;
+				PanelProgress.Children.Add(lbl);
+				PanelProgress.Children.Add(pb);
 
-                ci.mWorker = new BackgroundWorker();
-                ci.mWorker.WorkerReportsProgress = true;
-                ci.mWorker.DoWork += ci.mHandler;
-                ci.mWorker.ProgressChanged += worker_ProgressChanged;
-                ci.mWorker.RunWorkerCompleted += worker_RunWorkerCompleted;
-                ci.mWorker.RunWorkerAsync(ci.mCalldata);
-            }
+				ci.mLabel = lbl;
+				ci.mProgressBar = pb;
 
-            ShowDialog();
-        }
+				ci.mWorker = new BackgroundWorker();
+				ci.mWorker.WorkerReportsProgress = true;
+				ci.mWorker.DoWork += ci.mHandler;
+				ci.mWorker.ProgressChanged += worker_ProgressChanged;
+				ci.mWorker.RunWorkerCompleted += worker_RunWorkerCompleted;
+				ci.mWorker.RunWorkerAsync(ci.mCalldata);
+			}
 
-        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            foreach (CWorkerInfo ci in listWorker)
-            {
-                if (ci.mWorker == (BackgroundWorker)sender)
-                {
-                    if (ci.mProgressBar.Value != e.ProgressPercentage)
-                    {
-                        ci.mProgressBar.Value = e.ProgressPercentage;
-                        //NotifyPropertyChanged("Progress1");
-                        if (e.ProgressPercentage % 5 == 0) Logger.Info("worker progress [" + ci.mTitle + "]:" + e.ProgressPercentage);
-                    }
-                    break;
-                }
-            }
-        }
+		//    ShowDialog();
+			Show();
+		}
 
-        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            bool all_completed = true;
+		void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+		{
+			foreach (CWorkerInfo ci in listWorker)
+			{
+				if (ci.mWorker == (BackgroundWorker)sender)
+				{
+					if (ci.mProgressBar.Value != e.ProgressPercentage)
+					{
+						ci.mProgressBar.Value = e.ProgressPercentage;
+						//NotifyPropertyChanged("Progress1");
+						if (e.ProgressPercentage % 5 == 0) Logger.Info("worker progress [" + ci.mTitle + "]:" + e.ProgressPercentage);
+					}
+					break;
+				}
+			}
+		}
 
-            //            MessageBox.Show("Numbers between 0 and 10000 divisible by 7: " + e.Result);
-            foreach (CWorkerInfo ci in listWorker)
-            {
-                if (ci.mWorker == (BackgroundWorker)sender)
-                {
-                    ci.isCompleted = true;
-                    Logger.InfoFormat("worker [{0}] completed", ci.mTitle);
-                }
-                else
-                {
-                    if (ci.isCompleted == false) all_completed = false;
-                }
-            }
+		void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			bool all_completed = true;
 
-            if (all_completed) Close();
-        }
+			//            MessageBox.Show("Numbers between 0 and 10000 divisible by 7: " + e.Result);
+			foreach (CWorkerInfo ci in listWorker)
+			{
+				if (ci.mWorker == (BackgroundWorker)sender)
+				{
+					ci.isCompleted = true;
+					PanelProgress.Children.Remove(ci.mLabel);
+					PanelProgress.Children.Remove(ci.mProgressBar);
+					Logger.InfoFormat("worker [{0}] completed", ci.mTitle);
+				}
+				else
+				{
+					if (ci.isCompleted == false) all_completed = false;
+				}
+			}
 
-    }
+			if (all_completed) Close();
+		}
+
+	}
 }

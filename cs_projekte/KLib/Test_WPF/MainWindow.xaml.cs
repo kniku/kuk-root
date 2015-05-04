@@ -78,8 +78,10 @@ namespace Test_WPF
             WndProgress xxx = new WndProgress();
             xxx.AddWorker(worker_DoWork, "worker 1", 5000);
             xxx.AddWorker(worker_DoWork, "worker 2", 7000);
-            xxx.AddWorker(worker_DoWork, "worker 3", 5000);
-            xxx.RunAsync();
+            xxx.AddWorker(worker_DoWork, "worker 3", 3000);
+			xxx.AddWorker(worker_DoWork, "worker 4", 4000);
+			xxx.AddWorker(worker_DoWork, "worker 5", 8000);
+			xxx.RunAsync();
 
             return;
             // ############### TEST END ###############
