@@ -55,16 +55,16 @@ namespace KLib.Wpf
 		class CWorkerInfo
 		{
 			public DoWorkEventHandler mHandler; public string mTitle; public object mCalldata;
-			public BackgroundWorker mWorker; public Label mLabel;  public ProgressBar mProgressBar;
-			public bool isCompleted;
+			public BackgroundWorker mWorker; public Label mLabel; public ProgressBar mProgressBar; public Grid mGrid; public TextBlock mTextBlock;
+			public bool isCompleted; public bool mWorkerReportsProgress;
 		}
 
-		public void AddWorker(DoWorkEventHandler iHandler, string iTitle, object iCalldata)
+		public void AddWorker(DoWorkEventHandler iHandler, string iTitle, bool iWorkerReportsProgress, object iCalldata)
 		{
-			listWorker.Add(new CWorkerInfo() { mHandler = iHandler, mTitle = iTitle, mCalldata = iCalldata, isCompleted = false });
+			listWorker.Add(new CWorkerInfo() { mHandler = iHandler, mTitle = iTitle, mCalldata = iCalldata, isCompleted = false, mWorkerReportsProgress = iWorkerReportsProgress });
 		}
 
-		public void RunAsync()
+		public void StartAllTasks(bool iAsync)
 		{
 			Logger.Info("worker starts");
 
@@ -75,20 +75,31 @@ namespace KLib.Wpf
 				Label lbl = new Label();
 				lbl.Content = ci.mTitle;
 
+				Grid grid = new Grid();
+				TextBlock tb = new TextBlock();
+				tb.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+				tb.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+				//tb.Text = "34 %";
+
 				ProgressBar pb = new ProgressBar();
 				pb.Width = 200;
-				pb.Height = 15;
-				var binding = new Binding("Progress" + idx++);
-				BindingOperations.SetBinding(pb, ProgressBar.ValueProperty, binding);
+				//pb.Height = 15;
+				pb.IsIndeterminate = !ci.mWorkerReportsProgress;
+				//var binding = new Binding("Progress" + idx++);
+				//BindingOperations.SetBinding(pb, ProgressBar.ValueProperty, binding);
 
 				PanelProgress.Children.Add(lbl);
-				PanelProgress.Children.Add(pb);
+				grid.Children.Add(pb);
+				grid.Children.Add(tb);
+				PanelProgress.Children.Add(grid);
 
 				ci.mLabel = lbl;
 				ci.mProgressBar = pb;
+				ci.mGrid = grid;
+				ci.mTextBlock = tb;
 
 				ci.mWorker = new BackgroundWorker();
-				ci.mWorker.WorkerReportsProgress = true;
+				ci.mWorker.WorkerReportsProgress = true;// ci.mWorkerReportsProgress;
 				ci.mWorker.DoWork += ci.mHandler;
 				ci.mWorker.ProgressChanged += worker_ProgressChanged;
 				ci.mWorker.RunWorkerCompleted += worker_RunWorkerCompleted;
@@ -96,7 +107,8 @@ namespace KLib.Wpf
 			}
 
 		//    ShowDialog();
-			Show();
+			if (iAsync) Show();
+			else ShowDialog();
 		}
 
 		void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -105,9 +117,14 @@ namespace KLib.Wpf
 			{
 				if (ci.mWorker == (BackgroundWorker)sender)
 				{
-					if (ci.mProgressBar.Value != e.ProgressPercentage)
+					//if (ci.mProgressBar.Value != e.ProgressPercentage)
 					{
-						ci.mProgressBar.Value = e.ProgressPercentage;
+						if (ci.mWorkerReportsProgress)
+						{
+							ci.mProgressBar.Value = e.ProgressPercentage;
+							ci.mTextBlock.Text = e.ProgressPercentage.ToString() + " %";
+						}
+						if (e.UserState is string) ci.mLabel.Content = e.UserState;
 						//NotifyPropertyChanged("Progress1");
 						if (e.ProgressPercentage % 5 == 0) Logger.Info("worker progress [" + ci.mTitle + "]:" + e.ProgressPercentage);
 					}
@@ -127,7 +144,7 @@ namespace KLib.Wpf
 				{
 					ci.isCompleted = true;
 					PanelProgress.Children.Remove(ci.mLabel);
-					PanelProgress.Children.Remove(ci.mProgressBar);
+					PanelProgress.Children.Remove(ci.mGrid);
 					Logger.InfoFormat("worker [{0}] completed", ci.mTitle);
 				}
 				else

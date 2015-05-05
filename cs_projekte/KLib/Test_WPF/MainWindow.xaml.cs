@@ -49,42 +49,43 @@ namespace Test_WPF
 		}
 
 
-        void worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            int max = (int)e.Argument;
-            int result = 0;
-            for (int i = 0; i < max; i++)
-            {
-                int progressPercentage = Convert.ToInt32(((double)i / max) * 100);
-                if (i % 42 == 0)
-                {
-                    result++;
-                    (sender as BackgroundWorker).ReportProgress(progressPercentage, i);
-                }
-                else
-                    (sender as BackgroundWorker).ReportProgress(progressPercentage);
-                System.Threading.Thread.Sleep(1);
+		void worker_DoWork(object sender, DoWorkEventArgs e)
+		{
+			int max = (int)e.Argument;
+			int result = 0;
+			for (int i = 0; i < max; i++)
+			{
+				int progressPercentage = Convert.ToInt32(((double)i / max) * 100);
+				if (i % 42 == 0)
+				{
+					result++;
+					//(sender as BackgroundWorker).ReportProgress(progressPercentage, i);
+					(sender as BackgroundWorker).ReportProgress(progressPercentage, "TEST " + i + ":");
+				}
+				else
+					if (progressPercentage % 2 == 0) (sender as BackgroundWorker).ReportProgress(progressPercentage);
+				System.Threading.Thread.Sleep(1);
 
-            }
-            e.Result = result;
-        }
+			}
+			e.Result = result;
+		}
 
 
 		void _testPostgres()
 		{
 			Button_Click(btnLog, null);
-            // ############### TEST ###############
+			// ############### TEST ###############
 
-            WndProgress xxx = new WndProgress();
-            xxx.AddWorker(worker_DoWork, "worker 1", 5000);
-            xxx.AddWorker(worker_DoWork, "worker 2", 7000);
-            xxx.AddWorker(worker_DoWork, "worker 3", 3000);
-			xxx.AddWorker(worker_DoWork, "worker 4", 4000);
-			xxx.AddWorker(worker_DoWork, "worker 5", 8000);
-			xxx.RunAsync();
+			WndProgress xxx = new WndProgress();
+			xxx.AddWorker(worker_DoWork, "worker 1:", true, 5000);
+			xxx.AddWorker(worker_DoWork, "worker 2:", false, 7000);
+			xxx.AddWorker(worker_DoWork, "worker 3:", true, 3000);
+			xxx.AddWorker(worker_DoWork, "worker 4:", true, 4000);
+			xxx.AddWorker(worker_DoWork, "worker 5:", true, 8000);
+			xxx.StartAllTasks(false);
 
-            return;
-            // ############### TEST END ###############
+			return;
+			// ############### TEST END ###############
 
 
 
