@@ -5,6 +5,9 @@ using System.Text;
 
 namespace KLib.Sql
 {
+	/// <summary>
+	/// Verwaltet Verbindungen zu einer bestimmten Datenbank.
+	/// </summary>
 	public class DbConnectionManager
 	{
 //		static log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(DbConnectionManager));
@@ -47,6 +50,10 @@ namespace KLib.Sql
 			setThrowExceptions = false;
 		}
 
+		/// <summary>
+		/// Eine freie Verbindung anfordern
+		/// </summary>
+		/// <returns>Eine Verbindung zu der Datenbank</returns>
 		public DbConnection getConnection()
 		{
 			DbConnection r = new DbConnection(this);

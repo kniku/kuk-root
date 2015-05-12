@@ -35,8 +35,11 @@ namespace Test_WPF
 			InitializeComponent();
 
 			BasicConfigurator.Configure();
+			log.Info("test logger");
 
-			log.Info("starting tcp client");
+			DbManager.addConnectionManager("testdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "kuk", "anlusa", 0));
+			DbManager.addConnectionManager("rcsdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "rcsdb", "admin", "sorting", 0));
+			DbManager.addConnectionManager("axavia", new DbConnectionManager(DbConnectionManager.ProviderType.SqlServer, "axavia", "BT_ZETS", "axavia", "Axavia#2011", 0));
 
 		}
 
@@ -74,9 +77,20 @@ namespace Test_WPF
 		void _testPostgres()
 		{
 			Button_Click(btnLog, null);
-			// ############### TEST ###############
+			// ############### TEST WndSqlView ###############
 
-			WndProgress xxx = new WndProgress();
+			KLib.Wpf.Sql.WndSqlView sv = new KLib.Wpf.Sql.WndSqlView();
+			sv.SqlConnection = "rcsdb";
+//			sv.SqlQuery = "select * from config";
+			sv.SqlQuery = "select * from statistic limit 5000";
+			sv.Show();
+
+			return;
+			// ############### TEST END ###############
+
+			// ############### TEST WndProgress ###############
+
+			WndProgress xxx = new WndProgress(this);
 			xxx.AddWorker(worker_DoWork, "worker 1:", true, 5000);
 			xxx.AddWorker(worker_DoWork, "worker 2:", false, 7000);
 			xxx.AddWorker(worker_DoWork, "worker 3:", true, 3000);
@@ -88,13 +102,11 @@ namespace Test_WPF
 			// ############### TEST END ###############
 
 
-
-
 			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "bankinfo_echt", "admin", "sorting", 0);
-			DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "kuk", "anlusa", 0);
+			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "kuk", "anlusa", 0);
 
-			DbConnection con1 = cm.getConnection();
-			DbConnection con2 = cm.getConnection();
+			DbConnection con1 = DbManager.getConnectionManager("testdb").getConnection();
+			DbConnection con2 = DbManager.getConnectionManager("testdb").getConnection();
 
 			if (con1.open())
 			{
@@ -147,9 +159,8 @@ namespace Test_WPF
 
 		void _testSqlServer()
 		{
-			DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.SqlServer, "axavia", "BT_ZETS", "axavia", "Axavia#2011", 0);
 
-			DbConnection con1 = cm.getConnection();
+			DbConnection con1 = DbManager.getConnectionManager("axavia").getConnection();
 
 			con1.open();
 //			MessageBox.Show("ok, con1=" + con1.NativeConnection.State);

@@ -1,0 +1,13 @@
+﻿<Window x:Class="KLib.Wpf.Sql.WndSqlView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WndSqlView" Height="377" Width="643" Loaded="Window_Loaded">
+    <Grid>
+        <DataGrid Name="gridData" Margin="10,10,113,88" ItemsSource="{Binding}"/>
+        <StackPanel HorizontalAlignment="Right" Height="227" Margin="0,10,10,0" VerticalAlignment="Top" Width="98">
+            <Button Name="btnReload"  Content="Reload" VerticalAlignment="Top" Click="btnReload_Click"/>
+        </StackPanel>
+        <Button Name="btnClose" Content="Exit" VerticalAlignment="Bottom" Margin="0,0,10,10" HorizontalAlignment="Right" Width="98" Click="btnClose_Click"/>
+        <TextBox x:Name="txtSqlQuery" Margin="10,0,113,10" TextWrapping="Wrap" Text="TextBox" RenderTransformOrigin="0.267,0.452" FontSize="10" FontFamily="Courier New" Height="73" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>

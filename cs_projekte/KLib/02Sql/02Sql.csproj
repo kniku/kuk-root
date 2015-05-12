@@ -63,6 +63,7 @@
     <Compile Include="DbConnection_ormapper.cs" />
     <Compile Include="DbConnection_simple.cs" />
     <Compile Include="DbConnection_transactional.cs" />
+    <Compile Include="DbManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

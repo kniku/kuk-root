@@ -114,5 +114,28 @@ namespace KLib.Sql
 
 			return r;
 		}
+
+		public DataSet execSQL_selectDS(string iSql, params object[] iSqlParams)
+		{
+			DataSet r = null;
+
+			try
+			{
+				IDataAdapter da = createDataAdapter(prepareSQL(iSql, iSqlParams));
+				if (da != null)
+				{
+					DataSet ds = new DataSet();
+					da.Fill(ds);
+					r = ds;
+				}
+			}
+			catch (Exception _ex)
+			{
+				Logger.ErrorFormat("DbConnection {0}: execSQL_select ERROR: stmt=[{1}], exception={2}", GetHashCode(), iSql, _ex.Message);
+				if (mConnectionManager.setThrowExceptions) throw;	// weiterwerfen, wenn gewünscht...
+			}
+
+			return r;
+		}
 	}
 }

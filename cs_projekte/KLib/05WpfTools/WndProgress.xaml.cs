@@ -39,10 +39,11 @@ namespace KLib.Wpf
 			}
 		}
 
-		public WndProgress()
+		public WndProgress(Window iOwner)
 		{
 			InitializeComponent();
 			PanelProgress.DataContext = this;
+			Owner = iOwner;
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
