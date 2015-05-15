@@ -101,16 +101,46 @@ namespace KLib.Wpf
 			foreach (LoggingEvent logevent in LogMemAppender.GetEvents())
 			{
 				found = true;
-				listLog.Items.Add(string.Format("{2} {0}: {1}", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp));
+//				listLog.Items.Add(string.Format("{2} {0}: {1}", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp));
+				//textLog.SelectionBrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Yellow);
+				//textLog.AppendText(string.Format("{2} {0}: {1}", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp));
+				//textLog.SelectionBrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Green);
+				//textLog.AppendText(string.Format("{2} {0}: {1}", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp));
+
+				System.Windows.Documents.TextRange rangeOfText1 = new System.Windows.Documents.TextRange(textLog.Document.ContentEnd, textLog.Document.ContentEnd);
+//				rangeOfText1.Text = string.Format("{2} {0}: {1}" + System.Environment.NewLine, logevent.Level, logevent.RenderedMessage, logevent.TimeStamp);
+				rangeOfText1.Text = string.Format("{2} {0}: {1}\r", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp).Replace("\n","");
+				
+				
+				System.Windows.Media.SolidColorBrush brush;
+
+				if (logevent.Level >= Level.Error)
+				{
+					brush = System.Windows.Media.Brushes.Red;
+				}
+				else if (logevent.Level >= Level.Warn)
+				{
+					brush = System.Windows.Media.Brushes.Blue;
+				}
+				else if (logevent.Level >= Level.Info)
+				{
+					brush = System.Windows.Media.Brushes.Black;
+				}
+				else
+				{
+					brush = System.Windows.Media.Brushes.Gray;
+				}
+				rangeOfText1.ApplyPropertyValue(System.Windows.Documents.TextElement.ForegroundProperty, brush);
 			}
 
 			if (found)
 			{
 				LogMemAppender.Clear();
 				CommandManager.InvalidateRequerySuggested();
-				listLog.Items.MoveCurrentToLast();
-				listLog.SelectedItem = listLog.Items.CurrentItem;
-				listLog.ScrollIntoView(listLog.Items.CurrentItem);
+				//listLog.Items.MoveCurrentToLast();
+				//listLog.SelectedItem = listLog.Items.CurrentItem;
+				//listLog.ScrollIntoView(listLog.Items.CurrentItem);
+				textLog.ScrollToEnd();
 			}
 		}
 
@@ -151,10 +181,12 @@ namespace KLib.Wpf
 
 			using (System.IO.StreamWriter file = new System.IO.StreamWriter(fn))
 			{
-				foreach (var item in listLog.Items)
-				{
-					file.WriteLine(item.ToString());
-				}
+				//foreach (var item in listLog.Items)
+				//{
+				//	file.WriteLine(item.ToString());
+				//}
+				textLog.SelectAll();
+				file.WriteLine(textLog.Selection.Text);
 			}
 
 			Process P = new Process();
@@ -165,7 +197,9 @@ namespace KLib.Wpf
 
 		private void btnClear_Click(object sender, RoutedEventArgs e)
 		{
-			listLog.Items.Clear();
+//			listLog.Items.Clear();
+			textLog.SelectAll();
+			textLog.Selection.Text = "";
 		}
 	}
 }

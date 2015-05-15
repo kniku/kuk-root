@@ -46,7 +46,11 @@ namespace KLib.Sql
 					NativeConnection = new MySql.Data.MySqlClient.MySqlConnection(connstring);
 					break;
 				case DbConnectionManager.ProviderType.SQLite:
-					connstring = String.Format(@"Data Source=C:\knk\tmp\sqlite.db;FailIfMissing=False;");
+					if (!System.IO.File.Exists(iConnectionManager.Database))
+					{
+						SQLiteConnection.CreateFile(iConnectionManager.Database);
+					}
+					connstring = String.Format(@"Data Source={0};Version=3;FailIfMissing=True;", iConnectionManager.Database);
 					NativeConnection = new SQLiteConnection(connstring);
 					break;
 				case DbConnectionManager.ProviderType.SqlServer:
@@ -116,6 +120,9 @@ namespace KLib.Sql
 				case DbConnectionManager.ProviderType.MySql:
 					r = new MySql.Data.MySqlClient.MySqlCommand();
 					break;
+				case DbConnectionManager.ProviderType.SQLite:
+					r = new SQLiteCommand();
+					break;
 				case DbConnectionManager.ProviderType.SqlServer:
 					r = new System.Data.SqlClient.SqlCommand();
 					break;
@@ -136,6 +143,9 @@ namespace KLib.Sql
 					break;
 				case DbConnectionManager.ProviderType.MySql:
 					r = new MySql.Data.MySqlClient.MySqlParameter();
+					break;
+				case DbConnectionManager.ProviderType.SQLite:
+					r = new SQLiteParameter();
 					break;
 				case DbConnectionManager.ProviderType.SqlServer:
 					r = new System.Data.SqlClient.SqlParameter();
@@ -215,6 +225,9 @@ namespace KLib.Sql
 					case DbConnectionManager.ProviderType.SqlServer:
 						iSql = iSql.Replace(':', '@');
 						break;
+					case DbConnectionManager.ProviderType.SQLite:
+//						iSql = iSql.Replace(':', '@');
+						break;
 					case DbConnectionManager.ProviderType.MySql:
 						iSql = iSql.Replace(':', '?');
 						break;
@@ -251,11 +264,17 @@ namespace KLib.Sql
 			{
 				switch (mConnectionManager.Provider)
 				{
+					case DbConnectionManager.ProviderType.MySql:
+						r = new MySql.Data.MySqlClient.MySqlDataAdapter(iCmd as MySql.Data.MySqlClient.MySqlCommand);
+						break;
 					case DbConnectionManager.ProviderType.Postgres:
 						r = new NpgsqlDataAdapter(iCmd as NpgsqlCommand);
 						break;
 					case DbConnectionManager.ProviderType.SqlServer:
 						r = new System.Data.SqlClient.SqlDataAdapter(iCmd as System.Data.SqlClient.SqlCommand);
+						break;
+					case DbConnectionManager.ProviderType.SQLite:
+						r = new SQLiteDataAdapter(iCmd as SQLiteCommand);
 						break;
 					default:
 						throw new NotImplementedException("Providertyp nicht unterstützt: " + mConnectionManager.Provider);

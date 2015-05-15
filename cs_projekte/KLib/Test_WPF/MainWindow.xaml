@@ -47,8 +47,9 @@
         </Menu>
         <Menu Height="20" VerticalAlignment="Top">
             <MenuItem Header="Datei">
-                <MenuItem Header="Neu" HorizontalAlignment="Left" Width="85"/>
-                <MenuItem Header="Beenden" HorizontalAlignment="Left" Width="85" Click="MenuItem_Click"/>
+                <MenuItem Header="Neu"/>
+                <MenuItem Header="TEST"/>
+                <MenuItem Header="Beenden" Click="MenuItem_Click"/>
             </MenuItem>
             <MenuItem Header="Hilfe"/>
             <MenuItem Header="Extra"/>
