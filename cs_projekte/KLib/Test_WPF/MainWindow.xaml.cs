@@ -41,6 +41,7 @@ namespace Test_WPF
 			DbManager.addConnectionManager("rcsdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "rcsdb", "admin", "sorting", 0));
 			DbManager.addConnectionManager("axavia", new DbConnectionManager(DbConnectionManager.ProviderType.SqlServer, "axavia", "BT_ZETS", "axavia", "Axavia#2011", 0));
 			DbManager.addConnectionManager("taifun", new DbConnectionManager(DbConnectionManager.ProviderType.SqlServer, "192.168.0.6", "TAIFUN software", "axavia", "axavia", 0));
+			DbManager.addConnectionManager("sqlite", new DbConnectionManager(DbConnectionManager.ProviderType.SQLite, null, null, null, null, 0));
 
 		}
 
@@ -78,6 +79,12 @@ namespace Test_WPF
 		void _testPostgres()
 		{
 			Button_Click(btnLog, null);
+
+
+			DbConnection conx = DbManager.getConnectionManager("sqlite").getConnection();
+			conx.open();
+			conx.close();
+
 			// ############### TEST WndSqlView ###############
 
 			KLib.Wpf.Sql.WndSqlView sv = new KLib.Wpf.Sql.WndSqlView();

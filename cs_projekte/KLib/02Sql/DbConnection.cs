@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Data.SQLite;
 
 namespace KLib.Sql
 {
@@ -43,6 +44,10 @@ namespace KLib.Sql
 					connstring = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};Pooling=true;",
 						Server, Port, iConnectionManager.User, iConnectionManager.Password, iConnectionManager.Database);
 					NativeConnection = new MySql.Data.MySqlClient.MySqlConnection(connstring);
+					break;
+				case DbConnectionManager.ProviderType.SQLite:
+					connstring = String.Format(@"Data Source=C:\knk\tmp\sqlite.db;FailIfMissing=False;");
+					NativeConnection = new SQLiteConnection(connstring);
 					break;
 				case DbConnectionManager.ProviderType.SqlServer:
 					if (Port == 0) Port = 1433;   // SqlServer default port...
