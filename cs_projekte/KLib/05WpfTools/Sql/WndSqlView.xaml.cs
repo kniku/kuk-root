@@ -40,8 +40,11 @@ namespace KLib.Wpf.Sql
 		{
 			DbConnection con1 = DbManager.getConnectionManager(SqlConnection).getConnection();
 			con1.open();
-			DV = con1.execSQL_selectDS(SqlQuery).Tables[0].DefaultView;
-			con1.close();
+			if (con1.getState() == System.Data.ConnectionState.Open)
+			{
+				DV = con1.execSQL_selectDS(SqlQuery).Tables[0].DefaultView;
+				con1.close();
+			}
 		}
 
 		System.Data.DataView DV;

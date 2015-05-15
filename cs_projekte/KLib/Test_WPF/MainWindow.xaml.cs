@@ -40,6 +40,7 @@ namespace Test_WPF
 			DbManager.addConnectionManager("testdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "kuk", "anlusa", 0));
 			DbManager.addConnectionManager("rcsdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "rcsdb", "admin", "sorting", 0));
 			DbManager.addConnectionManager("axavia", new DbConnectionManager(DbConnectionManager.ProviderType.SqlServer, "axavia", "BT_ZETS", "axavia", "Axavia#2011", 0));
+			DbManager.addConnectionManager("taifun", new DbConnectionManager(DbConnectionManager.ProviderType.SqlServer, "192.168.0.6", "TAIFUN software", "axavia", "axavia", 0));
 
 		}
 
@@ -83,6 +84,7 @@ namespace Test_WPF
 			sv.SqlConnection = "rcsdb";
 //			sv.SqlQuery = "select * from config";
 			sv.SqlQuery = "select * from statistic limit 5000";
+//			sv.SqlQuery = "select * from TFW_M002.PhUDF01";
 			sv.Show();
 
 			return;
