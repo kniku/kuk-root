@@ -1,26 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using KLib.Sql;
 using KLib.Wpf;
-using System.Data;
 using log4net;
-using log4net.Core;
 using log4net.Config;
-using log4net.Appender;
-using log4net.Repository.Hierarchy;
 using System.ComponentModel;
-using System.Collections;
 
 namespace Test_WPF
 {
@@ -37,6 +21,8 @@ namespace Test_WPF
 
 			BasicConfigurator.Configure();
 			log.Info("test logger");
+
+//			string setting = System.Configuration.ConfigurationSettings.AppSettings[ ConfigurationManager.AppSettings["setting1"];
 
 			DbManager.addConnectionManager("testdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "admin", "sorting", 0));
 			DbManager.addConnectionManager("rcsdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "rcsdb", "admin", "sorting", 0));

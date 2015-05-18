@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KLib.Sql
 {
@@ -39,14 +35,20 @@ namespace KLib.Sql
 		{
 			bool r = false;
 
-			IEnumerator<DataRow> List = execSQL_select(iSql, iSqlParams);
-			while (List.MoveNext())
+			//IEnumerator<DataRow> List = execSQL_select(iSql, iSqlParams);
+			//while (List.MoveNext())
+			//{
+			//	r = true;
+			//	mapRow(iObj, List.Current);
+			//	break;
+			//}
+			DataTable List = execSQL_select(iSql, iSqlParams);
+			foreach (DataRow aRow in List.Rows)
 			{
 				r = true;
-				mapRow(iObj, List.Current);
+				mapRow(iObj, aRow);
 				break;
 			}
-
 			return r;
 		}
 

@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace KLib.Wpf
 {
@@ -69,7 +58,7 @@ namespace KLib.Wpf
 		{
 			Logger.Info("worker starts");
 
-			int idx = 1;
+//			int idx = 1;
 			foreach (CWorkerInfo ci in listWorker)
 			{
 

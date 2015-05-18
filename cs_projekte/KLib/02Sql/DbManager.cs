@@ -27,13 +27,22 @@ namespace KLib.Sql
 		}
 
 		/// <summary>
-		/// Einen verbindungsmanager über seinen Namen anfordern
+		/// Einen Verbindungsmanager über seinen Namen anfordern
 		/// </summary>
 		/// <param name="iName">Name des Managers / der Verbindung</param>
 		/// <returns>Den Manager</returns>
 		public static DbConnectionManager getConnectionManager(string iName)
 		{
 			return mDict[iName];
+		}
+		/// <summary>
+		/// Den Verbindungsmanager anfordern.
+		/// Funktioniert nur, wenn genau eine Verbindung definiert wurde, sonst null!
+		/// </summary>
+		/// <returns>Den Manager</returns>
+		public static DbConnectionManager getConnectionManager()
+		{
+			return mDict.Count() == 1 ? mDict.Values.ElementAt(0) : null;
 		}
 	}
 }

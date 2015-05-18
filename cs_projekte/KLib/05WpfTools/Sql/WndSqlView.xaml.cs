@@ -1,18 +1,6 @@
 ﻿using KLib.Sql;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace KLib.Wpf.Sql
 {
@@ -42,7 +30,12 @@ namespace KLib.Wpf.Sql
 			con1.open();
 			if (con1.getState() == System.Data.ConnectionState.Open)
 			{
-				DV = con1.execSQL_selectDS(SqlQuery).Tables[0].DefaultView;
+				DV = con1.execSQL_select(SqlQuery).DefaultView;
+
+				foreach (var item in con1.execSQL_select(SqlQuery).Rows)
+				{
+					
+				}
 				con1.close();
 			}
 		}
@@ -52,7 +45,7 @@ namespace KLib.Wpf.Sql
 		void reload()
 		{
 			WndProgress xxx = new WndProgress(this);
-			xxx.AddWorker(worker_DoWork, "loading...", false, 10000);
+			xxx.AddWorker(worker_DoWork, "loading...", false, null);
 			xxx.StartAllTasks(false);
 
 			gridData.DataContext = DV;

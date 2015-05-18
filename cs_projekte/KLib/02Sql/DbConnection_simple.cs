@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace KLib.Sql
 {
@@ -73,7 +68,7 @@ namespace KLib.Sql
 			return r;
 		}
 
-
+#if false
 		//	Beispiel:
 		//	IEnumerator<DataRow> List = conn.execSQL_select("select * from config");
 		//	while (List.MoveNext())
@@ -114,10 +109,10 @@ namespace KLib.Sql
 
 			return r;
 		}
-
-		public DataSet execSQL_selectDS(string iSql, params object[] iSqlParams)
+#endif
+		public DataTable execSQL_select(string iSql, params object[] iSqlParams)
 		{
-			DataSet r = null;
+			DataTable r = null;
 
 			try
 			{
@@ -126,7 +121,7 @@ namespace KLib.Sql
 				{
 					DataSet ds = new DataSet();
 					da.Fill(ds);
-					r = ds;
+					r = ds.Tables[0];
 				}
 			}
 			catch (Exception _ex)
