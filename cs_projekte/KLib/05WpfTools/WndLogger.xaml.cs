@@ -51,6 +51,9 @@ namespace KLib.Wpf
 			return mWndLogger != null;
 		}
 
+		/// <summary>
+		/// Zum Erzeugen verwende CreateOrGetWndLogger()!
+		/// </summary>
 		private WndLogger()
 		{
 			InitializeComponent();
