@@ -1,8 +1,9 @@
 ﻿using KLib.Sql;
+using KLib.Wpf;
 using System.ComponentModel;
 using System.Windows;
 
-namespace KLib.Wpf.Sql
+namespace KLib.WpfSql
 {
 	/// <summary>
 	/// Interaktionslogik für WndSqlView.xaml

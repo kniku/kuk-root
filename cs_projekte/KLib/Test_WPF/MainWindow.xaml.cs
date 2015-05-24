@@ -102,7 +102,7 @@ a_num decimal(12,2))"
 				//}
 
 				log.Info("showing content of klib_test_01...");
-				KLib.Wpf.Sql.WndSqlView sv = new KLib.Wpf.Sql.WndSqlView();
+				KLib.WpfSql.WndSqlView sv = new KLib.WpfSql.WndSqlView();
 				sv.SqlConnection = DATENBANK;
 				sv.SqlQuery = "select * from klib_test_01";
 				sv.ShowDialog();
@@ -122,7 +122,7 @@ a_num decimal(12,2))"
 
 			if (true)
 			{
-				KLib.Wpf.Sql.WndSqlView sv = new KLib.Wpf.Sql.WndSqlView();
+				KLib.WpfSql.WndSqlView sv = new KLib.WpfSql.WndSqlView();
 				sv.SqlConnection = "rcsdb";
 				//			sv.SqlQuery = "select * from config";
 				sv.SqlQuery = "select * from statistic limit 5000";
