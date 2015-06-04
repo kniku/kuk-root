@@ -12,7 +12,6 @@ namespace KLib.Sql
 {
 	public partial class DbConnection
 	{
-		//static log4net.ILog Logger = log4net.LogManager.GetLogger(typeof(DbConnectionManager));
 		private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		private IDbConnection NativeConnection { set; get; }
@@ -32,32 +31,48 @@ namespace KLib.Sql
 			switch (iConnectionManager.Provider)
 			{
 				case DbConnectionManager.ProviderType.Postgres:
-					if (Port == 0) Port = 5432;   // postgres default port...
-					if (Server == null) Server = "localhost";
-					connstring = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};Pooling=true;",
-						Server, Port, iConnectionManager.User, iConnectionManager.Password, iConnectionManager.Database);
+					connstring = iConnectionManager.ConnectionString;
+					if (connstring == null)
+					{
+						if (Port == 0) Port = 5432;   // postgres default port...
+						if (Server == null) Server = "localhost";
+						connstring = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};Pooling=true;",
+							Server, Port, iConnectionManager.User, iConnectionManager.Password, iConnectionManager.Database);
+					}
 					NativeConnection = new NpgsqlConnection(connstring);
 					break;
 				case DbConnectionManager.ProviderType.MySql:
-					if (Port == 0) Port = 3306;   // mysql default port...
-					if (Server == null) Server = "localhost";
-					connstring = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};Pooling=true;",
-						Server, Port, iConnectionManager.User, iConnectionManager.Password, iConnectionManager.Database);
+					connstring = iConnectionManager.ConnectionString;
+					if (connstring == null)
+					{
+						if (Port == 0) Port = 3306;   // mysql default port...
+						if (Server == null) Server = "localhost";
+						connstring = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};Pooling=true;",
+							Server, Port, iConnectionManager.User, iConnectionManager.Password, iConnectionManager.Database);
+					}
 					NativeConnection = new MySql.Data.MySqlClient.MySqlConnection(connstring);
 					break;
 				case DbConnectionManager.ProviderType.SQLite:
-					if (!System.IO.File.Exists(iConnectionManager.Database))
+					connstring = iConnectionManager.ConnectionString;
+					if (connstring == null)
 					{
-						SQLiteConnection.CreateFile(iConnectionManager.Database);
+						if (!System.IO.File.Exists(iConnectionManager.Database))
+						{
+							SQLiteConnection.CreateFile(iConnectionManager.Database);
+						}
+						connstring = String.Format(@"Data Source={0};Version=3;FailIfMissing=True;", iConnectionManager.Database);
 					}
-					connstring = String.Format(@"Data Source={0};Version=3;FailIfMissing=True;", iConnectionManager.Database);
 					NativeConnection = new SQLiteConnection(connstring);
 					break;
 				case DbConnectionManager.ProviderType.SqlServer:
-					if (Port == 0) Port = 1433;   // SqlServer default port...
-					if (Server == null) Server = "localhost";
-					connstring = String.Format("Server={0},{1};User Id={2};Password={3};Database={4};Pooling=true;Connection Timeout=5;",
-						Server, Port, iConnectionManager.User, iConnectionManager.Password, iConnectionManager.Database);
+					connstring = iConnectionManager.ConnectionString;
+					if (connstring == null)
+					{
+						if (Port == 0) Port = 1433;   // SqlServer default port...
+						if (Server == null) Server = "localhost";
+						connstring = String.Format("Server={0},{1};User Id={2};Password={3};Database={4};Pooling=true;Connection Timeout=5;",
+							Server, Port, iConnectionManager.User, iConnectionManager.Password, iConnectionManager.Database);
+					}
 					NativeConnection = new System.Data.SqlClient.SqlConnection(connstring);
 					break;
 				default:

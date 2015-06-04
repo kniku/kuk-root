@@ -32,15 +32,24 @@ namespace KLib.Sql
 		public string Password { private set; get; }
 		public uint Port { private set; get; }
 		public ProviderType Provider { private set; get; }
+		public string ConnectionString { private set; get; }
+
 
 		/// <summary>
 		/// Sollen Exceptions an Applikation durchgereicht werden (default=false)
 		/// </summary>
 		public bool setThrowExceptions { set; get; }
 
+		public DbConnectionManager(ProviderType iProvider, string iConnectionString)
+		{
+			Logger.DebugFormat("new DbConnectionManager with connection string. Type={4}", iProvider);
+			Provider = iProvider;
+			ConnectionString = iConnectionString;
+		}
+
 		public DbConnectionManager(ProviderType iProvider, string iServer, string iDatabase, string iUser, string iPassword, uint iPort = 0)
 		{
-			Logger.DebugFormat("new DbConnectionManager: {0}@{1}:{2}/{3} - {4}", iUser, iServer, iPort, iDatabase, iProvider);
+			Logger.DebugFormat("new DbConnectionManager: {0}@{1}:{2}/{3} - Type={4}", iUser, iServer, iPort, iDatabase, iProvider);
 			Provider = iProvider;
 			Server = iServer;
 			Database = iDatabase;

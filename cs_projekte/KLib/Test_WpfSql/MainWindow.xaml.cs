@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-[assembly: log4net.Config.XmlConfigurator(ConfigFile = "Log4Net.config", Watch = true)]
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "Logging.config", Watch = true)]
 
 namespace Test_WpfSql
 {
@@ -24,15 +24,14 @@ namespace Test_WpfSql
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+		static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			log.Info("Startup ...");
-
-			DbManager.addConnectionManager("postgres", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "admin", "sorting", 0));
-			DbManager.addConnectionManager("sqlite", new DbConnectionManager(DbConnectionManager.ProviderType.SQLite, null, @"sqlite_test.db", null, null, 0));
+			//DbManager.addConnectionManager("postgres", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "admin", "sorting", 0));
+			//DbManager.addConnectionManager("sqlite", new DbConnectionManager(DbConnectionManager.ProviderType.SQLite, null, @"sqlite_test.db", null, null, 0));
 
 		}
 
@@ -104,8 +103,7 @@ a_num decimal(12,2))"
 			}
 			catch (Exception _ex)
 			{
-				log.Error("Error: ", _ex);
-				throw;
+				log.Error("Error: " + _ex.Message);
 			}
 		}
 	}
