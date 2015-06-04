@@ -13,13 +13,13 @@ namespace Test_WPF
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		static readonly ILog log = LogManager.GetLogger(typeof(MainWindow));
+		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		public MainWindow()
 		{
 			InitializeComponent();
 
-			BasicConfigurator.Configure();
+//			BasicConfigurator.Configure();
 			log.Info("test logger");
 
 //			string setting = System.Configuration.ConfigurationSettings.AppSettings[ ConfigurationManager.AppSettings["setting1"];

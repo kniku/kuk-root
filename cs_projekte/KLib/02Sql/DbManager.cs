@@ -33,7 +33,7 @@ namespace KLib.Sql
 		/// <returns>Den Manager</returns>
 		public static DbConnectionManager getConnectionManager(string iName)
 		{
-			return mDict[iName];
+			return mDict.ContainsKey(iName) ? mDict[iName] : null;
 		}
 		/// <summary>
 		/// Den Verbindungsmanager anfordern.

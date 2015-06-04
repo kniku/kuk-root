@@ -53,6 +53,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06WpfSqlTools", "06WpfSqlTo
 		{465B5D8C-EB79-4C90-B269-13FD7392ED6B} = {465B5D8C-EB79-4C90-B269-13FD7392ED6B}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_WpfSql", "Test_WpfSql\Test_WpfSql.csproj", "{076E0A99-0F33-4F82-B8D0-011FCC0568FD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{10F226C6-9CF3-436C-80D6-5978A11526A8} = {10F226C6-9CF3-436C-80D6-5978A11526A8}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +100,10 @@ Global
 		{10F226C6-9CF3-436C-80D6-5978A11526A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10F226C6-9CF3-436C-80D6-5978A11526A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10F226C6-9CF3-436C-80D6-5978A11526A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{076E0A99-0F33-4F82-B8D0-011FCC0568FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{076E0A99-0F33-4F82-B8D0-011FCC0568FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{076E0A99-0F33-4F82-B8D0-011FCC0568FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{076E0A99-0F33-4F82-B8D0-011FCC0568FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
