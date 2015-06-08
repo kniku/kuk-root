@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankInfo", "BankInfo\BankInfo.csproj", "{0A15EBAB-5847-4F11-8D38-08135B35E2FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KLib", "KLib", "{FA874C85-AE9C-47B9-A344-73495FB41B7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01Base", "..\..\KLib\01Base\01Base.csproj", "{385DBB6C-DD83-4F45-818C-1638671D2B12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02Sql", "..\..\KLib\02Sql\02Sql.csproj", "{BB232C50-6838-4157-B7C4-8A83510C716E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05WpfTools", "..\..\KLib\05WpfTools\05WpfTools.csproj", "{465B5D8C-EB79-4C90-B269-13FD7392ED6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06WpfSqlTools", "..\..\KLib\06WpfSqlTools\06WpfSqlTools.csproj", "{10F226C6-9CF3-436C-80D6-5978A11526A8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A15EBAB-5847-4F11-8D38-08135B35E2FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A15EBAB-5847-4F11-8D38-08135B35E2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A15EBAB-5847-4F11-8D38-08135B35E2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A15EBAB-5847-4F11-8D38-08135B35E2FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{385DBB6C-DD83-4F45-818C-1638671D2B12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{385DBB6C-DD83-4F45-818C-1638671D2B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{385DBB6C-DD83-4F45-818C-1638671D2B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{385DBB6C-DD83-4F45-818C-1638671D2B12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB232C50-6838-4157-B7C4-8A83510C716E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB232C50-6838-4157-B7C4-8A83510C716E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB232C50-6838-4157-B7C4-8A83510C716E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB232C50-6838-4157-B7C4-8A83510C716E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{465B5D8C-EB79-4C90-B269-13FD7392ED6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{465B5D8C-EB79-4C90-B269-13FD7392ED6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{465B5D8C-EB79-4C90-B269-13FD7392ED6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{465B5D8C-EB79-4C90-B269-13FD7392ED6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F226C6-9CF3-436C-80D6-5978A11526A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F226C6-9CF3-436C-80D6-5978A11526A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F226C6-9CF3-436C-80D6-5978A11526A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F226C6-9CF3-436C-80D6-5978A11526A8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{385DBB6C-DD83-4F45-818C-1638671D2B12} = {FA874C85-AE9C-47B9-A344-73495FB41B7F}
+		{BB232C50-6838-4157-B7C4-8A83510C716E} = {FA874C85-AE9C-47B9-A344-73495FB41B7F}
+		{465B5D8C-EB79-4C90-B269-13FD7392ED6B} = {FA874C85-AE9C-47B9-A344-73495FB41B7F}
+		{10F226C6-9CF3-436C-80D6-5978A11526A8} = {FA874C85-AE9C-47B9-A344-73495FB41B7F}
+	EndGlobalSection
+EndGlobal
