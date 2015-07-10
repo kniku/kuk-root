@@ -146,6 +146,15 @@ namespace dbigen
 								case "string":
 									type.type = classes.CType.basetype.STRING;
 									break;
+								case "int2":
+									type.type = classes.CType.basetype._SMALL;
+									break;
+								case "int":
+									type.type = classes.CType.basetype.INT;
+									break;
+								case "double":
+									type.type = classes.CType.basetype.DOUBLE;
+									break;
 								case "numeric":
 									type.type = classes.CType.basetype.NUMERIC;
 									break;
@@ -284,7 +293,6 @@ namespace dbigen
 	{
 		classes.CTable currentTable;
 		string name;
-		bool inKey = false;
 		classes.CStructure currentStruct;
 
 		public string getName()
@@ -314,9 +322,24 @@ namespace dbigen
 								iAppGlobal.log.LogError("{0}({1}): Unbekannte Basisstruktur: \"{2}\"!", reader.BaseURI, reader.LineNumber, currentTable.reftype);
 							}
 							if (currentTable.getName() != null) iAppGlobal.lookup.addDbiType(currentTable);
+
+							string primKey = tools.getAttr(iAppGlobal, reader, "PrimKey", false);
+							if (!string.IsNullOrEmpty(primKey))
+							{
+								string[] cols = primKey.Split(',');
+								foreach (string aCol in cols)
+								{
+									string col = aCol.Trim();
+									if (!currentStruct.hashMember.ContainsKey(col))
+									{
+										iAppGlobal.log.LogError("{0}({1}): Unbekannte Spalte: \"{2}\"!", reader.BaseURI, reader.LineNumber, col);
+									}
+									currentTable.arrayKeyColumns.Add(col);
+								}
+							}
 							break;
-						case "PrimKey":
-							inKey = true;
+						case "ForKey":
+							currentTable.arrayForKeys.Add(new dbigen.classes.CForKey() { cols = tools.getAttr(iAppGlobal, reader, "Column", true), for_table = tools.getAttr(iAppGlobal, reader, "ForTable", true), for_cols = tools.getAttr(iAppGlobal, reader, "ForColumn", true) });
 							break;
 						default:
 							iAppGlobal.log.LogWarning("Unbekanntes Unterelement: {0}", reader.Name);
@@ -324,19 +347,19 @@ namespace dbigen
 					}
 					break;
 				case XmlNodeType.Text:
-					if (inKey)
-					{
-						string [] cols = reader.Value.Split(',');
-						foreach (string aCol in cols)
-						{
-							string col = aCol.Trim();
-							if (!currentStruct.hashMember.ContainsKey(col))
-							{
-								iAppGlobal.log.LogError("{0}({1}): Unbekannte Spalte: \"{2}\"!", reader.BaseURI, reader.LineNumber, col);
-							}
-							currentTable.arrayKeyColumns.Add(col);
-						}
-					}
+					//if (inKey)
+					//{
+					//	string [] cols = reader.Value.Split(',');
+					//	foreach (string aCol in cols)
+					//	{
+					//		string col = aCol.Trim();
+					//		if (!currentStruct.hashMember.ContainsKey(col))
+					//		{
+					//			iAppGlobal.log.LogError("{0}({1}): Unbekannte Spalte: \"{2}\"!", reader.BaseURI, reader.LineNumber, col);
+					//		}
+					//		currentTable.arrayKeyColumns.Add(col);
+					//	}
+					//}
 					break;
 			}
 			if (reader.NodeType == XmlNodeType.EndElement || (reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement))
@@ -345,9 +368,6 @@ namespace dbigen
 				{
 					case "Table":
 						iAppGlobal.log.popPrefix();
-						break;
-					case "PrimKey":
-						inKey = false;
 						break;
 				}
 			}
