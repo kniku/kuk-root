@@ -10,6 +10,9 @@ namespace dbigen.classes
 		public enum basetype
 		{
 			NONE,
+			_SMALL,	// deprecated...
+			INT,
+			DOUBLE,
 			NUMERIC,
 			STRING,
 			DATETIME,

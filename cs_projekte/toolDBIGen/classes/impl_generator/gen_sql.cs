@@ -40,6 +40,27 @@ namespace dbigen.classes.impl_generator
 										sqldefault = " default '" + aMember.sql_default + "'";
 									}
 									break;
+								case CType.basetype._SMALL:
+									sqltype = "smallint";
+									if (aMember.sql_default != null)
+									{
+										sqldefault = " default " + aMember.sql_default;
+									}
+									break;
+								case CType.basetype.INT:
+									sqltype = "integer";
+									if (aMember.sql_default != null)
+									{
+										sqldefault = " default " + aMember.sql_default;
+									}
+									break;
+								case CType.basetype.DOUBLE:
+									sqltype = "double precision";
+									if (aMember.sql_default != null)
+									{
+										sqldefault = " default " + aMember.sql_default;
+									}
+									break;
 								case CType.basetype.NUMERIC:
 									sqltype = string.Format("numeric({0},{1})",
 										aType.precision > 0 ? aType.precision.ToString() : "10",
@@ -102,7 +123,7 @@ namespace dbigen.classes.impl_generator
 						{
 							tabledef = tabledef.TrimEnd('\n', ',');
 						}
-						tabledef += "\n);\n";
+						tabledef += "\n);\n\n";
 						break;
 
 					case "drop":
@@ -115,6 +136,28 @@ namespace dbigen.classes.impl_generator
 				}
 
 				if (tabledef != null) writer.Write(tabledef);
+			}
+
+			// zweiter durchlauf wegen der constraints (foreign keys)
+			if (iGenerator.mode == "create")
+			{
+				writer.Write("\n/* ***** foreign key constraints ***** */\n\n");
+				foreach (classes.i_dbi_type aEntry in iAppGlobal.lookup.getDbiTypeHash(dbigen.classes.dbi_type.TABLE).Values)
+				{
+					classes.CTable aTable = (classes.CTable)aEntry;
+
+					foreach (CForKey aForKey in aTable.arrayForKeys)
+					{
+						if (!iAppGlobal.lookup.getDbiTypeHash(dbigen.classes.dbi_type.TABLE).ContainsKey(aForKey.for_table))
+						{
+							iAppGlobal.log.LogWarning("foreign key (table {0}): unknown table found: {1}", aTable.getName(), aForKey.for_table);
+						}
+						string sql = string.Format("alter table {0} add foreign key ({1}) references {2} ({3});\n",
+							aTable.getName(), aForKey.cols, aForKey.for_table, aForKey.for_cols);
+						
+						writer.Write(sql);
+					}
+				}
 			}
 		}
 
