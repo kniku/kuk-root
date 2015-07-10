@@ -1,0 +1,44 @@
+<DBI_DATA_DESCRIPTION>
+
+	<Structure Name="C_updates" Descr="update information and history">
+		<Member Name="pmcs_version" RefType="String016" Descr="PMCS version"></Member>
+		<Member Name="dbms_version" RefType="String016" Descr="DBMS version"></Member>
+		<Member Name="ts_update" RefType="DateTime" Descr="timestamp" Null='false'></Member>
+		<Member Name="descr" RefType="String256" Descr="description"></Member>
+	</Structure>
+
+	<Structure Name="C_actions" Descr="action table">
+		<Member Name="ac_id" RefType="AUTOID" Descr="action id"></Member>
+		<Member Name="ac_name" RefType="String020" Descr="action name" Null='false'></Member>
+	</Structure>
+
+	<Structure Name="C_classes" Descr="gss class definition">
+		<Member Name="cl_id" RefType="AUTOID" Descr="class id"></Member>
+		<Member Name="pr_id" RefType="Int32" Descr="program id" Null='false'></Member>
+		<Member Name="sh_id" RefType="Int32" Descr="side id" Null='false'></Member>
+		<Member Name="cl_name" RefType="String050" Descr="class name" Null='false'></Member>
+		<Member Name="cl_classlabel" RefType="Int32" Descr="class label" Null='false'></Member>
+		<Member Name="cl_efficiency" RefType="Int32" Null='false'></Member>
+		<Member Name="cl_efficiencyvariance" RefType="Int32" Null='false'></Member>
+		<Member Name="cl_oversort" RefType="Int32" Null='false'></Member>
+		<Member Name="cl_oversortvariance" RefType="Int32" Null='false'></Member>
+		<Member Name="cl_percentmin" RefType="Int32" Null='false'></Member>
+		<Member Name="cl_percentmax" RefType="Int32" Null='false'></Member>
+		<Member Name="cl_status" RefType="Int16" Null='false'></Member>
+		<Member Name="cl_validthrough" RefType="DateTime" Null='false'></Member>
+	</Structure>
+	
+	<Structure Name="C_programs" Descr="GSS programs">
+		<Member Name="pr_id" RefType="AUTOID" Descr="program id"></Member>
+		<Member Name="ma_id" RefType="Int32" Descr="machine id" Null='false'></Member>
+		<Member Name="si_id" RefType="Int32" Descr="side id" Null='false'></Member>
+		<Member Name="pr_number" RefType="Int32" Descr="program number" Null='false'></Member>
+		<Member Name="pr_name" RefType="String050" Descr="program name" Null='false'></Member>
+		<Member Name="pr_profilnr" RefType="Int32" Null='false'></Member>
+		<Member Name="pr_status" RefType="Int16" Null='false'></Member>
+		<Member Name="pr_validthrough" RefType="DateTime" Null='false'></Member>
+	</Structure>
+	
+);
+
+</DBI_DATA_DESCRIPTION>

@@ -1,0 +1,15 @@
+<DBI_DATA_DESCRIPTION>
+
+	<Module Name="PMCS">
+
+		<Generator Name="GenSql" Mode="create" Dialect="postgres" Target="generated/c_table_postgres.sql"/>
+		<Generator Name="GenSql" Mode="drop" Dialect="postgres" Target="generated/d_table_postgres.sql"/>
+		<Generator Name="GenC#" Target="generated/gen.cs"/>
+		
+		<Import File="typesPMCS.xml"></Import>
+		<Import File="structsPMCS.xml"/>
+		<Import File="tablesPMCS.xml"/>
+		
+	</Module>
+	
+</DBI_DATA_DESCRIPTION>

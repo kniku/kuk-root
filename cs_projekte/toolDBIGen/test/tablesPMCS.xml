@@ -1,0 +1,15 @@
+<DBI_DATA_DESCRIPTION>
+
+	<Table Name="_updates" Descr="update information and history" RefType="C_updates" PrimKey="pmcs_version, dbms_version"/>
+	<Table Name="actions" Descr="actions" RefType="C_actions" PrimKey="ac_id"/>
+	<Table Name="classes" Descr="GSS classes" RefType="C_classes" PrimKey="cl_id">
+		<ForKey Column="pr_id" ForTable="programs" ForColumn="pr_id"/>
+		<ForKey Column="sh_id" ForTable="shotchannels" ForColumn="sh_id"/>
+		
+	</Table>
+	<Table Name="programs" Descr="GSS programs" RefType="C_programs" PrimKey="pr_id">
+		<ForKey Column="ma_id" ForTable="machines" ForColumn="ma_id"/>
+		<ForKey Column="si_id" ForTable="slidesides" ForColumn="si_id"/>
+	</Table>
+	
+</DBI_DATA_DESCRIPTION>
