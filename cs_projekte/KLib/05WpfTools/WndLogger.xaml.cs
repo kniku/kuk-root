@@ -154,8 +154,8 @@ namespace KLib.Wpf
 
 		private void WndLogger1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			dispatcherTimer.Stop();
-			mWndLogger = null;
+			//dispatcherTimer.Stop();
+			//mWndLogger = null;
 		}
 
 		private void WndLogger1_Loaded(object sender, RoutedEventArgs e)
@@ -203,6 +203,12 @@ namespace KLib.Wpf
 //			listLog.Items.Clear();
 			textLog.SelectAll();
 			textLog.Selection.Text = "";
+		}
+
+		private void WndLogger1_Closed(object sender, EventArgs e)
+		{
+			dispatcherTimer.Stop();
+			mWndLogger = null;
 		}
 	}
 }

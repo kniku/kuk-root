@@ -24,11 +24,11 @@ namespace Test_WPF
 
 //			string setting = System.Configuration.ConfigurationSettings.AppSettings[ ConfigurationManager.AppSettings["setting1"];
 
-			DbManager.addConnectionManager("testdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "admin", "sorting", 0));
-			DbManager.addConnectionManager("rcsdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "rcsdb", "admin", "sorting", 0));
-			DbManager.addConnectionManager("axavia", new DbConnectionManager(DbConnectionManager.ProviderType.SqlServer, "axavia", "BT_ZETS", "axavia", "Axavia#2011", 0));
-			DbManager.addConnectionManager("taifun", new DbConnectionManager(DbConnectionManager.ProviderType.SqlServer, "192.168.0.6", "TAIFUN software", "axavia", "axavia", 0));
-			DbManager.addConnectionManager("sqlite", new DbConnectionManager(DbConnectionManager.ProviderType.SQLite, null, @"C:\knk\tmp\sqlite_test.db", null, null, 0));
+			//DbManager.addConnectionManager("testdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "admin", "sorting", 0));
+			//DbManager.addConnectionManager("rcsdb", new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "rcsdb", "admin", "sorting", 0));
+			//DbManager.addConnectionManager("axavia", new DbConnectionManager(DbConnectionManager.ProviderType.SqlServer, "axavia", "BT_ZETS", "axavia", "Axavia#2011", 0));
+			//DbManager.addConnectionManager("taifun", new DbConnectionManager(DbConnectionManager.ProviderType.SqlServer, "192.168.0.6", "TAIFUN software", "axavia", "axavia", 0));
+			//DbManager.addConnectionManager("sqlite", new DbConnectionManager(DbConnectionManager.ProviderType.SQLite, null, @"C:\knk\tmp\sqlite_test.db", null, null, 0));
 
 		}
 
@@ -47,6 +47,13 @@ namespace Test_WPF
 			int result = 0;
 			for (int i = 0; i < max; i++)
 			{
+				// Auf Abbruch checken....
+				if ((sender as BackgroundWorker).CancellationPending && max != 400)
+				{
+					break;
+				}
+
+
 				int progressPercentage = Convert.ToInt32(((double)i / max) * 100);
 				if (i % 42 == 0)
 				{
@@ -56,7 +63,7 @@ namespace Test_WPF
 				}
 				else
 					if (progressPercentage % 2 == 0) (sender as BackgroundWorker).ReportProgress(progressPercentage);
-				System.Threading.Thread.Sleep(1);
+				System.Threading.Thread.Sleep(10);
 
 			}
 			e.Result = result;
@@ -65,87 +72,7 @@ namespace Test_WPF
 
 		void _testPostgres()
 		{
-			Button_Click(btnLog, null);
-
-			string DATENBANK = "sqlite";
-
-			DbConnection conx = DbManager.getConnectionManager(DATENBANK).getConnection();
-			if (conx.open())
-			{
-				object r;
-
-
-				log.Info("creating table klib_test_01...");
-				r = conx.execSQL(@"
-create table klib_test_01 (
-id integer primary key not null,
-name varchar(256),
-birthday timestamp,
-address varchar(256),
-salary float,
-a_num decimal(12,2))"
-					);
-				log.InfoFormat("result={0}", r);
-
-				log.Info("creating data for klib_test_01...");
-				for (int i = 0; i < 10; i++)
-				{
-					r = conx.execSQL("insert into klib_test_01 (id,name,birthday,address,salary,a_num) values (:1,'Kurt','19670228','Graz 8020',55.123,123456.78)", i);
-					log.InfoFormat("result={0}", r);
-				}
-
-				//IEnumerator<DataRow> ie = conx.execSQL_select("select * from klib_test_01");
-				//while (ie.MoveNext())
-				//{
-				//	object Value = ie.Current["name"];	// access by name
-				//	Value = ie.Current[0];		// access by index, etc...
-				//}
-
-				log.Info("showing content of klib_test_01...");
-				KLib.WpfSql.WndSqlView sv = new KLib.WpfSql.WndSqlView();
-				sv.SqlConnection = DATENBANK;
-				sv.SqlQuery = "select * from klib_test_01";
-				sv.ShowDialog();
-
-				log.Info("droping table klib_test_01...");
-				r = conx.execSQL("drop table klib_test_01");
-				log.InfoFormat("result={0}", r);
-
-			}
-			
-
-			conx.close();
-
-			return;
-
-			// ############### TEST WndSqlView ###############
-
-			if (true)
-			{
-				KLib.WpfSql.WndSqlView sv = new KLib.WpfSql.WndSqlView();
-				sv.SqlConnection = "rcsdb";
-				//			sv.SqlQuery = "select * from config";
-				sv.SqlQuery = "select * from statistic limit 5000";
-				//			sv.SqlQuery = "select * from TFW_M002.PhUDF01";
-				sv.Show();
-
-				return;
-				// ############### TEST END ###############
-
-				// ############### TEST WndProgress ###############
-
-				WndProgress xxx = new WndProgress(this);
-				xxx.AddWorker(worker_DoWork, "worker 1:", true, 5000);
-				xxx.AddWorker(worker_DoWork, "worker 2:", false, 7000);
-				xxx.AddWorker(worker_DoWork, "worker 3:", true, 3000);
-				xxx.AddWorker(worker_DoWork, "worker 4:", true, 4000);
-				xxx.AddWorker(worker_DoWork, "worker 5:", true, 8000);
-				xxx.StartAllTasks(false);
-
-				return;
-			}
-			// ############### TEST END ###############
-
+			CTools.ensureLoggerIsOpen(this);
 
 			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "bankinfo_echt", "admin", "sorting", 0);
 			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "kuk", "anlusa", 0);
@@ -237,21 +164,6 @@ a_num decimal(12,2))"
 			con1.close();
 		}
 
-		void btnConnect_Click(object sender, RoutedEventArgs e)
-		{
-			try
-			{
-				_testPostgres();
-				//_testSqlServer();
-
-			}
-			catch (Exception ex)
-			{
-				log.Fatal(ex.Message, ex);
-				//MessageBox.Show(ex.Message);
-			}
-		}
-
 		private void MenuItem_Click(object sender, RoutedEventArgs e)
 		{
 			Close();
@@ -259,14 +171,36 @@ a_num decimal(12,2))"
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			if (!WndLogger.IsAlreadyOpen())
-			{
-				KLib.Wpf.WndLogger dlg = WndLogger.CreateOrGetWndLogger(this);
-				dlg.Top = this.Top;
-				dlg.Left = this.Left + this.Width;
-				dlg.Show();
-			}
+			CTools.ensureLoggerIsOpen(this);
+			//if (!WndLogger.IsAlreadyOpen())
+			//{
+			//	KLib.Wpf.WndLogger dlg = WndLogger.CreateOrGetWndLogger(this);
+			//	dlg.Top = this.Top;
+			//	dlg.Left = this.Left + this.Width;
+			//	dlg.Show();
+			//}
 		}
+
+		private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+		{
+			Window w = new WndTestDatenbanken();
+			w.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+			w.Show();
+		}
+
+		private void btnTestProgress_Click(object sender, RoutedEventArgs e)
+		{
+			CTools.ensureLoggerIsOpen(this);
+
+			WndProgress xxx = new WndProgress(this);
+			xxx.AddWorker(worker_DoWork, "worker 1:", true, 500);
+			xxx.AddWorker(worker_DoWork, "worker 2:", false, 700);
+			xxx.AddWorker(worker_DoWork, "worker 3:", true, 300);
+			xxx.AddWorker(worker_DoWork, "worker 4:", true, 400);
+			xxx.AddWorker(worker_DoWork, "worker 5:", true, 800);
+			xxx.StartAllTasks(false);
+		}
+
 	}
 
 }

@@ -9,7 +9,7 @@ using System.Xml;
 namespace KLib.Sql
 {
 	/// <summary>
-	/// Verwaltet alle Verbindungsmanager einer Anwendung (Verbindung zu verschiedenen datenbanken)
+	/// Verwaltet alle Verbindungsmanager einer Anwendung (Verbindung zu verschiedenen Datenbanken)
 	/// </summary>
 	public static class DbManager
 	{

@@ -3,16 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="593.255" Width="945.345">
     <Grid>
-        <Button x:Name="btnConnect" Content="Connect" Margin="0,255,36.4,0" VerticalAlignment="Top" Click="btnConnect_Click" RenderTransformOrigin="0.291,-0.221" Height="24" HorizontalAlignment="Right" Width="75">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="45.103"/>
-                    <TranslateTransform X="16.869" Y="-6.014"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
         <Menu Height="21" VerticalAlignment="Top">
             <MenuItem Header="Datei">
                 <MenuItem Header="Neu" HorizontalAlignment="Left" Width="85"/>
@@ -47,12 +37,13 @@
         </Menu>
         <Menu Height="20" VerticalAlignment="Top">
             <MenuItem Header="Datei">
-                <MenuItem Header="Neu"/>
-                <MenuItem Header="TEST"/>
                 <MenuItem Header="Beenden" Click="MenuItem_Click"/>
             </MenuItem>
+            <MenuItem Header="TESTS">
+                <MenuItem Header="Datenbanken..." Click="MenuItem_Click_1"/>
+                <MenuItem Header="ProgressView..."/>
+            </MenuItem>
             <MenuItem Header="Hilfe"/>
-            <MenuItem Header="Extra"/>
         </Menu>
         <StatusBar Height="20" VerticalAlignment="Bottom"/>
         <DataGrid x:Name="gridData" HorizontalAlignment="Left" Margin="10,26,0,25" Width="428"/>
@@ -63,8 +54,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnLog" Content="Log" HorizontalAlignment="Right" Margin="0,26,10,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button x:Name="btnTest" Content="Test" HorizontalAlignment="Right" Margin="0,51,10,0" VerticalAlignment="Top" Width="75" Click="btnConnect_Click" RenderTransformOrigin="0.291,-0.221" Height="24"></Button>
+        <Button x:Name="btnLog" Content="Zeige Log..." HorizontalAlignment="Right" Margin="0,26,10,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button x:Name="btnTestProgress" Content="Test: ProgressWindow" HorizontalAlignment="Left" Margin="804,53,0,0" VerticalAlignment="Top" Click="btnTestProgress_Click"/>
 
     </Grid>
 </Window>

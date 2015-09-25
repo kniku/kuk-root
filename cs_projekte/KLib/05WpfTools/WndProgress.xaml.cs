@@ -11,13 +11,6 @@ namespace KLib.Wpf
 	public partial class WndProgress : Window, INotifyPropertyChanged
 	{
 		private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-		//public double Progress1 { get; set; }
-		//public double Progress2 { get; set; }
-		//public double Progress3 { get; set; }
-		//public double Progress4 { get; set; }
-		//public double Progress5 { get; set; }
-
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		protected void NotifyPropertyChanged(string sProp)
@@ -58,7 +51,6 @@ namespace KLib.Wpf
 		{
 			Logger.Info("worker starts");
 
-//			int idx = 1;
 			foreach (CWorkerInfo ci in listWorker)
 			{
 
@@ -69,14 +61,10 @@ namespace KLib.Wpf
 				TextBlock tb = new TextBlock();
 				tb.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
 				tb.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-				//tb.Text = "34 %";
 
 				ProgressBar pb = new ProgressBar();
 				pb.Width = 200;
-				//pb.Height = 15;
 				pb.IsIndeterminate = !ci.mWorkerReportsProgress;
-				//var binding = new Binding("Progress" + idx++);
-				//BindingOperations.SetBinding(pb, ProgressBar.ValueProperty, binding);
 
 				PanelProgress.Children.Add(lbl);
 				grid.Children.Add(pb);
@@ -89,14 +77,14 @@ namespace KLib.Wpf
 				ci.mTextBlock = tb;
 
 				ci.mWorker = new BackgroundWorker();
-				ci.mWorker.WorkerReportsProgress = true;// ci.mWorkerReportsProgress;
+				ci.mWorker.WorkerReportsProgress = true;
 				ci.mWorker.DoWork += ci.mHandler;
 				ci.mWorker.ProgressChanged += worker_ProgressChanged;
 				ci.mWorker.RunWorkerCompleted += worker_RunWorkerCompleted;
+				ci.mWorker.WorkerSupportsCancellation = true;
 				ci.mWorker.RunWorkerAsync(ci.mCalldata);
 			}
 
-		//    ShowDialog();
 			if (iAsync) Show();
 			else ShowDialog();
 		}
@@ -107,7 +95,6 @@ namespace KLib.Wpf
 			{
 				if (ci.mWorker == (BackgroundWorker)sender)
 				{
-					//if (ci.mProgressBar.Value != e.ProgressPercentage)
 					{
 						if (ci.mWorkerReportsProgress)
 						{
@@ -115,7 +102,6 @@ namespace KLib.Wpf
 							ci.mTextBlock.Text = e.ProgressPercentage.ToString() + " %";
 						}
 						if (e.UserState is string) ci.mLabel.Content = e.UserState;
-						//NotifyPropertyChanged("Progress1");
 						if (e.ProgressPercentage % 5 == 0) Logger.Info("worker progress [" + ci.mTitle + "]:" + e.ProgressPercentage);
 					}
 					break;
@@ -127,7 +113,6 @@ namespace KLib.Wpf
 		{
 			bool all_completed = true;
 
-			//            MessageBox.Show("Numbers between 0 and 10000 divisible by 7: " + e.Result);
 			foreach (CWorkerInfo ci in listWorker)
 			{
 				if (ci.mWorker == (BackgroundWorker)sender)
@@ -144,6 +129,29 @@ namespace KLib.Wpf
 			}
 
 			if (all_completed) Close();
+		}
+
+		private void Window_Closing(object sender, CancelEventArgs e)
+		{
+			bool oneBusyFound = false;
+
+			foreach (CWorkerInfo ci in listWorker)
+			{
+				if (!ci.isCompleted)
+				{
+					oneBusyFound = true;
+					if (ci.mWorker != null /* && ci.mWorker.WorkerSupportsCancellation*/)
+					{
+						ci.mWorker.CancelAsync();
+					}
+					else
+					{
+						oneBusyFound = true;
+					}
+				}
+			}
+
+			if (oneBusyFound) e.Cancel = true;	// RunWorkerCompleted schließt Dialog endgültig...
 		}
 
 	}
