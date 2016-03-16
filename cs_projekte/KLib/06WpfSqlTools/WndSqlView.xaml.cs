@@ -33,10 +33,10 @@ namespace KLib.WpfSql
 			{
 				DV = con1.execSQL_select(SqlQuery).DefaultView;
 
-				foreach (var item in con1.execSQL_select(SqlQuery).Rows)
-				{
+				//foreach (var item in con1.execSQL_select(SqlQuery).Rows)
+				//{
 					
-				}
+				//}
 				con1.close();
 			}
 		}
