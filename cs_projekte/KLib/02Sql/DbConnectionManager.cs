@@ -42,7 +42,7 @@ namespace KLib.Sql
 
 		public DbConnectionManager(ProviderType iProvider, string iConnectionString)
 		{
-			Logger.DebugFormat("new DbConnectionManager with connection string. Type={4}", iProvider);
+			Logger.DebugFormat("new DbConnectionManager with connection string. Type={0}", iProvider);
 			Provider = iProvider;
 			ConnectionString = iConnectionString;
 		}

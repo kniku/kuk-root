@@ -214,7 +214,11 @@ namespace KLib.Sql
 			// seems to be a bug of npgsql (postgres)
 			if (mConnectionManager.Provider == DbConnectionManager.ProviderType.Postgres)
 			{
-				if (iObject is Int16)
+				if (iObject is String)
+				{
+					iParam.DbType = DbType.String;
+				}
+				else if (iObject is Int16)
 				{
 					iParam.DbType = DbType.Int16;
 				}
