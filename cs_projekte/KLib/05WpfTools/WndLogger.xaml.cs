@@ -8,6 +8,7 @@ using log4net.Core;
 using log4net.Repository.Hierarchy;
 using System.Windows.Threading;
 using System.Diagnostics;
+using log4net.Layout;
 
 namespace KLib.Wpf
 {
@@ -64,6 +65,12 @@ namespace KLib.Wpf
 			{
 				// Memory Appender ins Logging einhaengen
 				LogMemAppender = new MemoryAppender();
+
+				//PatternLayout patternLayout = new PatternLayout();
+				//patternLayout.ConversionPattern = "%date [%thread] %-5level %logger - %message%newline";
+				//patternLayout.ActivateOptions();
+				//LogMemAppender.Layout = patternLayout;
+				
 				LogMemAppender.ActivateOptions();
 				hierarchy.Root.AddAppender(LogMemAppender);
 
@@ -111,8 +118,9 @@ namespace KLib.Wpf
 				//textLog.AppendText(string.Format("{2} {0}: {1}", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp));
 
 				System.Windows.Documents.TextRange rangeOfText1 = new System.Windows.Documents.TextRange(textLog.Document.ContentEnd, textLog.Document.ContentEnd);
-//				rangeOfText1.Text = string.Format("{2} {0}: {1}" + System.Environment.NewLine, logevent.Level, logevent.RenderedMessage, logevent.TimeStamp);
-				rangeOfText1.Text = string.Format("{2} {0}: {1}\r", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp).Replace("\n","");
+//				rangeOfText1.Text = string.Format("{2} {0}: {1}\r", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp).Replace("\n","");
+				rangeOfText1.Text = string.Format("{2} {0}: {1} ({3}:{4})\r", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp,
+					logevent.LocationInformation.FileName, logevent.LocationInformation.LineNumber).Replace("\n", "");
 				
 				
 				System.Windows.Media.SolidColorBrush brush;
