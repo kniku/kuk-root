@@ -8,13 +8,22 @@ using System.Xml;
 
 namespace KLib.Sql
 {
+	// Konfigurieren in der Anwendung:
+	//	[assembly: ASDShared.Sql.XmlConfigurator(ConfigFile = "../conf/Database.config")]
+
+	[AttributeUsage(AttributeTargets.Assembly)]
+	public class XmlConfiguratorAttribute : Attribute
+	{
+		public string ConfigFile { get; set; }
+	}
+
 	/// <summary>
 	/// Verwaltet alle Verbindungsmanager einer Anwendung (Verbindung zu verschiedenen Datenbanken)
 	/// </summary>
 	public static class DbManager
 	{
 		static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-		const string DB_CONFIG_FILENAME = "Database.config";
+		static string DB_CONFIG_FILENAME = "Database.config";	// Default configuration file
 
 		/// <summary>
 		/// Internes Dictionary für die Verbindungsmanager
@@ -27,6 +36,27 @@ namespace KLib.Sql
 			string dbName = null;
 			string dbType = null;
 
+			// Mal schauen, ob es ein Assembly Attribute mit einer Konfiguration gibt.
+			// Ggf. damit den default-Konfigfilenamen übersteuern
+			System.Reflection.Assembly assembly = System.Reflection.Assembly.GetEntryAssembly();
+			System.Attribute[] attrs = System.Attribute.GetCustomAttributes(assembly);
+			foreach (Attribute attr in attrs)
+			{
+				if (attr.GetType() == typeof(XmlConfiguratorAttribute))
+				{
+					DB_CONFIG_FILENAME = (attr as XmlConfiguratorAttribute).ConfigFile;
+					break;
+				}
+			}
+
+			// Wenn Pfad zur Konfig relativ, den exe-Pfad dazuhängen und Gesamtpfad sauber auflösen...
+			if (!Path.IsPathRooted(DB_CONFIG_FILENAME))
+			{
+				DB_CONFIG_FILENAME = Path.GetDirectoryName(assembly.Location) + "\\" + DB_CONFIG_FILENAME;
+			}
+			DB_CONFIG_FILENAME = Path.GetFullPath(DB_CONFIG_FILENAME);
+
+			// Konfiguration einlesen
 			if (File.Exists(DB_CONFIG_FILENAME))
 			{
 				XmlTextReader xmlReader = new XmlTextReader(DB_CONFIG_FILENAME);
@@ -73,7 +103,7 @@ namespace KLib.Sql
 			}
 			else
 			{
-				Logger.InfoFormat("database configuration not found: {0}", DB_CONFIG_FILENAME);
+				Logger.ErrorFormat("database configuration not found: {0}", DB_CONFIG_FILENAME);
 			}
 		}
 
