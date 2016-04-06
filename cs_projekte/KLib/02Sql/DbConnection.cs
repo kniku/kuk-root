@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Data.SQLite;
+using NpgsqlTypes;
 
 namespace KLib.Sql
 {
@@ -211,7 +212,7 @@ namespace KLib.Sql
 					throw new NotImplementedException("Datentyp nicht unterstützt: " + iObjectType);
 			}
 #else
-			// seems to be a bug of npgsql (postgres)
+			// npgsql (postgres) braucht unbedingt den Typ!
 			if (mConnectionManager.Provider == DbConnectionManager.ProviderType.Postgres)
 			{
 				if (iObject is String)
@@ -226,7 +227,36 @@ namespace KLib.Sql
 				{
 					iParam.DbType = DbType.Int32;
 				}
+				else if (iObject is DateTime)
+				{
+					iParam.DbType = DbType.DateTime;
+				}
+				else if (iObject is double)
+				{
+					iParam.DbType = DbType.Double;
+				}
+				else if (iObject is float)
+				{
+					iParam.DbType = DbType.Double;
+				}
+				else if (iObject is bool)
+				{
+					iParam.DbType = DbType.Boolean;
+				}
+				else if (iObject is int[])
+				{
+					// int Array support:
+					// Beispiel select:
+					// DataTable last_entry = conx.execSQL_select("select * from class_statistics where machine_id=:1 and ts=(select max(x.ts) from class_statistics x where x.machine_id=machine_id)", MachineID);
+					// int[] y = last_entry.Rows[0]["values_raw"] as int[];
+					// Beispiel insert:
+					// int[] i_values = new int[value_count];
+					// conx.execSQL("insert into class_statistics (machine_id,ts,values_raw) values(:1,:2,:3)", MachineID, DatabaseTime, i_values);
+
+					((NpgsqlParameter)iParam).NpgsqlDbType = (NpgsqlDbType.Array | NpgsqlDbType.Integer);
+				}
 			}
+
 			iParam.ParameterName = iParamName;
 			iParam.Value = iObject;
 #endif
