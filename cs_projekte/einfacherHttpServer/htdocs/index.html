@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <!--<link href="css/style.css" rel="stylesheet">-->
+
+        <script>
+            // alert("HI");
+
+function myclick() {
+    var myJSONObject = {"bindings": document.getElementById("xtest").value};
+    var myJSONText = JSON.stringify(myJSONObject);
+
+// construct an HTTP request
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "test", true);
+  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+  // send the collected data as JSON
+  xhr.send(myJSONText);
+
+  xhr.onloadend = function () {
+      
+    var myObject = JSON.parse(this.responseText);
+    document.getElementById("rahmen").innerHTML = "dyn. load: " + myObject.Id;
+    document.getElementById("test").innerHTML = "dyn. load: " + myObject.Id;
+    document.getElementById("xtest").value = myObject.Id;
+    // window.document.write(myObject.Id + "<br>");
+    // window.document.write(myObject.aInt + "<br>");
+    // window.document.write(myObject.aDouble + "<br>");
+    // window.document.write(myObject.aDate + "<br>");
+    var pets = '{"pets":[{"name":"jack"},{"name":"john"},{"name":"joe"}]}';
+    var arr = JSON.parse(pets);
+        // alert(arr.pets[0].name);
+    for (index = 0; index < arr.pets.length; ++index) {
+        // alert(arr.pets[index].name);
+        absatz = document.createElement('p');
+        text   = document.createTextNode (arr.pets[index].name);
+        absatz.appendChild (text);
+        document.getElementById('rahmen').appendChild(absatz);
+        // document.getElementById("rahmen").firstChild.appendData(arr.pets[index].name + "<br>");
+    };
+  }
+
+}
+    // var xmlHttp = new XMLHttpRequest();
+
+    // xmlHttp.open( "GET", "test&" + myJSONText, false ); // false for synchronous request
+    // xmlHttp.send( null );
+
+    // var myObject = JSON.parse(xmlHttp.responseText);
+    // document.write(myObject.Id + "<br>");
+    // document.write(myObject.aInt + "<br>");
+    // document.write(myObject.aDouble + "<br>");
+    // document.write(myObject.aDate + "<br>");
+
+        </script>
+    </head>
+    <body>
+    <h1>TEST</h1>
+    <input type="text" name="xtest" value="?" id="xtest">
+    <h2 id="test"></h2>
+    <button type="button" onclick="myclick();">click me...</button>
+    <div id="rahmen">bla blubb jodelblah</div>
+    </body>
+</html>
