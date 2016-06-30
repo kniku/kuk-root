@@ -28,6 +28,30 @@ function myclick() {
     document.getElementById("rahmen").innerHTML = "dyn. load: " + myObject.Id;
     document.getElementById("test").innerHTML = "dyn. load: " + myObject.Id;
     document.getElementById("xtest").value = myObject.Id;
+
+    
+    for (index = 0; index < myObject.lStrings.length; ++index) {
+        text   = document.createTextNode (myObject.lStrings[index]);
+
+        var tblrow = document.createElement("tr");
+        var tblcol = document.createElement("td");
+        // var inputElement = document.createElement("input");
+        // inputElement.type = "text";
+        // inputElement.id = "txtlable";
+        // inputElement.name = "txtlable";
+        // inputElement.size = "30";
+        // inputElement.value = "Hello World";
+        // tblcol.appendChild(inputElement);
+        tblcol.appendChild (text);
+        tblrow.appendChild(tblcol);
+        tblrow.appendChild(document.createElement("td"));
+        tblrow.appendChild(document.createElement("td"));
+        document.getElementById('main_table_demo').appendChild(tblrow);
+
+        // document.getElementById("rahmen").firstChild.appendData(arr.pets[index].name + "<br>");
+    };
+    // document.getElementById('main_table_demo').className = "";
+    // document.getElementById('main_table_demo').className = 'table striped hovered border bordered';
     // window.document.write(myObject.Id + "<br>");
     // window.document.write(myObject.aInt + "<br>");
     // window.document.write(myObject.aDouble + "<br>");
@@ -88,6 +112,46 @@ function myclick() {
     <input type="radio">
     <span class="check"></span>
     <span class="caption">Radio</span>
-</label>
+    
+    </label>
+
+           <div class="example" data-text="Übersicht">
+            <table class="table hovered border bordered" id="main_table_demo">
+                <thead>
+                <tr>
+                    <th style="width:100px">Header 1</th>
+                    <th class="sortable-column sort-asc">Header 2</th>
+                    <th>Header 3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>a</td>
+                    <td>b1</td>
+                    <td>c</td>
+                </tr>
+                <tr>
+                    <td>a</td>
+                    <td>b2</td>
+                    <td>c</td>
+                </tr>
+                <tr>
+                    <td>a</td>
+                    <td>b3</td>
+                    <td>c</td>
+                </tr>
+                <tr>
+                    <td>a</td>
+                    <td>b4</td>
+                    <td>c</td>
+                </tr>
+                <tr>
+                    <td>a</td>
+                    <td>b5</td>
+                    <td>c</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>

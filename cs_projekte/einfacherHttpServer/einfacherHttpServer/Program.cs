@@ -10,7 +10,7 @@ namespace einfacherHttpServer
 	{
 		static void Main(string[] args)
 		{
-			SimpleHTTPServer s = new SimpleHTTPServer(@"c:\knk\tmp\htdocs", 12000);
+			SimpleHTTPServer s = new SimpleHTTPServer(@"..\..\..\htdocs", 12000);
 			System.Console.WriteLine("server started on port " + s.Port);
 		}
 	}

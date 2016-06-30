@@ -154,6 +154,7 @@ namespace einfacherHttpServer
 			public int aInt { get; set; }
 			public double aDouble { get; set; }
 			public DateTime aDate { get; set; }
+			public List<string> lStrings { get; set; }
 		}
 
 		CTest getTestObject()
@@ -163,7 +164,7 @@ namespace einfacherHttpServer
 			r.aInt = 12;
 			r.aDouble = 13.3;
 			r.aDate = DateTime.Now;
-
+			r.lStrings = new List<string>() { "hello", "world" };
 			return r;
 		}
 
@@ -175,18 +176,18 @@ namespace einfacherHttpServer
 
 			if (filename.StartsWith("test"))
 			{
-				Console.WriteLine("httprequest: [" + filename + "]");
+				//Console.WriteLine("httprequest: [" + filename + "]");
 				//			dynamic obj = Newtonsoft.Json.Linq.JObject.Parse(filename.Substring(5));
 
 				CTest testobj = getTestObject();
 
 				StreamReader reader = new StreamReader(context.Request.InputStream);
 				string text = reader.ReadToEnd();
-				Console.WriteLine("text: [" + text + "]");
+				Console.WriteLine("incoming json: >>" + text + "<<");
 				try
 				{
 					dynamic obj = Newtonsoft.Json.Linq.JObject.Parse(text);
-					Console.WriteLine("bindings: " + obj.bindings);
+					//Console.WriteLine("bindings: " + obj.bindings);
 					if (!string.IsNullOrEmpty(obj.bindings.ToString()))
 					{
 						testobj.Id = obj.bindings.ToString();
@@ -197,6 +198,7 @@ namespace einfacherHttpServer
 				}
 
 				string json = JsonConvert.SerializeObject(testobj);
+				Console.WriteLine("sending json: >>" + json + "<<");
 				byte[] buffer = Encoding.ASCII.GetBytes(json);
 
 				context.Response.ContentType = "text/xml";// "application/octet-stream";
