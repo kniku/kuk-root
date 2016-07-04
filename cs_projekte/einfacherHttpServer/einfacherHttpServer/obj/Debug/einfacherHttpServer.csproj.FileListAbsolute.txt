@@ -6,3 +6,12 @@ C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\b
 C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\obj\Debug\einfacherHttpServer.csprojResolveAssemblyReference.cache
 C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\obj\Debug\einfacherHttpServer.exe
 C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\obj\Debug\einfacherHttpServer.pdb
+C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\bin\Debug\klibsql.dll
+C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\bin\Debug\log4net.dll
+C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\bin\Debug\Npgsql.dll
+C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\bin\Debug\MySql.Data.dll
+C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\bin\Debug\System.Data.SQLite.dll
+C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\bin\Debug\klibsql.pdb
+C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\bin\Debug\log4net.xml
+C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\bin\Debug\Npgsql.xml
+C:\knk\Privat\Dev\kuk-root\cs_projekte\einfacherHttpServer\einfacherHttpServer\bin\Debug\System.Data.SQLite.xml

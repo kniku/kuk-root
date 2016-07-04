@@ -8,6 +8,8 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using KLib.Sql;
+using System.Data;
 
 namespace einfacherHttpServer
 {
@@ -155,6 +157,7 @@ namespace einfacherHttpServer
 			public double aDouble { get; set; }
 			public DateTime aDate { get; set; }
 			public List<string> lStrings { get; set; }
+			public List<string> lStrings2 { get; set; }
 		}
 
 		CTest getTestObject()
@@ -164,7 +167,27 @@ namespace einfacherHttpServer
 			r.aInt = 12;
 			r.aDouble = 13.3;
 			r.aDate = DateTime.Now;
-			r.lStrings = new List<string>() { "hello", "world" };
+			r.lStrings = new List<string>();// { "hello", "world" };
+			r.lStrings2 = new List<string>();
+
+
+			DbConnection conx = DbManager.getConnectionManager("zets").getConnection();
+			if (conx.open())
+			{
+				DataTable t = conx.execSQL_select("select person_data_choice,employee_timeclock_id from DW_EMPLOYEE where objectstate<>'Veraltet' and employee_timeclock_id<>'---' order by 1");
+
+				if (t != null && t.Rows.Count > 0)
+				{
+					foreach (DataRow row in t.Rows)
+					{
+						r.lStrings.Add(row.ItemArray[0].ToString());
+						r.lStrings2.Add(row.ItemArray[1].ToString());
+					}
+				}
+				conx.close();
+			}
+
+
 			return r;
 		}
 
@@ -199,7 +222,7 @@ namespace einfacherHttpServer
 
 				string json = JsonConvert.SerializeObject(testobj);
 				Console.WriteLine("sending json: >>" + json + "<<");
-				byte[] buffer = Encoding.ASCII.GetBytes(json);
+				byte[] buffer = Encoding.UTF8.GetBytes(json);
 
 				context.Response.ContentType = "text/xml";// "application/octet-stream";
 				context.Response.ContentLength64 = buffer.Count();

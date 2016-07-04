@@ -35,38 +35,35 @@ function myclick() {
 
         var tblrow = document.createElement("tr");
         var tblcol = document.createElement("td");
-        // var inputElement = document.createElement("input");
-        // inputElement.type = "text";
-        // inputElement.id = "txtlable";
-        // inputElement.name = "txtlable";
-        // inputElement.size = "30";
-        // inputElement.value = "Hello World";
-        // tblcol.appendChild(inputElement);
         tblcol.appendChild (text);
         tblrow.appendChild(tblcol);
+
+        text   = document.createTextNode (myObject.lStrings2[index]);
+        tblcol = document.createElement("td");
+        tblcol.appendChild (text);
+        tblrow.appendChild(tblcol);
+
         tblrow.appendChild(document.createElement("td"));
-        tblrow.appendChild(document.createElement("td"));
-        document.getElementById('main_table_demo').appendChild(tblrow);
+        // tblrow.setAttribute("link", "");
+        // tblrow.setAttribute("rel", "stylesheet");
+        // tblrow.setAttribute("type", "text/css");
+        // tblrow.setAttribute("href", "metro/css/metro.min.css");
+
+        document.getElementById('main_table_demo').tBodies[0].appendChild(tblrow);
+        
+        // document.getElementById('main_table_demo').appendChild(tblrow);
 
         // document.getElementById("rahmen").firstChild.appendData(arr.pets[index].name + "<br>");
     };
-    // document.getElementById('main_table_demo').className = "";
-    // document.getElementById('main_table_demo').className = 'table striped hovered border bordered';
-    // window.document.write(myObject.Id + "<br>");
-    // window.document.write(myObject.aInt + "<br>");
-    // window.document.write(myObject.aDouble + "<br>");
-    // window.document.write(myObject.aDate + "<br>");
-    var pets = '{"pets":[{"name":"jack"},{"name":"john"},{"name":"joe"}]}';
-    var arr = JSON.parse(pets);
-        // alert(arr.pets[0].name);
-    for (index = 0; index < arr.pets.length; ++index) {
-        // alert(arr.pets[index].name);
-        absatz = document.createElement('p');
-        text   = document.createTextNode (arr.pets[index].name);
-        absatz.appendChild (text);
-        document.getElementById('rahmen').appendChild(absatz);
-        // document.getElementById("rahmen").firstChild.appendData(arr.pets[index].name + "<br>");
-    };
+
+    // var pets = '{"pets":[{"name":"jack"},{"name":"john"},{"name":"joe"}]}';
+    // var arr = JSON.parse(pets);
+    // for (index = 0; index < arr.pets.length; ++index) {
+    //     absatz = document.createElement('p');
+    //     text   = document.createTextNode (arr.pets[index].name);
+    //     absatz.appendChild (text);
+    //     document.getElementById('rahmen').appendChild(absatz);
+    // };
   }
 
 }
@@ -116,16 +113,16 @@ function myclick() {
     </label>
 
            <div class="example" data-text="Übersicht">
-            <table class="table hovered border bordered" id="main_table_demo">
+            <table style="width:1000px" class="table hovered border bordered striped" id="main_table_demo">
                 <thead>
                 <tr>
-                    <th style="width:100px">Header 1</th>
-                    <th class="sortable-column sort-asc">Header 2</th>
+                    <th style="width:300px">Name</th>
+                    <th style="width:150px" class="sortable-column sort-asc">Kartennummer</th>
                     <th>Header 3</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <!--<tr>
                     <td>a</td>
                     <td>b1</td>
                     <td>c</td>
@@ -150,6 +147,11 @@ function myclick() {
                     <td>b5</td>
                     <td>c</td>
                 </tr>
+                <tr>
+                    <td>a6</td>
+                    <td></td>
+                    <td></td>
+                </tr>-->
                 </tbody>
             </table>
         </div>
