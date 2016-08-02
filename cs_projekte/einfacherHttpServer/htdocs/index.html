@@ -1,90 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <!--<link href="materialize/css/materialize.min.css" rel="stylesheet">-->
-        <!--<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">-->
-        <link href="metro/css/metro.min.css" rel="stylesheet">
 
-        <script>
-            // alert("HI");
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <!--<link href="materialize/css/materialize.min.css" rel="stylesheet">-->
+    <!--<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">-->
+    <link href="metro/css/metro.css" rel="stylesheet">
+    <script src="js/index.js"></script>
+</head>
 
-function myclick() {
-    var myJSONObject = {"bindings": document.getElementById("xtest").value};
-    var myJSONText = JSON.stringify(myJSONObject);
-
-// construct an HTTP request
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "test", true);
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
-  // send the collected data as JSON
-  xhr.send(myJSONText);
-
-  xhr.onloadend = function () {
-      
-    var myObject = JSON.parse(this.responseText);
-    document.getElementById("rahmen").innerHTML = "dyn. load: " + myObject.Id;
-    document.getElementById("test").innerHTML = "dyn. load: " + myObject.Id;
-    document.getElementById("xtest").value = myObject.Id;
-
-    
-    for (index = 0; index < myObject.lStrings.length; ++index) {
-        text   = document.createTextNode (myObject.lStrings[index]);
-
-        var tblrow = document.createElement("tr");
-        var tblcol = document.createElement("td");
-        tblcol.appendChild (text);
-        tblrow.appendChild(tblcol);
-
-        text   = document.createTextNode (myObject.lStrings2[index]);
-        tblcol = document.createElement("td");
-        tblcol.appendChild (text);
-        tblrow.appendChild(tblcol);
-
-        tblrow.appendChild(document.createElement("td"));
-        // tblrow.setAttribute("link", "");
-        // tblrow.setAttribute("rel", "stylesheet");
-        // tblrow.setAttribute("type", "text/css");
-        // tblrow.setAttribute("href", "metro/css/metro.min.css");
-
-        document.getElementById('main_table_demo').tBodies[0].appendChild(tblrow);
-        
-        // document.getElementById('main_table_demo').appendChild(tblrow);
-
-        // document.getElementById("rahmen").firstChild.appendData(arr.pets[index].name + "<br>");
-    };
-
-    // var pets = '{"pets":[{"name":"jack"},{"name":"john"},{"name":"joe"}]}';
-    // var arr = JSON.parse(pets);
-    // for (index = 0; index < arr.pets.length; ++index) {
-    //     absatz = document.createElement('p');
-    //     text   = document.createTextNode (arr.pets[index].name);
-    //     absatz.appendChild (text);
-    //     document.getElementById('rahmen').appendChild(absatz);
-    // };
-  }
-
-}
-    // var xmlHttp = new XMLHttpRequest();
-
-    // xmlHttp.open( "GET", "test&" + myJSONText, false ); // false for synchronous request
-    // xmlHttp.send( null );
-
-    // var myObject = JSON.parse(xmlHttp.responseText);
-    // document.write(myObject.Id + "<br>");
-    // document.write(myObject.aInt + "<br>");
-    // document.write(myObject.aDouble + "<br>");
-    // document.write(myObject.aDate + "<br>");
-
-        </script>
-    </head>
-    <body>
+<body>
+<div class="app-bar">
+    <a class="app-bar-element" href="...">Home</a>
+    <span class="app-bar-divider"></span>
+    <ul class="app-bar-menu">
+        <li><a href="">Home</a></li>
+        <li>
+            <a href="" class="dropdown-toggle">Products</a>
+            <ul class="d-menu" data-role="dropdown">
+                <li><a href="">Windows 10</a></li>
+                <li><a href="">Spartan</a></li>
+                <li><a href="">Outlook</a></li>
+                <li><a href="">Office 2015</a></li>
+            </ul>
+        </li>
+        <li><a href="">Support</a></li>
+        <li><a href="">Help</a></li>
+    </ul>
+</div>
     <h1>TEST</h1>
-    <input type="text" name="xtest" value="?" id="xtest">
+    <button class="button large-button" onclick="myclick()">Aktualisieren</button>
+    <br><input type="text" name="xtest" value="?" id="xtest">
     <h2 id="test"></h2>
-    <button type="button" onclick="myclick();">click me...</button>
+    <!--<button type="button" onclick="myclick();">click me...</button>-->
     <div id="rahmen">bla blubb jodelblah</div>
     <button class="button"><span class="mif-checkmark"></span> Primary</button>
     <button class="button large-button">Caption</button>
@@ -95,39 +44,39 @@ function myclick() {
         <input type="text">
     </div>
 
-        <label class="input-control checkbox">
+    <label class="input-control checkbox">
             <input type="checkbox" unchecked>
             <span class="check"></span>
             <span class="caption">Checkbox</span>
         </label>
-        <label class="input-control checkbox">
+    <label class="input-control checkbox">
             <input type="checkbox" checked>
             <span class="check"></span>
             <span class="caption">Checkbox 2</span>
         </label>
-        <label class="input-control radio">
+    <label class="input-control radio">
     <input type="radio">
     <span class="check"></span>
     <span class="caption">Radio</span>
     
     </label>
 
-           <div class="example" data-text="Übersicht">
-            <table style="width:1000px" class="table hovered border bordered striped" id="main_table_demo">
-                <thead>
+    <div class="example" data-text="Übersicht">
+        <table style="width:1000px" class="table hovered border bordered striped" id="main_table_demo">
+            <thead>
                 <tr>
                     <th style="width:300px">Name</th>
                     <th style="width:150px" class="sortable-column sort-asc">Kartennummer</th>
                     <th>Header 3</th>
                 </tr>
-                </thead>
-                <tbody>
-                <!--<tr>
+            </thead>
+            <tbody>
+                <tr onclick="onrowselect(this)">
                     <td>a</td>
                     <td>b1</td>
                     <td>c</td>
                 </tr>
-                <tr>
+                <!--                <tr>
                     <td>a</td>
                     <td>b2</td>
                     <td>c</td>
@@ -152,8 +101,9 @@ function myclick() {
                     <td></td>
                     <td></td>
                 </tr>-->
-                </tbody>
-            </table>
-        </div>
-    </body>
+            </tbody>
+        </table>
+    </div>
+</body>
+
 </html>
