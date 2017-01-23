@@ -8,6 +8,3 @@ github:
 user: kniku, password: anlusa10
 email: google std. email
 https://github.com/kniku/kuk-root
-
-
-
