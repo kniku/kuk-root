@@ -12,6 +12,7 @@ namespace knk.DBTools
 	{
 		string mTableName = null;
 
+
 		public string TableName()
 		{
 			if (mTableName == null) mTableName = LookupRegistry.getTableNameFromAnnotations(this.GetType());
