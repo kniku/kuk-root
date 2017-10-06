@@ -32,3 +32,4 @@
 /c-tools/sTimer/*.user
 /c-tools/ssleep/*.user
 /c-tools/mylib/*.user
+*.suo
