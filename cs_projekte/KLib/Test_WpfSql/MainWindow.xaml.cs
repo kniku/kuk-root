@@ -38,7 +38,8 @@ namespace Test_WpfSql
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			// Log Window aufmachen
-			KLib.Wpf.WndLogger dlg = WndLogger.CreateOrGetWndLogger(this);
+			KLib.Wpf.WndLogger dlg = WndLogger.Instance;
+		    dlg.Owner = this;
 			dlg.Top = this.Top;
 			dlg.Left = this.Left + this.Width;
 			dlg.Show();

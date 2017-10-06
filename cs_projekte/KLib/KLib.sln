@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01Base", "01Base\01Base.csproj", "{385DBB6C-DD83-4F45-818C-1638671D2B12}"
 EndProject
@@ -58,11 +58,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_WpfSql", "Test_WpfSql\
 		{10F226C6-9CF3-436C-80D6-5978A11526A8} = {10F226C6-9CF3-436C-80D6-5978A11526A8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GssMultilanguage", "GssMultilanguage\GssMultilanguage.csproj", "{9C77B313-8A93-4F26-A26F-D530937DE56B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{10F226C6-9CF3-436C-80D6-5978A11526A8} = {10F226C6-9CF3-436C-80D6-5978A11526A8}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,12 +104,11 @@ Global
 		{076E0A99-0F33-4F82-B8D0-011FCC0568FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{076E0A99-0F33-4F82-B8D0-011FCC0568FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{076E0A99-0F33-4F82-B8D0-011FCC0568FD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C77B313-8A93-4F26-A26F-D530937DE56B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C77B313-8A93-4F26-A26F-D530937DE56B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C77B313-8A93-4F26-A26F-D530937DE56B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C77B313-8A93-4F26-A26F-D530937DE56B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E8BE17A-C686-47D2-959A-6F53A116BE4F}
 	EndGlobalSection
 EndGlobal

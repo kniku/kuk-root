@@ -72,7 +72,7 @@ namespace Test_WPF
 
 		void _testPostgres()
 		{
-			CTools.ensureLoggerIsOpen(this);
+		    WndLogger.InstanceShow(this);
 
 			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "bankinfo_echt", "admin", "sorting", 0);
 			//DbConnectionManager cm = new DbConnectionManager(DbConnectionManager.ProviderType.Postgres, null, "testdb", "kuk", "anlusa", 0);
@@ -171,17 +171,17 @@ namespace Test_WPF
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			CTools.ensureLoggerIsOpen(this);
+		    WndLogger.InstanceShow(this);
 			//if (!WndLogger.IsAlreadyOpen())
-			//{
-			//	KLib.Wpf.WndLogger dlg = WndLogger.CreateOrGetWndLogger(this);
-			//	dlg.Top = this.Top;
-			//	dlg.Left = this.Left + this.Width;
-			//	dlg.Show();
-			//}
-		}
+            //{
+            //	KLib.Wpf.WndLogger dlg = WndLogger.CreateOrGetWndLogger(this);
+            //	dlg.Top = this.Top;
+            //	dlg.Left = this.Left + this.Width;
+            //	dlg.Show();
+            //}
+        }
 
-		private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
 		{
 			Window w = new WndTestDatenbanken();
 			w.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -190,9 +190,9 @@ namespace Test_WPF
 
 		private void btnTestProgress_Click(object sender, RoutedEventArgs e)
 		{
-			CTools.ensureLoggerIsOpen(this);
+		    WndLogger.InstanceShow(this);
 
-			WndProgress xxx = new WndProgress(this);
+            WndProgress xxx = new WndProgress(this);
 			xxx.AddWorker(worker_DoWork, "worker 1:", true, 500);
 			xxx.AddWorker(worker_DoWork, "worker 2:", false, 700);
 			xxx.AddWorker(worker_DoWork, "worker 3:", true, 300);

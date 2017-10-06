@@ -10,18 +10,19 @@ namespace Test_WPF
 {
 	public class CTools
 	{
-		public static void ensureLoggerIsOpen(Window iOwner)
-		{
-			if (!WndLogger.IsAlreadyOpen())
-			{
-				KLib.Wpf.WndLogger dlg = WndLogger.CreateOrGetWndLogger(iOwner);
-				if (iOwner != null)
-				{
-					dlg.Top = iOwner.Top;
-					dlg.Left = iOwner.Left + iOwner.Width;
-				}
-				dlg.Show();
-			}
-		}
+		//public static void ensureLoggerIsOpen(Window iOwner)
+		//{
+		//	if (!WndLogger.InstanceExists)
+		//	{
+		//		KLib.Wpf.WndLogger dlg = WndLogger.Instance;
+		//		if (iOwner != null)
+		//		{
+		//		    dlg.Owner = iOwner;
+		//			dlg.Top = iOwner.Top;
+		//			dlg.Left = iOwner.Left + iOwner.Width;
+		//		}
+		//		dlg.Show();
+		//	}
+		//}
 	}
 }

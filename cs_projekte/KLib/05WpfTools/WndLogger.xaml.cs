@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,39 +24,107 @@ namespace KLib.Wpf
 
 		static WndLogger mWndLogger;
 
-		//public static WndLogger CreateAndShowWndLogger()
-		//{
-		//	if (mWndLogger == null)
-		//	{
-		//		CreateWndLogger();
-		//		mWndLogger.Show();
-		//	}
-		//	else
-		//	{
-		//		mWndLogger.Activate();
-		//	}
-		//	return mWndLogger;
-		//}
+	    public static WndLogger Instance
+	    {
+	        get
+	        {
+	            if (!InstanceExists)
+	            {
+	                mWndLogger = new WndLogger();
+	            }
+	            return mWndLogger;
+	        }
+        }
 
-		public static WndLogger CreateOrGetWndLogger(Window iOwner)
+	    public enum RelativePositionToOwner
+	    {
+	        None, Left, Right, Above, Below
+	    }
+
+        public static void InstanceShow(Window iOwner = null, RelativePositionToOwner Pos = RelativePositionToOwner.None, Rect? PosAndSize = null)
+	    {
+	        if (!InstanceExists)
+	        {
+	            if (iOwner != null)
+	            {
+	                Instance.Owner = iOwner;
+                    //iOwner.LocationChanged += (sender, args) => { Instance.SetRelativePosition(Pos, PosAndSize); };
+	                //iOwner.SizeChanged += (sender, args) => { Instance.SetRelativePosition(Pos, PosAndSize); };
+	            }
+	            Instance.SetRelativePosition(Pos, PosAndSize);
+                Instance.Show();
+	        }
+	    }
+
+        public static void InstanceClose()
+	    {
+	        if (InstanceExists)
+	        {
+	            Instance.Close();
+	        }
+	    }
+
+        public static bool InstanceExists
 		{
-			if (mWndLogger == null)
-			{
-				mWndLogger = new WndLogger();
-				mWndLogger.Owner = iOwner;
-			}
-			return mWndLogger;
+		    get { return mWndLogger != null; }
 		}
 
-		public static bool IsAlreadyOpen()
-		{
-			return mWndLogger != null;
-		}
+	    private void SetRelativePosition(RelativePositionToOwner Pos = RelativePositionToOwner.None, Rect? PosAndSize = null)
+	    {
+	        switch (Pos)
+	        {
+	            case RelativePositionToOwner.None:
+	                if (PosAndSize.HasValue)
+	                {
+	                    Top = PosAndSize.Value.Top;
+	                    Left = PosAndSize.Value.Left;
+	                    Height = PosAndSize.Value.Height;
+	                    Width = PosAndSize.Value.Width;
+	                }
+	                break;
+	            case RelativePositionToOwner.Right:
+	                if (Owner != null)
+	                {
+	                    Left = Owner.Left + Owner.Width;
+	                    if (PosAndSize.HasValue)
+	                    {
+	                        Top = PosAndSize.Value.Top;
+	                        Height = PosAndSize.Value.Height;
+	                        Width = PosAndSize.Value.Width;
+	                    }
+	                    else
+	                    {
+	                        Top = Owner.Top;
+	                        Height = Owner.Height;
+	                        Width = 400;
+	                    }
+	                }
+	                break;
+	            case RelativePositionToOwner.Below:
+	                if (Owner != null)
+	                {
+	                    Top = Owner.Top + Owner.ActualHeight;
+	                    if (PosAndSize.HasValue)
+	                    {
+	                        Left = PosAndSize.Value.Left;
+	                        Height = PosAndSize.Value.Height;
+	                        Width = PosAndSize.Value.Width;
+	                    }
+	                    else
+	                    {
+	                        Left = Owner.Left;
+	                        Height = 300;
+	                        Width = Owner.Width;
+	                    }
+	                }
+	                break;
+	        }
+	    }
 
-		/// <summary>
-		/// Zum Erzeugen verwende CreateOrGetWndLogger()!
-		/// </summary>
-		private WndLogger()
+        /// <summary>
+        /// Zum Erzeugen verwende CreateOrGetWndLogger()!
+        /// </summary>
+        private WndLogger()
 		{
 			InitializeComponent();
 
@@ -66,11 +135,6 @@ namespace KLib.Wpf
 				// Memory Appender ins Logging einhaengen
 				LogMemAppender = new MemoryAppender();
 
-				//PatternLayout patternLayout = new PatternLayout();
-				//patternLayout.ConversionPattern = "%date [%thread] %-5level %logger - %message%newline";
-				//patternLayout.ActivateOptions();
-				//LogMemAppender.Layout = patternLayout;
-				
 				LogMemAppender.ActivateOptions();
 				hierarchy.Root.AddAppender(LogMemAppender);
 
@@ -97,28 +161,15 @@ namespace KLib.Wpf
 
 		}
 
-		//~WndLogger()
-		//{
-		//	dispatcherTimer.Stop();
-		//}
-
-
 		private void dispatcherTimer_Tick(object sender, EventArgs e)
 		{
-//			listLog.Items.Add(DateTime.Now.ToString() + "-tick()");
 			bool found = false;
 			
 			foreach (LoggingEvent logevent in LogMemAppender.GetEvents())
 			{
 				found = true;
-//				listLog.Items.Add(string.Format("{2} {0}: {1}", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp));
-				//textLog.SelectionBrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Yellow);
-				//textLog.AppendText(string.Format("{2} {0}: {1}", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp));
-				//textLog.SelectionBrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Green);
-				//textLog.AppendText(string.Format("{2} {0}: {1}", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp));
 
 				System.Windows.Documents.TextRange rangeOfText1 = new System.Windows.Documents.TextRange(textLog.Document.ContentEnd, textLog.Document.ContentEnd);
-//				rangeOfText1.Text = string.Format("{2} {0}: {1}\r", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp).Replace("\n","");
 				rangeOfText1.Text = string.Format("{2} {0}: {1} ({3}:{4})\r", logevent.Level, logevent.RenderedMessage, logevent.TimeStamp,
 					logevent.LocationInformation.FileName, logevent.LocationInformation.LineNumber).Replace("\n", "");
 				
@@ -148,9 +199,6 @@ namespace KLib.Wpf
 			{
 				LogMemAppender.Clear();
 				CommandManager.InvalidateRequerySuggested();
-				//listLog.Items.MoveCurrentToLast();
-				//listLog.SelectedItem = listLog.Items.CurrentItem;
-				//listLog.ScrollIntoView(listLog.Items.CurrentItem);
 				textLog.ScrollToEnd();
 			}
 		}
@@ -160,13 +208,7 @@ namespace KLib.Wpf
 			Close();
 		}
 
-		private void WndLogger1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			//dispatcherTimer.Stop();
-			//mWndLogger = null;
-		}
-
-		private void WndLogger1_Loaded(object sender, RoutedEventArgs e)
+        private void WndLogger1_Loaded(object sender, RoutedEventArgs e)
 		{
 			dispatcherTimer.Start();
 		}
@@ -180,11 +222,6 @@ namespace KLib.Wpf
 			hierarchy.RaiseConfigurationChanged(EventArgs.Empty);
 		}
 
-		private void Button_Click_1(object sender, RoutedEventArgs e)
-		{
-
-		}
-
 		private void btnEditor_Click(object sender, RoutedEventArgs e)
 		{
 
@@ -192,23 +229,17 @@ namespace KLib.Wpf
 
 			using (System.IO.StreamWriter file = new System.IO.StreamWriter(fn))
 			{
-				//foreach (var item in listLog.Items)
-				//{
-				//	file.WriteLine(item.ToString());
-				//}
 				textLog.SelectAll();
 				file.WriteLine(textLog.Selection.Text);
 			}
 
 			Process P = new Process();
 			P.StartInfo.FileName = fn;
-//			P.StartInfo.Arguments = (file_log as knk.shared.logger.impl.RollingFile).getFileName();
 			P.Start();
 		}
 
 		private void btnClear_Click(object sender, RoutedEventArgs e)
 		{
-//			listLog.Items.Clear();
 			textLog.SelectAll();
 			textLog.Selection.Text = "";
 		}

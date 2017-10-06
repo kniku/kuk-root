@@ -48,10 +48,10 @@ namespace Test_WPF
 		private void btnTest_Click(object sender, RoutedEventArgs e)
 		{
 
-			CTools.ensureLoggerIsOpen(this);
+		    WndLogger.InstanceShow(this);
 
-			try
-			{
+            try
+            {
 				DbConnection conx = DbManager.getConnectionManager(comboDatenbank.Text).getConnection();
 				if (conx.open())
 				{
@@ -103,10 +103,10 @@ a_num decimal(12,2))"
 
 		private void btnTestConnect_Click(object sender, RoutedEventArgs e)
 		{
-			CTools.ensureLoggerIsOpen(this);
+		    WndLogger.InstanceShow(this);
 
-			try
-			{
+            try
+            {
 				DbConnectionManager manager = DbManager.getConnectionManager(comboDatenbank.Text);
 
 
