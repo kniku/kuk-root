@@ -26,3 +26,13 @@
 *.suo
 *.sdf
 *.user
+cs_projekte/KnkTools/.vs/
+cs_projekte/KnkTools/Base/bin/
+cs_projekte/KnkTools/Base/obj/
+cs_projekte/KnkTools/GuiWPF/bin/
+cs_projekte/KnkTools/GuiWPF/obj/
+cs_projekte/KnkTools/packages/
+cs_projekte/KnkTools/TestWpf/bin/
+cs_projekte/KnkTools/TestWpf/obj/
+cs_projekte/KnkTools/UnitTest_Base/bin/
+cs_projekte/KnkTools/UnitTest_Base/obj/
