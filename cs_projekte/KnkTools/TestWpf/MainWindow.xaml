@@ -9,5 +9,6 @@
     <Canvas>
         <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Canvas.Left="10" Canvas.Top="10" Click="Button_Click"/>
         <TextBox Height="23" Canvas.Left="10" TextWrapping="Wrap" Text="TextBox" Canvas.Top="35" Width="120"/>
+        <Button Content="ProgressWindow" Canvas.Left="28" Canvas.Top="82" Width="75" Name="bProgress" Click="BProgress_OnClick"/>
     </Canvas>
 </Window>
