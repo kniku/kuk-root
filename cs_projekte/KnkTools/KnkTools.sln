@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest_Base", "UnitTest_B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuiWPF", "GuiWPF\GuiWPF.csproj", "{FF681D3C-DE6C-4A27-BABF-4E9B8E2389A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Framework", "Base.NET\Base.Framework.csproj", "{82293117-B704-450B-B1FC-889ABF8100DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FF681D3C-DE6C-4A27-BABF-4E9B8E2389A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF681D3C-DE6C-4A27-BABF-4E9B8E2389A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF681D3C-DE6C-4A27-BABF-4E9B8E2389A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82293117-B704-450B-B1FC-889ABF8100DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82293117-B704-450B-B1FC-889ABF8100DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82293117-B704-450B-B1FC-889ABF8100DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82293117-B704-450B-B1FC-889ABF8100DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

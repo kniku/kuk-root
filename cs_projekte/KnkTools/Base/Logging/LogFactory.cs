@@ -33,10 +33,25 @@ namespace Knk.Base.Logging
         class log4netLogItem : ILogItem
         {
             public string message;
-            string ILogItem.GetMessage()
-            {
-                return message;
-            }
+            public Level level;
+
+            string ILogItem.Message => message;
+            Level ILogItem.Level => level;
+
+        }
+
+        static Level log4netLevel2Level(log4net.Core.Level l)
+        {
+            if (l.Value == log4net.Core.Level.Info.Value)
+                return Level.Info;
+            if (l.Value == log4net.Core.Level.Warn.Value)
+                return Level.Warn;
+            if (l.Value == log4net.Core.Level.Error.Value)
+                return Level.Error;
+            if (l.Value == log4net.Core.Level.Fatal.Value)
+                return Level.Fatal;
+
+            return Level.Debug;
         }
         class log4netDispatcher : MemoryAppender, ILogDispatcher
         {
@@ -46,7 +61,7 @@ namespace Knk.Base.Logging
                 ILogItem [] r = new ILogItem[list.Length];
                 for (int i = 0; i < list.Length; i++)
                 {
-                    r[i] = new log4netLogItem {message = list[i].MessageObject.ToString()};
+                    r[i] = new log4netLogItem {message = list[i].MessageObject.ToString(), level = log4netLevel2Level(list[i].Level)};
                 }
 
                 return r;

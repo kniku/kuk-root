@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,16 +20,9 @@ namespace Knk.GuiWPF
             InitializeComponent();
         }
 
-        private void WndLoaded_Loaded(object sender, RoutedEventArgs e)
-        {
-            // TODO: attach to log with separate method
-            attachToLog();
-        }
-
         private void WndClosed_Closed(object sender, EventArgs e)
         {
-            // TODO: dettach from log with separate method
-            detachFromLog();
+            ((ILogViewWindow)this).DetachFromBaseLogging();
         }
 
         private void Log(Base.Logging.Level level, string msg)
@@ -79,13 +73,20 @@ namespace Knk.GuiWPF
 
         private void btnEditor_Click(object sender, RoutedEventArgs e)
         {
-            if (LogDispatcher == null)
-                return;
+            string fn = System.IO.Path.GetTempPath() + @"\LogList.txt";
 
-            foreach (ILogItem item in LogDispatcher.PopAllEvents())
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fn))
             {
-                ((ILog) this).Debug(item.GetMessage());
+                foreach (ListBoxItem logListItem in LogList.Items)
+                {
+                    file.WriteLine(logListItem.Content.ToString());
+                }
             }
+
+            Process P = new Process();
+            P.StartInfo.FileName = fn;
+            P.Start();
+
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
@@ -99,20 +100,39 @@ namespace Knk.GuiWPF
         }
 
         private ILogDispatcher LogDispatcher;
-        void attachToLog()
+        private DispatcherTimer LogDispatcherTimer;
+        
+        void ILogViewWindow.AttachToBaseLogging()
         {
             if (LogDispatcher == null)
             {
                 LogDispatcher = LogFactory.RegisterLogDispatcher();
+                LogDispatcherTimer = new DispatcherTimer();
+                LogDispatcherTimer.Tick += dispatcherTimer_Tick;
+                LogDispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+                LogDispatcherTimer.Start();
             }
         }
 
-        void detachFromLog()
+        void ILogViewWindow.DetachFromBaseLogging()
         {
             if (LogDispatcher != null)
             {
+                LogDispatcherTimer.Stop();
                 LogFactory.UnregisterLogDispatcher(LogDispatcher);
+                LogDispatcherTimer = null;
                 LogDispatcher = null;
+            }
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            if (LogDispatcher == null)
+                return;
+
+            foreach (ILogItem item in LogDispatcher.PopAllEvents())
+            {
+                Log(item.Level, item.Message);
             }
         }
 
@@ -152,7 +172,8 @@ namespace Knk.GuiWPF
 
     public interface ILogViewWindow : ILog
     {
-
+        void AttachToBaseLogging();
+        void DetachFromBaseLogging();
     }
 
     public static class Factory

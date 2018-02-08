@@ -1,9 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 using Knk.Base.Logging;
 using Knk.GuiWPF;
-using Knk.GuiWPF.DynamicWindows;
 using ILog = Knk.Base.Logging.ILog;
 
 //[assembly: log4net.Config.XmlConfigurator(ConfigFileExtension = "log4net", Watch = true)]
@@ -33,15 +36,74 @@ namespace TestWpf
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ILogViewWindow log = Factory.ShowWindowLogger(this);
-            log.Error("ERROR....");
-            log.Warn("Warning....");
+            log.AttachToBaseLogging();
+
+            Logger.Error("ERROR....");
+            Logger.Warn("Warning....");
 
             Logger.Error("log4net");
 
-            CData data = new CData {Name = "Kurt", Nummer = 10};
-            SimplePropertyWindow w = new SimplePropertyWindow("TEST", data);
-            w.ShowDialog();
+            //CData data = new CData {Name = "Kurt", Nummer = 10};
+            //SimplePropertyWindow w = new SimplePropertyWindow("TEST", data);
+            //w.ShowDialog();
+
+            log.Info($"RAM free : {Knk.Base.Framework.Diagnostic.ManagementObject.GetFreePhysicalMemory}");
+            log.Info($"RAM total: {Knk.Base.Framework.Diagnostic.ManagementObject.GetTotalRamSize}");
+
+
+            if (_perCpu == null)
+            {
+
+                Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
+                log.Info("Categories:");
+                foreach (var performanceCounterCategory in PerformanceCounterCategory.GetCategories().OrderBy(p => p.CategoryName))
+                {
+                    log.Warn($"  [{performanceCounterCategory.CategoryName}]");
+                }
+
+                foreach (var performanceCounterCategory in PerformanceCounterCategory.GetCategories().OrderBy(p => p.CategoryName)/*.Where(p=>p.CategoryName=="Physikalischer Datenträger")*/)
+                {
+                    if (!performanceCounterCategory.CategoryName.Contains("xNetwork Interface"))
+                        continue;
+
+                    log.Warn($"    {performanceCounterCategory.CategoryName}");
+
+                    if (performanceCounterCategory.CategoryType == PerformanceCounterCategoryType.MultiInstance)
+                    {
+                        foreach (var instanceName in performanceCounterCategory.GetInstanceNames())
+                        {
+                            foreach (var counter in performanceCounterCategory.GetCounters(instanceName))
+                            {
+                                log.Debug($"    .... [{performanceCounterCategory.CategoryName}]/[{instanceName}]: [{counter.CounterName}]");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (var counter in performanceCounterCategory.GetCounters())
+                        {
+                            log.Debug($"    .... [{performanceCounterCategory.CategoryName}]/- : [{counter.CounterName}]");
+                        }
+                    }
+
+                }
+
+                _perCpu = new PerformanceCounter("Processor", "% Processor Time","_Total");
+                _perMem = new PerformanceCounter("Memory", "Available MBytes");
+                _perCpuProc = new PerformanceCounter("Process", "% Processor Time", Process.GetCurrentProcess().ProcessName);
+                _perMemProc = new PerformanceCounter("Network Interface", "Bytes Sent/sec", "Intel[R] Ethernet Connection [2] I219-LM _2");
+            }
+
+            log.Info($"CPU: {_perCpu.NextValue()}");
+            log.Info($"MEM: {_perMem.NextValue()*1024}");
+            log.Info($"CPU(process): {_perCpuProc.NextValue()}");
+            log.Info($"NET: {_perMemProc.NextValue()}");
+
+
         }
+
+        PerformanceCounter _perCpu, _perMem, _perCpuProc, _perMemProc;
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {

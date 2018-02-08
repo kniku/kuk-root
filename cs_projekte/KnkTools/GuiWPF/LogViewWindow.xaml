@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Log" Height="461" Width="451" Loaded="WndLoaded_Loaded" Closed="WndClosed_Closed">
+        Title="Log" Height="461" Width="451" Closed="WndClosed_Closed">
 
     <Grid>
         <!--<RichTextBox x:Name="textLog" Margin="10,10,10,66" IsReadOnly="True" IsReadOnlyCaretVisible="True" VerticalScrollBarVisibility="Auto">

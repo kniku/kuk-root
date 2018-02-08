@@ -35,7 +35,8 @@ namespace Knk.Base.Logging
 
     public interface ILogItem
     {
-        string GetMessage();
+        string Message { get; }
+        Level Level { get; }
     }
 
     public interface ILogDispatcher
