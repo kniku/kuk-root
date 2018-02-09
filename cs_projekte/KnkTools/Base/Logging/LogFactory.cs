@@ -32,10 +32,10 @@ namespace Knk.Base.Logging
 
         class log4netLogItem : ILogItem
         {
-            public string message;
+            public object message;
             public Level level;
 
-            string ILogItem.Message => message;
+            object ILogItem.Message => message;
             Level ILogItem.Level => level;
 
         }
@@ -53,9 +53,9 @@ namespace Knk.Base.Logging
 
             return Level.Debug;
         }
-        class log4netDispatcher : MemoryAppender, ILogDispatcher
+        class log4netDispatcher : MemoryAppender, ILogItemProvider
         {
-            ILogItem[] ILogDispatcher.PopAllEvents()
+            ILogItem[] ILogItemProvider.PopAllEvents()
             {
                 var list = PopAllEvents();
                 ILogItem [] r = new ILogItem[list.Length];
@@ -68,7 +68,7 @@ namespace Knk.Base.Logging
             }
         }
 
-        public static ILogDispatcher RegisterLogDispatcher()
+        public static ILogItemProvider RegisterLogDispatcher()
         {
             Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository(Assembly.GetEntryAssembly());
 
@@ -89,7 +89,7 @@ namespace Knk.Base.Logging
             return LogMemAppender;
         }
 
-        public static void UnregisterLogDispatcher(ILogDispatcher dispatcher)
+        public static void UnregisterLogDispatcher(ILogItemProvider dispatcher)
         {
             if (dispatcher is log4netDispatcher d)
             {
@@ -113,7 +113,7 @@ namespace Knk.Base.Logging
             public bool IsErrorEnabled => nativeLogger.IsErrorEnabled;
             public bool IsFatalEnabled => nativeLogger.IsFatalEnabled;
 
-            public void Debug(string message, Exception ex = null)
+            void ILog.Debug(object message, Exception ex = null)
             {
                 if (ex == null)
                     nativeLogger.Debug(message);
@@ -121,7 +121,7 @@ namespace Knk.Base.Logging
                     nativeLogger.DebugExt(message, ex);
             }
 
-            public void Error(string message, Exception ex = null)
+            void ILog.Error(object message, Exception ex = null)
             {
                 if (ex == null)
                     nativeLogger.Error(message);
@@ -129,7 +129,7 @@ namespace Knk.Base.Logging
                     nativeLogger.ErrorExt(message, ex);
             }
 
-            public void Fatal(string message, Exception ex = null)
+            void ILog.Fatal(object message, Exception ex = null)
             {
                 if (ex == null)
                     nativeLogger.Fatal(message);
@@ -137,7 +137,7 @@ namespace Knk.Base.Logging
                     nativeLogger.FatalExt(message, ex);
             }
 
-            public void Info(string message, Exception ex = null)
+            void ILog.Info(object message, Exception ex = null)
             {
                 if (ex == null)
                     nativeLogger.Info(message);
@@ -145,7 +145,7 @@ namespace Knk.Base.Logging
                     nativeLogger.InfoExt(message, ex);
             }
 
-            public void Warn(string message, Exception ex = null)
+            void ILog.Warn(object message, Exception ex = null)
             {
                 if (ex == null)
                     nativeLogger.Warn(message);
@@ -163,31 +163,31 @@ namespace Knk.Base.Logging
             public bool IsErrorEnabled => true;
             public bool IsFatalEnabled => true;
 
-            public void Debug(string message, Exception ex = null)
+            void ILog.Debug(object message, Exception ex = null)
             {
                 if (IsDebugEnabled)
                     System.Diagnostics.Debug.WriteLine(message);
             }
 
-            public void Error(string message, Exception ex = null)
+            void ILog.Error(object message, Exception ex = null)
             {
                 if (IsErrorEnabled)
                     System.Diagnostics.Debug.WriteLine(message);
             }
 
-            public void Fatal(string message, Exception ex = null)
+            void ILog.Fatal(object message, Exception ex = null)
             {
                 if (IsFatalEnabled)
                     System.Diagnostics.Debug.WriteLine(message);
             }
 
-            public void Info(string message, Exception ex = null)
+            void ILog.Info(object message, Exception ex = null)
             {
                 if (IsInfoEnabled)
                     System.Diagnostics.Debug.WriteLine(message);
             }
 
-            public void Warn(string message, Exception ex = null)
+            void ILog.Warn(object message, Exception ex = null)
             {
                 if (IsWarnEnabled)
                     System.Diagnostics.Debug.WriteLine(message);

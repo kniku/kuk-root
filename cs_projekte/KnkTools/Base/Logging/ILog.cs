@@ -26,20 +26,20 @@ namespace Knk.Base.Logging
         bool IsFatalEnabled { get; }
         
         /* Log a message */
-        void Debug(string message, Exception ex = null);
-        void Info(string message, Exception ex = null);
-        void Warn(string message, Exception ex = null);
-        void Error(string message, Exception ex = null);
-        void Fatal(string message, Exception ex = null);
+        void Debug(object message, Exception ex = null);
+        void Info(object message, Exception ex = null);
+        void Warn(object message, Exception ex = null);
+        void Error(object message, Exception ex = null);
+        void Fatal(object message, Exception ex = null);
     }
 
     public interface ILogItem
     {
-        string Message { get; }
+        object Message { get; }
         Level Level { get; }
     }
 
-    public interface ILogDispatcher
+    public interface ILogItemProvider
     {
         ILogItem [] PopAllEvents();
     }

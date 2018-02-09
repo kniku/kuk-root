@@ -25,12 +25,12 @@ namespace Knk.GuiWPF
             ((ILogViewWindow)this).DetachFromBaseLogging();
         }
 
-        private void Log(Base.Logging.Level level, string msg)
+        private void Log(Base.Logging.Level level, object msg)
         {
             if (LogList.Dispatcher.CheckAccess())
-                _WriteLog(level, msg);
+                _WriteLog(level, msg.ToString());
             else
-                LogList.Dispatcher.Invoke(() => { _WriteLog(level, msg); });
+                LogList.Dispatcher.Invoke(() => { _WriteLog(level, msg.ToString()); });
         }
 
         Brush level2color(Base.Logging.Level level)
@@ -99,7 +99,7 @@ namespace Knk.GuiWPF
             Close();
         }
 
-        private ILogDispatcher LogDispatcher;
+        private ILogItemProvider LogDispatcher;
         private DispatcherTimer LogDispatcherTimer;
         
         void ILogViewWindow.AttachToBaseLogging()
@@ -143,27 +143,27 @@ namespace Knk.GuiWPF
         bool ILog.IsErrorEnabled => true;
         bool ILog.IsFatalEnabled => true;
 
-        void ILog.Debug(string message, Exception ex)
+        void ILog.Debug(object message, Exception ex)
         {
             Log(Base.Logging.Level.Debug, message);
         }
 
-        void ILog.Info(string message, Exception ex)
+        void ILog.Info(object message, Exception ex)
         {
             Log(Base.Logging.Level.Info, message);
         }
 
-        void ILog.Warn(string message, Exception ex)
+        void ILog.Warn(object message, Exception ex)
         {
             Log(Base.Logging.Level.Warn, message);
         }
 
-        void ILog.Error(string message, Exception ex)
+        void ILog.Error(object message, Exception ex)
         {
             Log(Base.Logging.Level.Error, message);
         }
 
-        void ILog.Fatal(string message, Exception ex)
+        void ILog.Fatal(object message, Exception ex)
         {
             Log(Base.Logging.Level.Fatal, message);
         }
