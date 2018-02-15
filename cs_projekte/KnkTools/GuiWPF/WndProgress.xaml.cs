@@ -17,23 +17,15 @@ namespace Knk.GuiWPF
 
 		protected void NotifyPropertyChanged(string sProp)
 		{
-			if (PropertyChanged != null)
-			{
-				PropertyChanged(this, new PropertyChangedEventArgs(sProp));
-			}
-		}
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(sProp));
+        }
 
 		public WndProgress(Window iOwner)
 		{
 			InitializeComponent();
-			PanelProgress.DataContext = this;
+			//PanelProgress.DataContext = this;
 			Owner = iOwner;
 		}
-
-		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{
-		}
-
 
 		ArrayList listWorker = new ArrayList();
 		
@@ -79,7 +71,7 @@ namespace Knk.GuiWPF
 				ci.mTextBlock = tb;
 
 				ci.mWorker = new BackgroundWorker();
-				ci.mWorker.WorkerReportsProgress = true;
+			    ci.mWorker.WorkerReportsProgress = true;
 				ci.mWorker.DoWork += ci.mHandler;
 				ci.mWorker.ProgressChanged += worker_ProgressChanged;
 				ci.mWorker.RunWorkerCompleted += worker_RunWorkerCompleted;
@@ -141,15 +133,15 @@ namespace Knk.GuiWPF
 			{
 				if (!ci.isCompleted)
 				{
-					oneBusyFound = true;
-					if (ci.mWorker != null /* && ci.mWorker.WorkerSupportsCancellation*/)
+                    oneBusyFound = true;
+                    if (ci.mWorker != null /* && ci.mWorker.WorkerSupportsCancellation*/)
 					{
 						ci.mWorker.CancelAsync();
 					}
-					else
-					{
-						oneBusyFound = true;
-					}
+					//else
+					//{
+					//	oneBusyFound = true;
+					//}
 				}
 			}
 

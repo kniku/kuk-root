@@ -15,6 +15,9 @@ namespace Knk.GuiWPF
     /// </summary>
     public partial class LogViewWindow : Window, ILogViewWindow
     {
+        /// <summary>
+        /// internal constructor - use Factory to instantiate new object
+        /// </summary>
         internal LogViewWindow()
         {
             InitializeComponent();
