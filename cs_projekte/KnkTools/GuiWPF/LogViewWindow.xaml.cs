@@ -109,7 +109,7 @@ namespace Knk.GuiWPF
         {
             if (LogDispatcher == null)
             {
-                LogDispatcher = LogFactory.RegisterLogDispatcher();
+                LogDispatcher = LogManager.RegisterLogDispatcher();
                 LogDispatcherTimer = new DispatcherTimer();
                 LogDispatcherTimer.Tick += dispatcherTimer_Tick;
                 LogDispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
@@ -122,7 +122,7 @@ namespace Knk.GuiWPF
             if (LogDispatcher != null)
             {
                 LogDispatcherTimer.Stop();
-                LogFactory.UnregisterLogDispatcher(LogDispatcher);
+                LogManager.UnregisterLogDispatcher(LogDispatcher);
                 LogDispatcherTimer = null;
                 LogDispatcher = null;
             }
@@ -191,7 +191,18 @@ namespace Knk.GuiWPF
                 if (iOwner != null)
                     windowLogger.Owner = iOwner;
 
-                windowLogger.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                //windowLogger.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                if (iOwner == null)
+                {
+                    windowLogger.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                }
+                else
+                {
+                    windowLogger.WindowStartupLocation = WindowStartupLocation.Manual;
+                    windowLogger.Top = iOwner.Top;
+                    windowLogger.Left = iOwner.Left + iOwner.Width;
+                }
+
 
                 windowLogger.Closed += (sender, args) => { windowLogger = null; };
                 windowLogger.Show();

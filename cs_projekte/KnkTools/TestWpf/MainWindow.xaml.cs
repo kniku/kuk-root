@@ -5,8 +5,11 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using Knk.Base.File;
 using Knk.Base.Logging;
+using Knk.Base.Threading;
 using Knk.GuiWPF;
+using NLog.Targets;
 using ILog = Knk.Base.Logging.ILog;
 
 //[assembly: log4net.Config.XmlConfigurator(ConfigFileExtension = "log4net", Watch = true)]
@@ -19,12 +22,14 @@ namespace TestWpf
     public partial class MainWindow : Window
     {
         //private static readonly log4net.ILog Log = LogManager.GetLogger(typeof(MainWindow));
-        static ILog Logger = LogFactory.GetLogger(typeof(MainWindow));
+        static ILog Logger = LogManager.GetLogger(typeof(MainWindow));
+        private static NLog.ILogger nLogger = NLog.LogManager.GetCurrentClassLogger();
         
         public MainWindow()
         {
             InitializeComponent();
             Logger.Debug("Startup");
+            nLogger.Debug("TEST");
         }
 
         class CData
@@ -33,10 +38,36 @@ namespace TestWpf
             public int Nummer { get; set; }
             public string Test { get; set; }
         }
+
+        private ILogViewWindow LogWindow;
+        void openLoggerWindow()
+        {
+            LogWindow = Factory.ShowWindowLogger(this);
+            LogWindow.AttachToBaseLogging();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ILogViewWindow log = Factory.ShowWindowLogger(this);
-            log.AttachToBaseLogging();
+            NLog.Targets.MemoryTarget target = new MemoryTarget("MemTarget");
+            NLog.LogManager.Configuration.AddTarget("MemAppender", target);
+
+            foreach (var t in NLog.LogManager.Configuration.AllTargets)
+            {
+                Logger.Info($"target: {t.Name}, {t.GetType().Name}");
+            }
+
+            nLogger.Debug(@"Button_Click
+foreach (var performanceCounterCategory in PerformanceCounterCategory.GetCategories().OrderBy(p => p.CategoryName)/*.Where(p=>p.CategoryName==""Physikalischer Datenträger"")*/)");
+
+            var logs = NLog.LogManager.Configuration.FindTargetByName<MemoryTarget>("MemAppender").Logs;
+            foreach (var l in logs)
+            {
+                Logger.Info(l);
+            }
+
+            openLoggerWindow();
+            //ILogViewWindow log = Factory.ShowWindowLogger(this);
+            //log.AttachToBaseLogging();
 
             Logger.Error("ERROR....");
             Logger.Warn("Warning....");
@@ -47,19 +78,19 @@ namespace TestWpf
             //SimplePropertyWindow w = new SimplePropertyWindow("TEST", data);
             //w.ShowDialog();
 
-            log.Info($"RAM free : {Knk.Base.Framework.Diagnostic.ManagementObject.GetFreePhysicalMemory}");
-            log.Info($"RAM total: {Knk.Base.Framework.Diagnostic.ManagementObject.GetTotalRamSize}");
+            LogWindow.Info($"RAM free : {Knk.Base.Framework.Diagnostic.ManagementObject.GetFreePhysicalMemory}");
+            LogWindow.Info($"RAM total: {Knk.Base.Framework.Diagnostic.ManagementObject.GetTotalRamSize}");
 
 
-            if (_perCpu == null)
+            if (_perCpu == null && false)
             {
 
                 Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
-                log.Info("Categories:");
+                LogWindow.Info("Categories:");
                 foreach (var performanceCounterCategory in PerformanceCounterCategory.GetCategories().OrderBy(p => p.CategoryName))
                 {
-                    log.Warn($"  [{performanceCounterCategory.CategoryName}]");
+                    LogWindow.Warn($"  [{performanceCounterCategory.CategoryName}]");
                 }
 
                 foreach (var performanceCounterCategory in PerformanceCounterCategory.GetCategories().OrderBy(p => p.CategoryName)/*.Where(p=>p.CategoryName=="Physikalischer Datenträger")*/)
@@ -67,7 +98,7 @@ namespace TestWpf
                     if (!performanceCounterCategory.CategoryName.Contains("xNetwork Interface"))
                         continue;
 
-                    log.Warn($"    {performanceCounterCategory.CategoryName}");
+                    LogWindow.Warn($"    {performanceCounterCategory.CategoryName}");
 
                     if (performanceCounterCategory.CategoryType == PerformanceCounterCategoryType.MultiInstance)
                     {
@@ -75,7 +106,7 @@ namespace TestWpf
                         {
                             foreach (var counter in performanceCounterCategory.GetCounters(instanceName))
                             {
-                                log.Debug($"    .... [{performanceCounterCategory.CategoryName}]/[{instanceName}]: [{counter.CounterName}]");
+                                LogWindow.Debug($"    .... [{performanceCounterCategory.CategoryName}]/[{instanceName}]: [{counter.CounterName}]");
                             }
                         }
                     }
@@ -83,7 +114,7 @@ namespace TestWpf
                     {
                         foreach (var counter in performanceCounterCategory.GetCounters())
                         {
-                            log.Debug($"    .... [{performanceCounterCategory.CategoryName}]/- : [{counter.CounterName}]");
+                            LogWindow.Debug($"    .... [{performanceCounterCategory.CategoryName}]/- : [{counter.CounterName}]");
                         }
                     }
 
@@ -95,18 +126,39 @@ namespace TestWpf
                 _perMemProc = new PerformanceCounter("Network Interface", "Bytes Sent/sec", "Intel[R] Ethernet Connection [2] I219-LM _2");
             }
 
-            log.Info($"CPU: {_perCpu.NextValue()}");
-            log.Info($"MEM: {_perMem.NextValue()*1024}");
-            log.Info($"CPU(process): {_perCpuProc.NextValue()}");
-            log.Info($"NET: {_perMemProc.NextValue()}");
+            if (_perCpu != null)
+            {
+                LogWindow.Info($"CPU: {_perCpu.NextValue()}");
+                LogWindow.Info($"MEM: {_perMem.NextValue() * 1024}");
+                LogWindow.Info($"CPU(process): {_perCpuProc.NextValue()}");
+                LogWindow.Info($"NET: {_perMemProc.NextValue()}");
+            }
 
-
+            watcher?.Dispose();
+            watcher = new DirectoryWatcher(@"c:\temp", false, false);
+            watcher.WatchedElementChanged += (o, args) => { Logger.Info($"file {args.FullPath}: {args.ChangeType} (old: {args.FullPathOld})"); };
+            watcher.Start();
         }
+
+        private Knk.Base.File.DirectoryWatcher watcher;
 
         PerformanceCounter _perCpu, _perMem, _perCpuProc, _perMemProc;
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            int xxx = (int) e.Argument;
+            Logger.Warn($"Thread #{Thread.CurrentThread.ManagedThreadId}-START, arg={xxx}, supended={s1.Suspended}");
+            if (xxx > 500)
+            {
+                //s1.Suspended = true;
+            }
+            Thread.Sleep(new Random().Next(2000));
+            if ((xxx > 500 && !s1.Suspended) || (xxx <= 500 && s1.Suspended))
+                Logger.Error($"Thread #{Thread.CurrentThread.ManagedThreadId}-END, arg={xxx}, supended={s1.Suspended}");
+            else
+                Logger.Warn($"Thread #{Thread.CurrentThread.ManagedThreadId}-END, arg={xxx}, supended={s1.Suspended}");
+            return;
+
             int max = (int)e.Argument;
             int result = 0;
             for (int i = 0; i < max; i++)
@@ -132,15 +184,29 @@ namespace TestWpf
             }
             e.Result = result;
         }
+
+        Suspender s1,s2;
+
         private void BProgress_OnClick(object sender, RoutedEventArgs e)
         {
-            WndProgress xxx = new WndProgress(this);
-            xxx.AddWorker(worker_DoWork, "worker 1:", true, 500);
-            xxx.AddWorker(worker_DoWork, "worker 2:", false, 700);
-            xxx.AddWorker(worker_DoWork, "worker 3:", true, 300);
-            xxx.AddWorker(worker_DoWork, "worker 4:", true, 400);
-            xxx.AddWorker(worker_DoWork, "worker 5:", true, 800);
-            xxx.StartAllTasks(false);
+            openLoggerWindow();
+
+            using (s1 = new Suspender())
+            {
+                Logger.Warn($"Thread #{Thread.CurrentThread.ManagedThreadId}-INIT, suspended={s1.Suspended}");
+                s2 = new Suspender(false);
+                WndProgress xxx = new WndProgress(this);
+                xxx.AddWorker(worker_DoWork, "worker 1:", true, 500);
+                xxx.AddWorker(worker_DoWork, "worker 2:", false, 700);
+                xxx.AddWorker(worker_DoWork, "worker 3:", true, 300);
+                xxx.AddWorker(worker_DoWork, "worker 4:", true, 400);
+                xxx.AddWorker(worker_DoWork, "worker 5:", true, 800);
+                xxx.StartAllTasks(false);
+            }
+            Logger.Warn($"Thread #{Thread.CurrentThread.ManagedThreadId}-DONE, suspended={s1.Suspended}");
+
+            //WndProgressManager manager = new WndProgressManager(this, false);
+            //manager.AddTask(worker_DoWork, "worker 1:", true, 500);
         }
     }
 }

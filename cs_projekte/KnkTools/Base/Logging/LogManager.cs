@@ -11,7 +11,7 @@ using log4net.Util;
 
 namespace Knk.Base.Logging
 {
-    public static class LogFactory
+    public static class LogManager
     {
         private static bool initialized;
         public static ILog GetLogger(Type type)
@@ -22,7 +22,7 @@ namespace Knk.Base.Logging
             if (!initialized)
             {
                 var executingAssembly = Assembly.GetEntryAssembly();
-                XmlConfigurator.Configure(LogManager.GetRepository(executingAssembly),
+                XmlConfigurator.Configure(log4net.LogManager.GetRepository(executingAssembly),
                     new System.IO.FileInfo($"{executingAssembly.ManifestModule.Name}.log4net"));
                 initialized = true;
             }
@@ -70,7 +70,7 @@ namespace Knk.Base.Logging
 
         public static ILogItemProvider RegisterLogDispatcher()
         {
-            Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository(Assembly.GetEntryAssembly());
+            Hierarchy hierarchy = (Hierarchy)log4net.LogManager.GetRepository(Assembly.GetEntryAssembly());
 
             // Memory Appender ins Logging einhaengen
             log4netDispatcher LogMemAppender = new log4netDispatcher();
@@ -94,7 +94,7 @@ namespace Knk.Base.Logging
             if (dispatcher is log4netDispatcher d)
             {
                 d.Clear();
-                Hierarchy hierarchy = (Hierarchy) LogManager.GetRepository(Assembly.GetEntryAssembly());
+                Hierarchy hierarchy = (Hierarchy) log4net.LogManager.GetRepository(Assembly.GetEntryAssembly());
                 hierarchy.Root.RemoveAppender(d);
             }
         }
