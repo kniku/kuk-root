@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -134,13 +135,162 @@ foreach (var performanceCounterCategory in PerformanceCounterCategory.GetCategor
                 LogWindow.Info($"NET: {_perMemProc.NextValue()}");
             }
 
-            watcher?.Dispose();
-            watcher = new DirectoryWatcher(@"c:\temp", false, false);
-            watcher.WatchedElementChanged += (o, args) => { Logger.Info($"file {args.FullPath}: {args.ChangeType} (old: {args.FullPathOld})"); };
-            watcher.Start();
+            //watcher?.Dispose();
+            //watcher = new DirectoryWatcher(@"c:\temp", false, false);
+            //watcher.WatchedElementChanged += (o, args) => { Logger.Info($"file {args.FullPath}: {args.ChangeType} (old: {args.FullPathOld})"); };
+            //watcher.Start();
+
+            MyActivity activity = new MyActivity("TEST");
+            activity.Start();
+            Thread.Sleep(1500);
+            LogWindow.Info($"elapsed(ms): {activity.ElapsedMilliseconds()}");
+            Thread.Sleep(500);
+            activity.Stop();
+            LogWindow.Info($"elapsed(ms): {activity.ElapsedMilliseconds()}");
+
+            using (var act = new MyActivity("TEST2", true))
+            {
+                Thread.Sleep(100);
+            }
+            using (var act = new MyActivity("TEST", true))
+            {
+                using (var act2 = new MyActivity("TEST", true))
+                {
+                    Thread.Sleep(50);
+                }
+                Thread.Sleep(25);
+            }
+
+            foreach (var act in MonitoredActivityManager.GetMonitoredActivities())
+            {
+                LogWindow.Info($"Activity [{act.Name}]: Events={act.CountEvents}, Total(ms)={act.TotalElapsedMilliseconds}");
+            }
+
+
         }
 
-        private Knk.Base.File.DirectoryWatcher watcher;
+        public interface IMonitoredActivity
+        {
+            string Name { get; }
+            long CountEvents { get; }
+            double TotalElapsedMilliseconds { get; }
+        }
+        static class MonitoredActivityManager
+        {
+            class MonitoredActivityAggregator : IMonitoredActivity
+            {
+
+                public MonitoredActivityAggregator(string iName)
+                {
+                    Name = iName;
+                }
+
+                public string Name { get; }
+                public long CountEvents { get; private set; }
+                public double TotalElapsedMilliseconds { get; private set; }
+
+                public void RegisterActivityEvent(MonitoredActivity iActivity)
+                {
+                    CountEvents++;
+                    TotalElapsedMilliseconds += iActivity.ElapsedMilliseconds();
+                }
+            }
+
+            // TODO: singleton
+            static Dictionary<string, MonitoredActivityAggregator> dict = new Dictionary<string, MonitoredActivityAggregator>();
+
+            static MonitoredActivityAggregator GetActivityAggregator(string iName)
+            {
+                if (!dict.ContainsKey(iName))
+                {
+                    var mon = new MonitoredActivityAggregator(iName);
+                    dict.Add(iName, mon);
+                    return mon;
+                }
+
+                return dict[iName];
+            }
+
+            public static IEnumerable<IMonitoredActivity> GetMonitoredActivities()
+            {
+                return dict.Values;
+            }
+
+            public static void RegisterActivity(MonitoredActivity iActivity)
+            {
+                var monitor = GetActivityAggregator(iActivity.Name);
+                monitor.RegisterActivityEvent(iActivity);
+            }
+        }
+
+
+        public class MyActivity : MonitoredActivity
+        {
+            public MyActivity(string iName, bool iStart = false) : base(iName, iStart)
+            {
+            }
+        }
+
+        public abstract class MonitoredActivity : IDisposable
+        {
+            private Stopwatch stopwatch;
+
+            public string Name { get; }
+
+            public MonitoredActivity(string iName, bool iStart = false)
+            {
+                Name = iName;
+
+                if (iStart)
+                    Start();
+            }
+            public void Start()
+            {
+                if (stopwatch == null)
+                {
+                    stopwatch = Stopwatch.StartNew();
+                }
+            }
+            public void Stop()
+            {
+                if (stopwatch != null && stopwatch.IsRunning)
+                {
+                    stopwatch.Stop();
+                    MonitoredActivityManager.RegisterActivity(this);
+                }
+            }
+
+            public long ElapsedMilliseconds()
+            {
+                return stopwatch?.ElapsedMilliseconds ?? 0;
+            }
+
+            #region IDisposable Support
+            private bool disposedValue = false; // To detect redundant calls
+
+            protected virtual void Dispose(bool disposing)
+            {
+                if (!disposedValue)
+                {
+                    if (disposing)
+                    {
+                        Stop();
+                    }
+                    disposedValue = true;
+                }
+            }
+
+            // This code added to correctly implement the disposable pattern.
+            void IDisposable.Dispose()
+            {
+                Dispose(true);
+                GC.SuppressFinalize(this);
+            }
+            #endregion
+        }
+
+
+        //private Knk.Base.File.DirectoryWatcher watcher;
 
         PerformanceCounter _perCpu, _perMem, _perCpuProc, _perMemProc;
 

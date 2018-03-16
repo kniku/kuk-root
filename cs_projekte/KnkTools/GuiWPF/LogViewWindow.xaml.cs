@@ -61,7 +61,7 @@ namespace Knk.GuiWPF
         {
             LogList.Items.Add(new ListBoxItem
             {
-                Content = $"{DateTime.Now:O}: {Text}",
+                Content = $"{DateTime.Now:HH:mm:ss.fff}: {Text}",
                 Foreground = level != Level.Info ? level2color(level) : Foreground
             });
             LogList.Dispatcher.Invoke(DispatcherPriority.Render, new Action(() => {})); // refresh immediately...
@@ -146,30 +146,36 @@ namespace Knk.GuiWPF
         bool ILog.IsErrorEnabled => true;
         bool ILog.IsFatalEnabled => true;
 
-        void ILog.Debug(object message, Exception ex)
+        void ILog.Debug(string format, params object [] parameter)
         {
-            Log(Base.Logging.Level.Debug, message);
+            if (((ILog)this).IsDebugEnabled)
+                Log(Base.Logging.Level.Debug, string.Format(format, parameter));
         }
 
-        void ILog.Info(object message, Exception ex)
+        void ILog.Info(string format, params object [] parameter)
         {
-            Log(Base.Logging.Level.Info, message);
+            if (((ILog)this).IsInfoEnabled)
+                Log(Base.Logging.Level.Info, string.Format(format, parameter));
+        }
+        
+        void ILog.Warn(string format, params object [] parameter)
+        {
+            if (((ILog)this).IsWarnEnabled)
+                Log(Base.Logging.Level.Warn, string.Format(format, parameter));
+        }
+        
+        void ILog.Error(string format, params object [] parameter)
+        {
+            if (((ILog)this).IsErrorEnabled)
+                Log(Base.Logging.Level.Error, string.Format(format, parameter));
         }
 
-        void ILog.Warn(object message, Exception ex)
+        void ILog.Fatal(string format, params object [] parameter)
         {
-            Log(Base.Logging.Level.Warn, message);
+            if (((ILog)this).IsFatalEnabled)
+                Log(Base.Logging.Level.Fatal, string.Format(format, parameter));
         }
 
-        void ILog.Error(object message, Exception ex)
-        {
-            Log(Base.Logging.Level.Error, message);
-        }
-
-        void ILog.Fatal(object message, Exception ex)
-        {
-            Log(Base.Logging.Level.Fatal, message);
-        }
         #endregion ILog implementation
     }
 

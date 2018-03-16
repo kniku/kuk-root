@@ -1,0 +1,18 @@
+﻿<Window x:Class="DirectoryWatcher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DirectoryWatcher"
+        mc:Ignorable="d"
+        Title="DirectoryWatcher" Height="101.213" Width="578.545">
+    <Grid>
+        <TextBox Name="tbDirName" Height="23" Margin="79,10,200,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <!--<Button x:Name="bWatch" Content="watch dir" HorizontalAlignment="Right" Margin="0,12,10,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>-->
+        <Button Content="open dir" HorizontalAlignment="Right" Margin="0,13,11,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <CheckBox x:Name="cbWatch" Content="Start" HorizontalAlignment="Right" Margin="0,15,91,0" VerticalAlignment="Top" Checked="cbWatch_Checked" Unchecked="CbWatch_OnUnchecked" Width="104"/>
+        <TextBox x:Name="tbIgnorePattern" Height="23" Margin="79,35,200,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <Label Content="Directory:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="64"/>
+        <Label Content="Ignore:" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="64"/>
+    </Grid>
+</Window>

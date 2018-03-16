@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 namespace Knk.Base.Logging
 {
@@ -26,11 +23,11 @@ namespace Knk.Base.Logging
         bool IsFatalEnabled { get; }
         
         /* Log a message */
-        void Debug(object message, Exception ex = null);
-        void Info(object message, Exception ex = null);
-        void Warn(object message, Exception ex = null);
-        void Error(object message, Exception ex = null);
-        void Fatal(object message, Exception ex = null);
+        void Debug(string format, params object [] parameters);
+        void Info(string format, params object [] parameters);
+        void Warn(string format, params object [] parameters);
+        void Error(string format, params object [] parameters);
+        void Fatal(string format, params object [] parameters);
     }
 
     public interface ILogItem

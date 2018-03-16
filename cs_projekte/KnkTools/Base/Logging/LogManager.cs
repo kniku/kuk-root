@@ -113,44 +113,44 @@ namespace Knk.Base.Logging
             public bool IsErrorEnabled => nativeLogger.IsErrorEnabled;
             public bool IsFatalEnabled => nativeLogger.IsFatalEnabled;
 
-            void ILog.Debug(object message, Exception ex = null)
+            void ILog.Debug(string format, params object[] parameter)
             {
-                if (ex == null)
-                    nativeLogger.Debug(message);
-                else
-                    nativeLogger.DebugExt(message, ex);
+                if (IsDebugEnabled)
+                {
+                    nativeLogger.DebugFormat(format, parameter);
+                }
             }
 
-            void ILog.Error(object message, Exception ex = null)
+            void ILog.Info(string format, params object[] parameter)
             {
-                if (ex == null)
-                    nativeLogger.Error(message);
-                else
-                    nativeLogger.ErrorExt(message, ex);
+                if (IsInfoEnabled)
+                {
+                    nativeLogger.InfoFormat(format, parameter);
+                }
             }
 
-            void ILog.Fatal(object message, Exception ex = null)
+            void ILog.Warn(string format, params object[] parameter)
             {
-                if (ex == null)
-                    nativeLogger.Fatal(message);
-                else
-                    nativeLogger.FatalExt(message, ex);
+                if (IsWarnEnabled)
+                {
+                    nativeLogger.WarnFormat(format, parameter);
+                }
             }
 
-            void ILog.Info(object message, Exception ex = null)
+            void ILog.Error(string format, params object[] parameter)
             {
-                if (ex == null)
-                    nativeLogger.Info(message);
-                else
-                    nativeLogger.InfoExt(message, ex);
+                if (IsErrorEnabled)
+                {
+                    nativeLogger.ErrorFormat(format, parameter);
+                }
             }
 
-            void ILog.Warn(object message, Exception ex = null)
+            void ILog.Fatal(string format, params object[] parameter)
             {
-                if (ex == null)
-                    nativeLogger.Warn(message);
-                else
-                    nativeLogger.WarnExt(message, ex);
+                if (IsFatalEnabled)
+                {
+                    nativeLogger.FatalFormat(format, parameter);
+                }
             }
         }
 
@@ -163,34 +163,34 @@ namespace Knk.Base.Logging
             public bool IsErrorEnabled => true;
             public bool IsFatalEnabled => true;
 
-            void ILog.Debug(object message, Exception ex = null)
+            void ILog.Debug(string format, params object [] parameter)
             {
                 if (IsDebugEnabled)
-                    System.Diagnostics.Debug.WriteLine(message);
+                    System.Diagnostics.Debug.WriteLine(string.Format(format, parameter));
             }
 
-            void ILog.Error(object message, Exception ex = null)
-            {
-                if (IsErrorEnabled)
-                    System.Diagnostics.Debug.WriteLine(message);
-            }
-
-            void ILog.Fatal(object message, Exception ex = null)
-            {
-                if (IsFatalEnabled)
-                    System.Diagnostics.Debug.WriteLine(message);
-            }
-
-            void ILog.Info(object message, Exception ex = null)
+            void ILog.Info(string format, params object [] parameter)
             {
                 if (IsInfoEnabled)
-                    System.Diagnostics.Debug.WriteLine(message);
+                    System.Diagnostics.Debug.WriteLine(string.Format(format, parameter));
             }
-
-            void ILog.Warn(object message, Exception ex = null)
+            
+            void ILog.Warn(string format, params object [] parameter)
             {
                 if (IsWarnEnabled)
-                    System.Diagnostics.Debug.WriteLine(message);
+                    System.Diagnostics.Debug.WriteLine(string.Format(format, parameter));
+            }
+            
+            void ILog.Error(string format, params object [] parameter)
+            {
+                if (IsErrorEnabled)
+                    System.Diagnostics.Debug.WriteLine(string.Format(format, parameter));
+            }
+
+            void ILog.Fatal(string format, params object [] parameter)
+            {
+                if (IsFatalEnabled)
+                    System.Diagnostics.Debug.WriteLine(string.Format(format, parameter));
             }
         }
     }
