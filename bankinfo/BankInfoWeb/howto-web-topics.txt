@@ -1,0 +1,133 @@
+Node.js installieren (npm ist inkludiert)
+================
+zip Paket holen und enpacken, Pfad setzen, z.B.:
+	7z x node-v10.0.0-win-x64.zip
+	set path=%path%;%cd%\node-v10.0.0-win-x64
+check: node -v bzw. npm -v
+
+
+Angular CLI installieren (global)
+================
+npm install -g @angular/cli
+check: ng -v
+
+CLI infos
+- Anm.: Benötigt Internetverbindung!!
+- Neues Projekt anlegen:
+	ng new PROJECTNAME --routing --skip-git
+	... Falls beim Install hängt: ng new --skip-install MYPROJECTNAME und danach im Projektordner npm install aufrufen
+- Projekt kompilieren&starten und Browser öffnen: ng serve --open
+
+Angular routing
+=================
+- Projekt mit --routing anlegen (siehe oben)
+- app-routing.module.ts anpassen:
+	const routes: Routes = [
+	  { path: 'crisis-center', component: CrisisListComponent },
+	  { path: 'hero/:id',      component: HeroDetailComponent },
+	  {
+		path: 'heroes',
+		component: HeroListComponent,
+		data: { title: 'Heroes List' }
+	  },
+	  { path: '',
+		redirectTo: '/heroes',
+		pathMatch: 'full'
+	  },
+	  { path: '**', component: PageNotFoundComponent }
+	];
+- HTML: <a routerLink="/crisis-center" routerLinkActive="active">Crisis Center</a>
+- Componenten werden bei <router-outlet></router-outlet> eingebaut...
+
+
+bootstrap für Projekt installieren
+=================
+- npm install jquery popper.js bootstrap
+- angular.json anpassen:
+	"styles": [
+		...,
+		"node_modules/bootstrap/dist/css/bootstrap.min.css"
+	],
+	"scripts": [
+		...
+		"node_modules/jquery/dist/jquery.min.js",
+		"node_modules/bootstrap/dist/js/bootstrap.min.js"
+	]
+- bootstrap button style fix: styles.css anpassen:
+	...
+	.btn {
+		margin: 1px;
+	}
+- test: app.component.html
+	<div class="container">
+	  <button type="button" class="btn">Basic</button>
+	  <button type="button" class="btn btn-primary">Primary</button>
+	</div>
+
+devextreme für Projekt installieren
+=================
+npm install devextreme jszip stream
+bzw. (mit angular paket)
+npm install devextreme devextreme-angular jszip stream
+
+- style: style.css
+	@import 'devextreme/dist/css/dx.common.css';
+	@import 'devextreme/dist/css/dx.light.css';
+	/* @import 'devextreme/dist/css/dx.light.compact.css'; */
+
+angular example:
+- app.module.ts:
+	import { DxButtonModule } from 'devextreme-angular';
+	imports: [
+		...
+		DxButtonModule
+	  ],
+- app.component.ts:
+	import notify from 'devextreme/ui/notify';
+	class AppComponent:
+	okClicked (e) { notify("The OK button was clicked") }
+
+- test: app.component.html
+  <dx-button text="OK" (onClick)="okClicked($event)"></dx-button>
+	
+material design installieren
+=================
+- npm install @angular/material @angular/cdk @angular/animations
+- import NgModules -> app.module.ts:
+	// immer NACH BrowserModule!
+	import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+
+	@NgModule({
+	  ...
+	  imports: [MatButtonModule, MatCheckboxModule],
+	  ...
+	})
+- style.css: @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+- test: app.component.html
+	<button mat-stroked-button>Click me!</button>
+
+Debugging mit Chrome
+=================
+- Chrome: Debugger for Chrome extension installieren
+- Studio Code: launch.json bearbeiten (Ctrl+Shift+D):
+	{
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "chrome",
+				"request": "launch",
+				"name": "Launch Chrome against localhost",
+				"url": "http://localhost:4200",
+				"webRoot": "${workspaceFolder}"
+			}
+		]
+	}
+- F5 startet Debugger...
+
+
+Tools
+=================
+- Swagger (Web API description tool)
+- Fiddler (http sniffer)
+- OAuth (authentication concept)
+- .NET Identity (authentication implementierung .NET Core)
