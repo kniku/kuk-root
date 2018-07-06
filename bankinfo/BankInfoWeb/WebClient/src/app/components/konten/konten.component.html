@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <a href="#" class="link">EUR 0001</a>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Hauptkonto, Bank Austria, EUR</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <a href="#" class="link">CHF 0002</a>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Verrechnungskonto, Bank Austria, CHF</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-10">
+      <form>
+        <div class="row">
+          <div class="form-group col-2">
+            <label for="konto_id">ID</label>
+            <input id="konto_id" class="form-control" type="text" readonly>
+          </div>
+          <div class="form-group col">
+            <label for="exampleInputEmail1">Kontonummer</label>
+            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Kontonummer eintragen">
+            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+          </div>
+          <div class="form-group col">
+            <label for="exampleInputPassword1">Währung</label>
+            <input class="form-control" id="exampleInputPassword1" placeholder="Kontowährung">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label for="description">Beschreibung</label>
+            <textarea class="form-control" id="description" placeholder="Optionale Beschreibung..." rows="3"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Speichern</button>
+      </form>
+    </div>
+  </div>
