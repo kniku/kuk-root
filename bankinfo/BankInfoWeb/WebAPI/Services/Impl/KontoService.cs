@@ -8,14 +8,16 @@ namespace WebAPI.Services.Impl
 {
     public class KontoService : IKontoService
     {
-	    public IEnumerable<Account> GetAccounts()
-	    {
-		    return new[] {new Account(11), new Account(22)};
-	    }
+		string IService.Name => "KontoService";
 
-	    public Account GetAccount(int id)
-	    {
-		    return new Account(id);
-	    }
-    }
+		IEnumerable<Account> IKontoService.GetAccounts()
+		{
+			return new[] {new Account(11) {Currency = "EUR", Nr = "x0001", Description = "Hauptkonto"}, new Account(22){Currency = "CHF", Nr = "x0002", Description = "Kreditverrechnungskonto"}};
+		}
+
+		Account IKontoService.GetAccount(int id)
+		{
+			return new Account(id);
+		}
+	}
 }

@@ -1,44 +1,35 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <div class="card">
-        <div class="card-header">
-          <a href="#" class="link">EUR 0001</a>
-        </div>
-        <div class="card-body">
-          <p class="card-text">Hauptkonto, Bank Austria, EUR</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <a href="#" class="link">CHF 0002</a>
-        </div>
-        <div class="card-body">
-          <p class="card-text">Verrechnungskonto, Bank Austria, CHF</p>
-        </div>
-      </div>
+      <nav class="nav nav-pills nav-fill flex-sm-column">
+        <nav class="nav-item" *ngFor="let konto of Konten; let idx = index">
+          <a [routerLink] class="nav-link" (click)="selectedIndex=idx;" [ngClass]="{'active': idx==selectedIndex }">{{konto.nr}} ({{konto.currency}})</a>
+        </nav>
+        <nav class="nav-item">
+            <a [routerLink] class="nav-link">(+) Neues Konto anlegen</a>
+          </nav>
+        </nav>
     </div>
     <div class="col-10">
       <form>
         <div class="row">
           <div class="form-group col-2">
             <label for="konto_id">ID</label>
-            <input id="konto_id" class="form-control" type="text" readonly>
+            <input id="konto_id" class="form-control" type="text" readonly value="{{(Konten==undefined?-1:Konten[selectedIndex].id)}}">
           </div>
           <div class="form-group col">
             <label for="exampleInputEmail1">Kontonummer</label>
-            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Kontonummer eintragen">
-            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Kontonummer eintragen" value="{{(Konten==undefined?-1:Konten[selectedIndex].nr)}}">
           </div>
           <div class="form-group col">
             <label for="exampleInputPassword1">Währung</label>
-            <input class="form-control" id="exampleInputPassword1" placeholder="Kontowährung">
+            <input class="form-control" id="exampleInputPassword1" placeholder="Kontowährung" value="{{(Konten==undefined?-1:Konten[selectedIndex].currency)}}">
           </div>
         </div>
         <div class="row">
           <div class="form-group col">
             <label for="description">Beschreibung</label>
-            <textarea class="form-control" id="description" placeholder="Optionale Beschreibung..." rows="3"></textarea>
+            <textarea class="form-control" id="description" placeholder="Optionale Beschreibung..." rows="3" value="{{(Konten==undefined?-1:Konten[selectedIndex].description)}}"></textarea>
           </div>
         </div>
 

@@ -6,7 +6,12 @@ using WebAPI.Model;
 
 namespace WebAPI.Services
 {
-    public interface IKontoService
+	public interface IService
+	{
+		string Name { get; }
+	}
+
+    public interface IKontoService : IService
     {
 	    IEnumerable<Account> GetAccounts();
 	    Account GetAccount(int id);

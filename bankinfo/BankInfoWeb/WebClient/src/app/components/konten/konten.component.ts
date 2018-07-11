@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { KontoService } from '../../service/konto.service';
+import { Konto } from '../../model/konto';
 
 @Component({
   selector: 'app-konten',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./konten.component.css']
 })
 export class KontenComponent implements OnInit {
+  Konten: Konto[];
+  selectedIndex: number = -1;
 
-  constructor() { }
+  constructor(private kontoService: KontoService) { }
 
   ngOnInit() {
+    this.kontoService.getKonten().subscribe(k => {
+      this.Konten = k;
+      this.selectedIndex = 0;
+    });
   }
-
 }
