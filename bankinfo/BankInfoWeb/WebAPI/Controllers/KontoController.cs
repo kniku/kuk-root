@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
     public class KontoController : Controller
     {
 	    private readonly IKontoService KontoService;
-	    private ILogger logger = ApplicationLogging.CreateLogger<KontoController>();
+	    private ILogger logger = AppGlobal.Logging.CreateLogger<KontoController>();
 
 	    public KontoController(IKontoService kontoService)
 	    {
@@ -24,13 +24,18 @@ namespace WebAPI.Controllers
 	    }
 
 	    [HttpGet]
-	    public IEnumerable<Account> Get()
-	    {
-		    logger.LogTrace("Get()");
-		    return KontoService.GetAccounts();
-	    }
+		//public ActionResult<IEnumerable<Account>> Get()
+		//{
+		// logger.LogTrace("Get()");
+		// return KontoService.GetAccounts() as ActionResult<IEnumerable<Account>>;
+		//}
+		public IEnumerable<Account> Get()
+		{
+			logger.LogTrace("Get()");
+			return KontoService.GetAccounts();
+		}
 
-	    [HttpGet("{id}")]
+		[HttpGet("{id}")]
 	    public Account Get(int id)
 	    {
 		    logger.LogTrace($"Get({id})");

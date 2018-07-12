@@ -8,6 +8,8 @@ namespace WebAPI.Model
     public class Account
     {
 	    public int Id { get; }
+	    public string Name { get; set; }
+	    public string BIC { get; set; }
 	    public string Nr { get; set; }
 	    public string Currency { get; set; }
 	    public string Description { get; set; }

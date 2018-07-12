@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KontenComponent } from './components/konten/konten.component';
 import { BankauszuegeComponent } from './components/bankauszuege/bankauszuege.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KontenComponent,
-    BankauszuegeComponent
+    BankauszuegeComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
