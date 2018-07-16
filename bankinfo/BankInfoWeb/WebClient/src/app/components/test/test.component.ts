@@ -1,18 +1,4 @@
-import { Component, OnInit, Directive, ViewRef, TemplateRef, ViewContainerRef, ViewChild, ComponentFactoryResolver, ComponentFactory, ComponentRef } from '@angular/core';
-
-@Component({
-  selector: 'app-test-alert',
-  template: `<p>KURT</p>`,
-  // styleUrls: ['./test.component.css']
-})
-export class AlertComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+import { Component, OnInit, Directive, ViewRef, TemplateRef, ViewContainerRef, ViewChild, ComponentFactoryResolver, ComponentFactory, ComponentRef, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-test',
@@ -26,30 +12,12 @@ export class TestComponent implements OnInit {
   ngOnInit() {
   }
 
-}
-
-@Directive({
-  selector: '[sidebar]'
-})
-export class SidebarDirective {
-  @ViewChild("alertContainer", { read: ViewContainerRef }) container;
-  // private _viewRef : ViewRef;
-  componentRef: ComponentRef<AlertComponent>;
-  
-  constructor(public tpl: TemplateRef<any>, private viewContainer: ViewContainerRef,private resolver: ComponentFactoryResolver ) {}
-
-  ngOnInit() {
-    // this._viewRef = this._sidebarService.vcr.createEmbeddedView(this.tpl);
-    this.tpl.createEmbeddedView("<p>KURT</p>")
-    // this.viewContainer.createEmbeddedView(this.tpl);
-  }
-  createComponent(type) {
-    this.container.clear(); 
-    const factory: ComponentFactory<AlertComponent> = this.resolver.resolveComponentFactory(AlertComponent);
-    this.componentRef = this.container.createComponent(factory);
-  }
-  ngOnDestroy() {
-    // this._viewRef.destroy();
+  public onTest()
+  {
+    var elem = document.getElementById("KURT");
+    var b = new HTMLLabelElement();
+    b.textContent = "KURT";
+    elem.appendChild(b);
   }
 
 }
