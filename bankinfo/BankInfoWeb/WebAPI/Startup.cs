@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Data.Common;
+using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using WebAPI.DbAccess;
 using WebAPI.DbAccess.Impl;
 using WebAPI.Services;
@@ -39,31 +42,45 @@ namespace WebAPI
 
             if (env.IsDevelopment())
             {
-	            AppGlobal.DatabaseAccess = new DbAccess.DbAccess(Configuration.GetConnectionString("BankInfo_test"));
+	            //AppGlobal.DatabaseAccess = new DbAccess.DbAccess(Configuration.GetConnectionString("BankInfo_test"));
                 app.UseDeveloperExceptionPage();
-	            dbtest();
             }
             else
             {
-	            AppGlobal.DatabaseAccess = new DbAccess.DbAccess(Configuration.GetConnectionString("BankInfo_prod"));
+	            //AppGlobal.DatabaseAccess = new DbAccess.DbAccess(Configuration.GetConnectionString("BankInfo_prod"));
             }
+
+	        AppGlobal.DatabaseAccess = new DbAccess.DbAccess(Configuration.GetConnectionString("BankInfo"));
+	        dbtest();
 
 	        app.UseCors(config => config.AllowAnyOrigin());
             app.UseMvc();
         }
 
+
 	    void dbtest()
 	    {
-		    ILogger logger = AppGlobal.Logging.CreateLogger("WebAPI.Controllers");
-			logger.LogWarning("STARTUP: DB TEST");
-		    logger.LogWarning($"connStr=[{AppGlobal.DatabaseAccess.ConnectionString}]");
+		    ILogger logger = AppGlobal.Logging.CreateLogger<Startup>() /* "WebAPI.Controllers"*/;
+		    string csWithoutPassword = Regex.Replace(AppGlobal.DatabaseAccess.ConnectionString, @"(password\s*=\s*)(\w+)",
+			    "$1*hidden*", RegexOptions.IgnoreCase);
 
-		    DbCommand cmd = AppGlobal.DatabaseAccess.GetCommand("select count(*) from konten");
-			var result = cmd.ExecuteScalar();
-			cmd.Connection.Close();
-		    
-		    logger.LogWarning($"result={result}");
-		    logger.LogWarning("STARTUP: DB TEST - done.");
+		    logger.LogDebug($"Checking database connection [{csWithoutPassword}]...");
+
+		    var x = AppGlobal.DatabaseAccess.CheckConnection();
+			if (x != null)
+			{
+				logger.LogCritical($"Database connection error!\nConnection string=[{csWithoutPassword}]\nException: {x.Message}");
+		    }
+		    //else
+		    //{
+
+			   // DbCommand cmd = AppGlobal.DatabaseAccess.GetCommand("select count(*) from konten");
+			   // var result = cmd.ExecuteScalar();
+			   // cmd.Connection.Close();
+			   // logger.LogWarning($"result={result}");
+		    //}
+
+		    //logger.LogWarning("STARTUP: DB TEST - done.");
 
 		}
     }

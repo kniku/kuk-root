@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using System.Data.Common;
 
 namespace WebAPI.DbAccess
@@ -13,6 +14,30 @@ namespace WebAPI.DbAccess
 			DbAccessFactory = AppGlobal.Application.ApplicationServices.GetService<IDbAccessFactory>();
 			ConnectionString = connectionString;
 		}
+
+		public Exception CheckConnection()
+		{
+			try
+			{
+				GetConnection(true).Close();
+			}
+			catch (Exception e)
+			{
+				return e;
+			}
+
+			return null;
+		}
+
+		//public DbConnectionStringBuilder ConnectionStringBuilder
+		//{
+		//	get
+		//	{
+		//		var b = DbAccessFactory.DbConnectionStringBuilder;
+		//		b.ConnectionString = ConnectionString;
+		//		return b;
+		//	}
+		//}
 
 		public DbConnection GetConnection(bool openConnection = false)
 		{

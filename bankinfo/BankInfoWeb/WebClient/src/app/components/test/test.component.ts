@@ -11,13 +11,24 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  xxx: HTMLDivElement;
   public onTest()
   {
-    var elem = document.getElementById("KURT");
-    var b = new HTMLLabelElement();
-    b.textContent = "KURT";
-    elem.appendChild(b);
-  }
+    // var elem = document.getElementById("KURT");
+    this.xxx = document.getElementById("KURT") as HTMLDivElement;
+    // this.xxx.insertAdjacentHTML("afterbegin", "<br>TESTTEST")
+    this.xxx.innerHTML=`
+    <canvas id="my_canvas" width="400" height="400" style="background-color: aquamarine">
+    TESTER
+    </canvas>`
 
+    var canvas = document.getElementById("my_canvas") as HTMLCanvasElement;
+    var context = canvas.getContext("2d");
+    context.beginPath();
+    context.arc(canvas.width/2, canvas.height/2, 20, 0, Math.PI*2, true);
+    context.fill();
+    // var b = new HTMLLabelElement();
+    // b.textContent = "KURT";
+    // elem.appendChild(b);
+  }
 }

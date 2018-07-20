@@ -5,7 +5,8 @@ namespace WebAPI.DbAccess.Impl
 {
 	public class DbAccessFactoryPostgres : IDbAccessFactory
 	{
-		public DbConnection DbConnection => new NpgsqlConnection();
-		public DbCommand DbCommand => new NpgsqlCommand();
+		//DbConnectionStringBuilder IDbAccessFactory.DbConnectionStringBuilder => new NpgsqlConnectionStringBuilder();
+		DbConnection IDbAccessFactory.DbConnection => new NpgsqlConnection();
+		DbCommand IDbAccessFactory.DbCommand => new NpgsqlCommand();
 	}
 }
