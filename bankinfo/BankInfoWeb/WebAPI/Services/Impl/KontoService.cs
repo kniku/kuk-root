@@ -48,5 +48,34 @@ namespace WebAPI.Services.Impl
 		{
 			return new Account(id);
 		}
+
+		IEnumerable<AccountPosition> IKontoService.GetPositions(int accountId)
+		{
+			List<AccountPosition> r = new List<AccountPosition>();
+			try
+			{
+				logger.LogTrace("IKontoService.GetPositions()");
+				using (var cmd = AppGlobal.DatabaseAccess.GetCommand("select id, effdt, amt, memo, curcode, posteddt, voucher from positionen where ktoid=:ktoid"))
+				{
+					cmd.Parameters.Add(ne)
+					DbDataReader reader = cmd.ExecuteReader();
+
+					if (reader.HasRows)
+					{
+						while (reader.Read())
+						{
+							r.Add(new AccountPosition() { Id = new Guid(reader.GetString(0)), Valuta = reader.GetDateTime(1), Amount = reader.GetDouble(2), Memo = reader.GetString(3), Currency = reader.GetString(4), Posted = reader.GetDateTime(5), Voucher = reader.IsDBNull(6) ? null: reader.GetString(6)});
+						}
+					}
+					reader.Close();
+				}
+				logger.LogTrace($"account positions: {r.Count}");
+			}
+			catch (Exception e)
+			{
+				logger.LogError(e, e.Message);
+			}
+			return r.ToArray();
+		}
 	}
 }

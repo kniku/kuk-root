@@ -14,6 +14,7 @@ namespace WebAPI.Services
     public interface IKontoService : IService
     {
 	    IEnumerable<Account> GetAccounts();
-	    Account GetAccount(int id);
+	    Account GetAccount(int accountId);
+	    IEnumerable<AccountPosition> GetPositions(int accountId);
     }
 }

@@ -42,5 +42,13 @@ namespace WebAPI.Controllers
 		    return KontoService.GetAccount(id);
 	    }
 
+	    [HttpGet("positions/{accountId}")]
+		//[Route("Buchungen")]
+	    public IEnumerable<AccountPosition> GetBuchungen(int accountId)
+	    {
+		    logger.LogTrace("GetBuchungen()");
+		    return KontoService.GetPositions(accountId);
+	    }
+
     }
 }

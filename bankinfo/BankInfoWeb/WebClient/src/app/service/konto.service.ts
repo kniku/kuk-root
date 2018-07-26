@@ -18,7 +18,7 @@ export class KontoService {
   }
 
   public getKonten(): Observable<Konto[]>{
-    return this.http.get<Konto[]>(environment.WebAPIBaseURL + '/v1/accounts')
+    return this.http.get<Konto[]>('v1/accounts')
       .pipe(
         tap(heroes => this.log(`fetched konten`)),
         catchError(this.handleError('getKonten', []))

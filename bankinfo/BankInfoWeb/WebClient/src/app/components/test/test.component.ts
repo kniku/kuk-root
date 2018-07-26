@@ -25,7 +25,7 @@ export class TestComponent implements OnInit {
     var canvas = document.getElementById("my_canvas") as HTMLCanvasElement;
     var context = canvas.getContext("2d");
     context.beginPath();
-    context.arc(canvas.width/2, canvas.height/2, 20, 0, Math.PI*2, true);
+    context.arc(canvas.width/2, canvas.height/2, 50, 0, Math.PI*2, true);
     context.fill();
     // var b = new HTMLLabelElement();
     // b.textContent = "KURT";
