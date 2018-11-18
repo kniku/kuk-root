@@ -9,7 +9,7 @@ check: node -v bzw. npm -v
 Angular CLI installieren (global)
 ================
 npm install -g @angular/cli
-check: ng -v
+check: ng version
 
 CLI infos
 - Anm.: Benötigt Internetverbindung!!
