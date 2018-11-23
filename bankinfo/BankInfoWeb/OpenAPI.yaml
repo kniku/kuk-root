@@ -1,0 +1,119 @@
+swagger: '2.0'
+info:
+  description: >-
+    You can find out more about Swagger at [http://swagger.io](http://swagger.io), Online Editor: [siehe hier...](https://editor.swagger.io/)
+    <br>=> [OpenAPI Specification](https://swagger.io/docs/specification/about/)
+    <br>=> [Microsoft Web API Best Practise](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design)
+  version: 0.1.0
+  title: BankInfo
+host: 'localhost:5000'
+basePath: /api/v1
+tags:
+  - name: accounts
+    description: Konteninformationen
+schemes:
+  - http
+paths:
+  /accounts:
+    get:
+      tags:
+        - accounts
+      summary: Kontenliste anfordern
+      description: ''
+      parameters:
+      - name: "id"
+        in: query
+        description: "Konto ID"
+        required: false
+        type: "integer"
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Konto mit gegebener ID oder Liste aller Konten (ohne Parameter)
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/Account'              
+        '404':
+          description: Kein Konto gefunden
+        '500':
+          description: Server error
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+    flow: implicit
+    scopes:
+      'write:pets': modify pets in your account
+      'read:pets': read your pets
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+
+  StdUniqueID:
+    description: Eindeutige Objekt ID (automatisch vergeben)
+    type: integer
+
+  StdDescription:
+    description: Beschreibung
+    type: string
+    maxLength: 100
+  
+  StdDate:
+    description: Datum (ISO 8601 YYYY-MM-DD)
+    type: string
+    maxLength: 10
+    minLength: 10
+  
+  Account:
+    description: Konteninformation
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/StdUniqueID'
+      description:
+        $ref: '#/definitions/StdDescription'
+      accnr:
+        description: Kontonummer
+        type: string
+      iban:
+        description: IBAN
+        type: string
+      currency:
+        description: Kontowährung
+        type: string
+        default: "EUR"
+    required:
+      - id
+      - iban
+      
+  StatementItem:
+    description: Bankauszugsposition
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/StdUniqueID'
+      description:
+        $ref: '#/definitions/StdDescription'
+      accout_id:
+        description: Konto ID
+        allOf: 
+          - $ref: '#/definitions/StdUniqueID'
+      date_item:
+        description: Positionsdatum        
+        allOf:
+          - $ref: '#/definitions/StdDate'
+      date_value:
+        allOf:
+          - $ref: '#/definitions/StdDate'
+          - description: Valuta
+      amount:
+        description: Betrag
+        type: number
+        format: "double"
+    required: 
+      - id
+      - accout_id
