@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
@@ -57,7 +58,12 @@ namespace WebAPI.Services.Impl
 				logger.LogTrace("IKontoService.GetPositions()");
 				using (var cmd = AppGlobal.DatabaseAccess.GetCommand("select id, effdt, amt, memo, curcode, posteddt, voucher from positionen where ktoid=:ktoid"))
 				{
-					cmd.Parameters.Add(ne)
+					DbParameter p = cmd.CreateParameter();
+					p.ParameterName = "ktoid";
+					p.Direction = ParameterDirection.Input;
+					p.Value = accountId;
+					cmd.Parameters.Add(p);
+
 					DbDataReader reader = cmd.ExecuteReader();
 
 					if (reader.HasRows)

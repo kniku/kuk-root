@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Microsoft.Extensions.DependencyInjection;
 using System.Data.Common;
 
@@ -62,5 +63,6 @@ namespace WebAPI.DbAccess
 			r.CommandText = sql;
 			return r;
 		}
+
 	}
 }
