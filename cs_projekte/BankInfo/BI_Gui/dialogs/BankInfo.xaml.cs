@@ -42,7 +42,7 @@ namespace BI_Gui
 #else
 			string db_host = "localhost";
 			string db_user = "admin";
-			string db_pwd = "sorting";
+		    string db_pwd = "anlusa"; //"sorting";
 			string db_database = "bankinfo_echt";
 #endif
 			ag.Log.LogInfo("Datenbankverbindung: {0}@{1} als User {2}", db_database, db_host, db_user);
