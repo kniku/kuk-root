@@ -1,0 +1,29 @@
+C#/CLR debugging mit visual studio:
+=====================================
+- neues Projekt anlegen: SQL Server Database Projekt
+- project/add: z.B.: scalar valued function; SQL CLR C#; User defined function...
+- skript generieren für Funktionsaufruf (wichtig: build action: none, sonst Fehler beim builden...)
+- projekt eigenschaften: debug:
+	-- start action: startup script; testscript (siehe oben) angeben
+	-- Target connection string angeben (db-connect für debugging)
+- Im SQL Server Object Explorer bei Zieldatenbank SQL/CLR Debugging enablen (über context menü)
+	Achtung: muss nach jedem Start von VS neu gesetzt werden!
+- build: build sollte sauber durchlaufen
+	Achtung: build mit ReSharper funktioniert hier nicht!
+- breakpoint in generierter funktion setzen; debug/F5 (deploy sollte automatisch passieren)...
+
+ACHTUNG: Soll Assembly nicht als SAVE eingespielt werden (=Defaulteinstellung bei SQL Projekten):
+- Project Settings/Database Settings->Miscellaneous: Häkchen bei TRUSTWORTHY setzen!
+	sonst funktioniert das deployment der "unsicheren" Assembly nicht...
+
+
+Sonstige Infos:
+
+-- Möglicherweise Recht auf external access an user vergeben:
+use [master]
+GO
+grant external access assembly to [GAW2000\autx-knku]
+GO
+
+-- Datenbank TRUSTWORTHY setzen:
+ALTER DATABASE AXSYSTEM SET TRUSTWORTHY on

@@ -1,0 +1,20 @@
+prelim.:
+	ubuntu image installiert
+	x server installiert
+	
+dockerfile erstellen mit:
+=================
+FROM ubuntu
+RUN apt-get update && apt-get install -y firefox
+CMD /usr/bin/firefox
+=================
+
+#build:
+docker build -t firefox .
+
+#start:
+set-variable -name DISPLAY -value 10.17.11.83:0.0
+docker run -ti --rm -e DISPLAY=10.17.11.83:0.0 firefox
+
+
+docker run --add-host="localhost:192.168.65.1" -ti ubuntu /bin/bash

@@ -1,0 +1,38 @@
+neuen lokalen branch anlegen:
+=============================
+git checkout -b branches/TEST
+
+branch nach remote pushen (inkl. tracking):
+=============================
+git push -u origin branches/TEST
+...oder mit anderem Namen:
+git push -u origin branches/TEST:branches/NEW_NAME
+
+branch mergen:
+=============================
+git checkout myBranch
+git merge master
+
+oder rebasen (besser, keine zusätzlichen merge commits):
+=============================
+git checkout myBranch
+git rebase master
+...danach zurückmergen in master:
+git checkout master
+git merge myBranch --> fast-forward merge, keine zusätzlichen commits enthalten
+
+
+auf welchem branch bin ich?
+=============================
+git status
+...oder
+git remote show origin
+
+welche branches sind gemerged/nicht gemerged?
+git branch --merged
+git branch --no-merged
+... oder auch anderen als den aktuellen branch bezogen:
+git branch --merged OTHER_BRANCH
+git branch --no-merged OTHER_BRANCH
+
+
