@@ -30,7 +30,15 @@ namespace WebAPI
 	        services.AddCors();
 
 			// Register application services.
-	        services.AddSingleton<IDbAccessFactory , DbAccessFactoryPostgres>();
+			switch (Configuration.GetSection("Application")["DBMSType"])
+	        {
+		        case "Postgres":
+			        services.AddSingleton<IDbAccessFactory , DbAccessFactoryPostgres>();
+			        break;
+				default:
+					services.AddSingleton<IDbAccessFactory , DbAccessFactorySqlServer>();
+					break;
+	        }
 	        services.AddSingleton<IKontoService, KontoService>();
         }
 
@@ -42,15 +50,10 @@ namespace WebAPI
 
             if (env.IsDevelopment())
             {
-	            //AppGlobal.DatabaseAccess = new DbAccess.DbAccess(Configuration.GetConnectionString("BankInfo_test"));
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-	            //AppGlobal.DatabaseAccess = new DbAccess.DbAccess(Configuration.GetConnectionString("BankInfo_prod"));
-            }
 
-	        AppGlobal.DatabaseAccess = new DbAccess.DbAccess(Configuration.GetConnectionString("BankInfo"));
+	        AppGlobal.DatabaseAccess = new DbAccess.DbAccess(Configuration.GetConnectionString(Configuration.GetSection("Application")["DBMSConnection"]));
 	        dbtest();
 
 	        app.UseCors(config => config.AllowAnyOrigin());
@@ -71,17 +74,10 @@ namespace WebAPI
 			{
 				logger.LogCritical($"Database connection error!\nConnection string=[{csWithoutPassword}]\nException: {x.Message}");
 		    }
-		    //else
-		    //{
-
-			   // DbCommand cmd = AppGlobal.DatabaseAccess.GetCommand("select count(*) from konten");
-			   // var result = cmd.ExecuteScalar();
-			   // cmd.Connection.Close();
-			   // logger.LogWarning($"result={result}");
-		    //}
-
-		    //logger.LogWarning("STARTUP: DB TEST - done.");
-
+			else
+			{
+				logger.LogDebug("Database connection Ok.");
+			}
 		}
     }
 }
