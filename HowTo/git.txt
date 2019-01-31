@@ -21,6 +21,11 @@ git rebase master
 git checkout master
 git merge myBranch --> fast-forward merge, keine zusätzlichen commits enthalten
 
+branch löschen
+=============================
+git branch -d BRANCH_NAME
+... remote branch löschen
+git push origin --delete BRANCH_NAME
 
 auf welchem branch bin ich?
 =============================
@@ -29,6 +34,7 @@ git status
 git remote show origin
 
 welche branches sind gemerged/nicht gemerged?
+=============================
 git branch --merged
 git branch --no-merged
 ... oder auch anderen als den aktuellen branch bezogen:
