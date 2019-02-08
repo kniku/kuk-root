@@ -41,4 +41,6 @@ git branch --no-merged
 git branch --merged OTHER_BRANCH
 git branch --no-merged OTHER_BRANCH
 
-
+lokales cleanup von allen remote removed branches
+=============================
+git remote prune origin
