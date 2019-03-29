@@ -1,6 +1,8 @@
 Param (
 	[Parameter(Mandatory=$true)][string]$Path,
-	[string]$Name
+	[string]$Name,
+	[string]$ParamWithDefault = 'default'
+	[switch]$Recurse = $false
 )
 
 if (!$Name) {

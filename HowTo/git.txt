@@ -2,6 +2,12 @@ neuen lokalen branch anlegen:
 =============================
 git checkout -b branches/TEST
 
+mit remote branch verknüpfen:
+=============================
+git branch --set-upstream-to=origin/<branch> branches/TEST
+...detaching:
+git branch --unset-upstream
+
 branch nach remote pushen (inkl. tracking):
 =============================
 git push -u origin branches/TEST

@@ -27,3 +27,20 @@ GO
 
 -- Datenbank TRUSTWORTHY setzen:
 ALTER DATABASE AXSYSTEM SET TRUSTWORTHY on
+
+Problem mit Assembly nach DB Backup/Restore:
+============================================
+EXEC sp_changedbowner 'sa'
+
+ALTER DATABASE [database_name] SET TRUSTWORTHY ON 
+
+linked server einrichten:
+============================================
+Typ= Andere Datenquelle, Verbindungstyp OLE DB Provider for SQL Server einstellen
+Als Produktname SQLSERVER eintragen
+Als Datenquelle server/instanz angeben (oder server,port)
+----- oder -----
+Typ=sql native client
+Als Datenquelle server/instanz angeben (oder server,port)
+
+unter security die Credentials für den Zugriff auf remote server hinterlegen (option: "in folgendem Kontext verwenden...")
