@@ -1,0 +1,30 @@
+Einfaches Web REST API Projekt
+============================
+1) .NET Core => ASP.NET Core Web Application => API Template (Core 2.2)
+1.a) Das Razor Designer Paket kann deinstalliert werden
+2) ggf. nuget restore (wenn automatisches restore disabled)
+3) build und starten (ggf. auf die self hosted variante wechseln: Startkonfiguration)
+	=> Browser sollte sich öffnen mit request auf den generierten values controller
+- Standalone starten: dotnet [project]\bin\Debug\netcoreapp2.2\[project].dll
+- Browser URL (template controller): http://localhost:5000/api/values oder https://localhost:5001/api/values
+- Basis URL beim Start übersteuern: zB.: dotnet [project].dll --server.urls "https://*:5001"
+
+Projekt: Upgrade von Microsoft.AspNetCore.App
+============================
+Falls Template nur Microsoft.AspNetCore.App v2.2.0 zulässt:	
+=> Im Projekt bei PackageReference "Microsoft.AspNetCore.App" um Version="2.*" ergänzen
+Danach im nuget Manager das Paket updaten...
+
+
+
+.NET Core SDK Version ermitteln / updaten
+============================
+dotnet --version
+SDKs und Runtime: https://dotnet.microsoft.com/download
+
+OLD stuff
+================	
+
+# Unit / Integrations Test
+- Neues Projekt xUnit Test Projekt
+
