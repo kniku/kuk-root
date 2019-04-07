@@ -1,7 +1,7 @@
 Param (
 	[Parameter(Mandatory=$true)][string]$Path,
 	[string]$Name,
-	[string]$ParamWithDefault = 'default'
+	[string]$ParamWithDefault = 'default',
 	[switch]$Recurse = $false
 )
 
