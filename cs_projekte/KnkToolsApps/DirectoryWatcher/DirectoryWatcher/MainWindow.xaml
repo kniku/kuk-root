@@ -14,5 +14,6 @@
         <TextBox x:Name="tbIgnorePattern" Height="23" Margin="79,35,200,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
         <Label Content="Directory:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="64"/>
         <Label Content="Ignore:" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="64"/>
+        <CheckBox x:Name="cbRecurse" Content="Recurse" HorizontalAlignment="Right" Margin="0,37,91,0" VerticalAlignment="Top" Width="104" IsChecked="True"/>
     </Grid>
 </Window>

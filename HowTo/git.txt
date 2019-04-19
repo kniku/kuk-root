@@ -33,6 +33,16 @@ git branch -d BRANCH_NAME
 ... remote branch löschen
 git push origin --delete BRANCH_NAME
 
+branch umbenennen
+=============================
+git branch -m new-name						# Rename branch locally
+git push origin :old_branch					# Delete the old branch
+git push --set-upstream origin new_branch	# Push the new branch, set local branch to track the new remote
+-- oder wenn anderer branch ausgecheckt:
+git branch -m old-name new-name
+git push origin :old-name new-name
+git push origin -u new-name
+
 auf welchem branch bin ich?
 =============================
 git status
@@ -46,6 +56,8 @@ git branch --no-merged
 ... oder auch anderen als den aktuellen branch bezogen:
 git branch --merged OTHER_BRANCH
 git branch --no-merged OTHER_BRANCH
+-- oder über remote branches:
+git branch -r --no-merged origin/<BRANCH_OF_INTEREST>
 
 lokales cleanup von allen remote removed branches
 =============================

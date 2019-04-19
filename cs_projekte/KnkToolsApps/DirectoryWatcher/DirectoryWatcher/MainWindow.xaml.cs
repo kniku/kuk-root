@@ -43,7 +43,7 @@ namespace DirectoryWatcher
             try
             {
                 watcher?.Dispose();
-                watcher = new Knk.Base.File.DirectoryWatcher(tbDirName.Text, true, true);
+                watcher = new Knk.Base.File.DirectoryWatcher(tbDirName.Text, true, (cbRecurse.IsChecked != null && cbRecurse.IsChecked.Value));
                 string IgnorePattern = tbIgnorePattern.Text;
 
                 watcher.WatchedElementChanged += (o, args) =>
