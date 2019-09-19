@@ -6,7 +6,7 @@ zip Paket holen und enpacken, Pfad setzen, z.B.:
 check: node -v bzw. npm -v
 
 
-Angular CLI installieren (global)
+Angular CLI installieren/updaten (global)
 ================
 npm install -g @angular/cli
 check: ng version
@@ -17,6 +17,10 @@ CLI infos
 	ng new PROJECTNAME --routing --skip-git
 	... Falls beim Install hängt: ng new --skip-install MYPROJECTNAME und danach im Projektordner npm install aufrufen
 - Projekt kompilieren&starten und Browser öffnen: ng serve --open
+
+Angular Projekt updaten
+=================
+ng update @angular/cli @angular/core
 
 Angular routing
 =================
@@ -40,9 +44,10 @@ Angular routing
 - Componenten werden bei <router-outlet></router-outlet> eingebaut...
 
 
-bootstrap für Projekt installieren
+bootstrap für Projekt installieren (siehe https://www.smashingmagazine.com/2019/02/angular-application-bootstrap/)
 =================
-- npm install jquery popper.js bootstrap
+- npm install --save bootstrap jquery
+		old: - npm install jquery popper.js bootstrap
 - angular.json anpassen:
 	"styles": [
 		...,

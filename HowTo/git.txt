@@ -18,6 +18,8 @@ branch mergen:
 =============================
 git checkout myBranch
 git merge master
+... oder remote tracking branch (nicht lokal)
+git merge origin/features/5.4.3000/ft-100293-SqlServer2017
 
 oder rebasen (besser, keine zusätzlichen merge commits):
 =============================
@@ -49,6 +51,13 @@ git status
 ...oder
 git remote show origin
 
+branch diff
+=============================
+allgemein:
+	git diff BRANCH1..BRANCH2
+gegen aktuellen branch (summarized):
+	git diff --compact-summary BRANCH2
+
 welche branches sind gemerged/nicht gemerged?
 =============================
 git branch --merged
@@ -59,6 +68,31 @@ git branch --no-merged OTHER_BRANCH
 -- oder über remote branches:
 git branch -r --no-merged origin/<BRANCH_OF_INTEREST>
 
-lokales cleanup von allen remote removed branches
+Gemeinsame baseline von zwei branches (1. commit nach Brancherstellung)
 =============================
-git remote prune origin
+git merge-base [BRANCH1] [BRANCH2]
+
+welche branches/tags gibt lokal?
+=============================
+branches: git branch -local
+tags: git tag -l
+
+welche branches/tags gibt es remote tatsächlich?
+=============================
+inkl. tags: git ls-remote
+exkl. tags: git ls-remote --heads
+nur tags: git ls-remote --tags
+
+lokales cleanup von allen remote removed branches/tags
+=============================
+branches: git remote prune origin
+tags: git tag -l | xargs git tag -d;git fetch --tags
+	oder (powershell):  foreach($x in (git tag -l)){ git tag -d $x};git fetch --tags
+
+tag erzeugen
+=============================
+git tag [TAG]
+... oder
+git tag -a [TAG] -m "my version 1.4"
+... nach remote pushen:
+git push origin [TAG]
