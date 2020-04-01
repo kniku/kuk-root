@@ -18,6 +18,13 @@ CLI infos
 	... Falls beim Install hängt: ng new --skip-install MYPROJECTNAME und danach im Projektordner npm install aufrufen
 - Projekt kompilieren&starten und Browser öffnen: ng serve --open
 
+npm umleiten (AX)
+================
+user registrieren:	npm adduser --registry http://ax-dev04:4873
+paket pushen:		npm publish --registry http://ax-dev04:4873
+set registry:		npm set registry http://ax-dev04:4873 (arbeitet dann auch als proxy!)
+unset:				npm set registry (nötig, falls proxy nicht erreichbar)
+
 Angular Projekt updaten
 =================
 ng update @angular/cli @angular/core

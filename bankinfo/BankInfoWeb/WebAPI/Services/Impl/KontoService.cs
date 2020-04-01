@@ -41,6 +41,7 @@ namespace WebAPI.Services.Impl
 			catch (Exception e)
 			{
 				logger.LogError(e, e.Message);
+xx				throw e;
 			}
 			return r.ToArray();
 		}

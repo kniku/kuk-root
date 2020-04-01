@@ -10,6 +10,33 @@ using WebAPI.Services;
 
 namespace WebAPI.Controllers
 {
+	public class RequestErrorHandler : IDisposable
+	{
+		private bool disposed;
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!disposed)
+			{
+				disposed = true;
+				if (disposing)
+				{
+				}
+			}
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		public void Handle(Action callback)
+		{
+			callback();
+		}
+	}
+
+
     [Produces("application/json")]
     [Route("api/v1/Accounts")]
     public class KontoController : Controller
@@ -31,8 +58,17 @@ namespace WebAPI.Controllers
 		//}
 		public IEnumerable<Account> Get()
 		{
-			logger.LogTrace("Get()");
-			return KontoService.GetAccounts();
+			IEnumerable<Account> r = null;
+			using (var x = new RequestErrorHandler())
+			{
+xxx				x.Handle(() =>
+				{
+					logger.LogTrace("Get()");
+					r = KontoService.GetAccounts();
+				});
+			}
+
+			return r;
 		}
 
 		[HttpGet("{id}")]
