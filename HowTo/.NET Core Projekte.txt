@@ -16,11 +16,31 @@ Falls Template nur Microsoft.AspNetCore.App v2.2.0 zulässt:
 Danach im nuget Manager das Paket updaten...
 
 
-
 .NET Core SDK Version ermitteln / updaten
 ============================
 dotnet --version
+# Detailinfo über installierte Versionen/runtime
+dotnet --info
+
 SDKs und Runtime: https://dotnet.microsoft.com/download
+
+.NET Core CLI (dotnet)
+============================
+■ Templates auflisten:
+	dotnet new --list
+■ Neues Projekt im aktuellen Verzeichis anlegen:
+	dotnet new TEMPLATE -n PROJEKTNAME/DIRECTORY
+	zB: dotnet new webapi -n web-api
+■ Neue Solution mit Projekten anlegen:
+	dotnet new sln -n SOLUTIONNAME
+	danach Projekte verwalten mit: dotnet sln SOLUTIONFILE add/list/remove...
+	zB. Projekt dazugeben: dotnet sln SOLUTIONFILE add PROJECTPATH
+
+
+Code Coverage: coverlet (nuget package, MSBuild Version für Testprojekt installieren, fertig)
+=======================
+dotnet test /p:CollectCoverage=true /p:Exclude="[AX.Service.Core.Test]*"
+Das Ganze funktioniert auf Verzeichnisebene (Verzeichnis kann auch als Parameter übergeben werden)
 
 OLD stuff
 ================	

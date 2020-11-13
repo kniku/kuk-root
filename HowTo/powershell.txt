@@ -1,0 +1,7 @@
+=> Installiert unter C:\knk\Apps\PowerShell\pwsh.EXE
+
+powershell core update
+======================
+neue Version https://github.com/PowerShell/PowerShell/releases/ runterladen und C:\knk\Apps\PowerShell damit updaten
+
+
