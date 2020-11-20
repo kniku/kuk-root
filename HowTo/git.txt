@@ -100,3 +100,7 @@ git push origin [TAG]
 git commit hook temporär deaktivieren
 =============================
 git commit --no-verify ...
+
+URL in bestehendem lokalen Repo ändern
+=============================
+git remote set-url origin http://AX-DEV01:3000/AutomationX/aXServices.git
