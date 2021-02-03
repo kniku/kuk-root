@@ -103,4 +103,5 @@ git commit --no-verify ...
 
 URL in bestehendem lokalen Repo ändern
 =============================
-git remote set-url origin http://AX-DEV01:3000/AutomationX/aXServices.git
+git remote set-url origin https://AX-RZ-DEV-001.ad.automationx.com/AutomationX/AX5.git
+

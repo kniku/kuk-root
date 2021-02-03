@@ -1,0 +1,4 @@
+Client aus wsdl generieren:
+------------------------------------
+C:\Temp\WSDL-Problem> svcutil.exe .\99570_WSClientInterface.wsdl
+

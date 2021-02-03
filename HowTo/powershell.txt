@@ -2,6 +2,6 @@
 
 powershell core update
 ======================
-neue Version https://github.com/PowerShell/PowerShell/releases/ runterladen und C:\knk\Apps\PowerShell damit updaten
+neue Version https://github.com/PowerShell/PowerShell/releases/ (zip Paket) runterladen und C:\knk\Apps\PowerShell damit updaten
 
 

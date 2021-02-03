@@ -3,6 +3,7 @@ Node.js installieren (npm ist inkludiert)
 zip Paket holen und enpacken, Pfad setzen, z.B.:
 	7z x node-v10.0.0-win-x64.zip
 	set path=%path%;%cd%\node-v10.0.0-win-x64
+oder: msi Paket holen und installieren...
 check: node -v bzw. npm -v
 
 
@@ -18,12 +19,18 @@ CLI infos
 	... Falls beim Install hängt: ng new --skip-install MYPROJECTNAME und danach im Projektordner npm install aufrufen
 - Projekt kompilieren&starten und Browser öffnen: ng serve --open
 
+Angular schematics CLI installieren (global)
+================
+npm install -g @angular-devkit/schematics-cli
+
 npm umleiten (AX)
 ================
 user registrieren:	npm adduser --registry http://ax-dev04:4873
 paket pushen:		npm publish --registry http://ax-dev04:4873
-set registry:		npm set registry http://ax-dev04:4873 (arbeitet dann auch als proxy!)
-unset:				npm set registry (nötig, falls proxy nicht erreichbar)
+#set registry:		npm set registry http://ax-dev04:4873 (arbeitet dann auch als proxy!)
+set registry:		npm set registry http://ax-rz-dev-004.ad.automationx.com:4873 (arbeitet dann auch als proxy!)
+unset:				npm config delete registry (nötig, falls proxy nicht erreichbar)
+config list: 	npm config list
 
 Angular Projekt updaten
 =================
