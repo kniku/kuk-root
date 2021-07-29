@@ -8,6 +8,7 @@ nuget sourcen verwalten
 ==========================
 nuget sources add -name LocalPackageSource -Source C:\nuget_store\
 nuget sources remove|disable -name LocalPackageSource -Source C:\nuget_store\
+nuget sources enable -name axnugettest
 
 Paket in lokales Verzeichnis pushen:
 ==========================

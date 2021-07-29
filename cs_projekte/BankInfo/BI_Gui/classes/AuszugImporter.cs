@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Globalization;
 using knk.DBTools;
+using System.Text.RegularExpressions;
 
 namespace BI_Gui.classes
 {
@@ -38,7 +39,7 @@ namespace BI_Gui.classes
 					throw new Exception(string.Format("Ungültiges Datum: {0}", DTstring));
 		}
 
-		static void handlePosition(Connection iConn, ImportStatus iStatus, int iKontoID, Position iPos)
+		static void handlePosition(Connection iConn, ImportStatus iStatus, int iKontoID, Position iPos, int line)
 		{
 			//			ag.Log.LogDebug("POS {0}#{1}: {2} {3}", iPos.Buchungsdatum, iPos.Valutadatum, iPos.Waehrung, iPos.Betrag);
 
@@ -51,6 +52,18 @@ namespace BI_Gui.classes
 			vks = vks.Replace(",", "");
 
 			double Betrag = double.Parse(vks + "." + nks, CultureInfo.InvariantCulture);
+
+			if (!string.IsNullOrEmpty(iPos.Verwendung))
+			{
+				iPos.Verwendung = Regex.Replace(iPos.Verwendung, @"\s+", " ").Trim();
+			}
+
+			if (!string.IsNullOrEmpty(iPos.Notiz))
+            {
+				iPos.Notiz = Regex.Replace(iPos.Notiz, @"\s+", " ").Trim();
+				iPos.Verwendung = $"{iPos.Verwendung} [{iPos.Notiz}]";
+            }
+
 			try
 			{
 				iConn.execSQL("insert into positionen (effdt,posteddt,curcode,amt,memo,ktoid,voucher) values (:1,:2,:3,:4,:5,:6,:7)",
@@ -60,7 +73,7 @@ namespace BI_Gui.classes
 			catch (Exception e)
 			{
 				//	ag.Log.LogError(e.Message);
-				iStatus.first_error = e.Message;
+				iStatus.first_error = $"Line # {line}: {e.Message}";
 				iStatus.cnt_err_imports++;
 			}
 		}
@@ -72,13 +85,14 @@ namespace BI_Gui.classes
 			String workingLine = "";
 			Position aPos = new Position();
 
-			bool inComment = false;	// Achtung: Zeilenübergreifende Kommentare!!
+			bool inComment = false; // Achtung: Zeilenübergreifende Kommentare!!
+			int line_nr = 1;
 
 			foreach (string aLine in lines.Skip(1))
 			{
-				//workingLine += aLine;
+				line_nr++;
 
-				for (int i = 0; i < aLine.Length; i++)
+				for (int i = 1; i < aLine.Length; i++)
 				{
 					Char c = aLine[i];
 					if (c == '"')
@@ -92,7 +106,7 @@ namespace BI_Gui.classes
 					workingLine += c;
 				}
 
-				if (workingLine.Count(c => c == (char)1) == 15)
+				if (workingLine.Count(c => c == (char)1) >= 15)
 				{
 					string[] cols = workingLine.Split((char)1);
 					try
@@ -115,7 +129,7 @@ namespace BI_Gui.classes
 						myUTF8Bytes = ASCIIEncoding.Convert(Encoding.Default, Encoding.Unicode, myASCIIBytes);
 						aPos.Beleginfo = Encoding.Unicode.GetString(myUTF8Bytes);
 						//						aPos.Beleginfo = cols[6];
-						handlePosition(iConn, r, iKontoID, aPos);
+						handlePosition(iConn, r, iKontoID, aPos, line_nr);
 					}
 					catch (Exception)
 					{
