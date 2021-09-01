@@ -1,0 +1,5 @@
+IP Adresse Host: ip route
+	zB. => default via 172.18.128.1 dev eth0
+export DISPLAY=172.18.128.1:0.0
+
+
