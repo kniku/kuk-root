@@ -10,6 +10,8 @@ $dwp = @{
  #KeySpec = 'KeyExchange';
  NotAfter = (Get-Date).AddYears(10)
 # TextExtension = '2.5.29.37={text}1.3.6.1.5.5.7.3.3'
+ DnsName = 'localhost'
+ FriendlyName = 'self signed cert for localhost'
 }
 New-SelfSignedCertificate @dwp
 --------------- inline-code end------------------
