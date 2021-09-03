@@ -1,0 +1,32 @@
+Erzeugen eines eigenen Zertifikats mit power shell:
+Create Certificate.ps1 anpassen und mit admin Rechten exekutieren
+--------------- inline-code: Create Certificate.ps1 ------------------
+$dwp = @{
+ Subject = 'CN=kurt.kniely';
+ KeyLength = 2048;
+ HashAlgorithm = 'SHA256';
+ #KeyUsage = 'None';
+ KeyExportPolicy = 'Exportable';
+ #KeySpec = 'KeyExchange';
+ NotAfter = (Get-Date).AddYears(10)
+# TextExtension = '2.5.29.37={text}1.3.6.1.5.5.7.3.3'
+}
+New-SelfSignedCertificate @dwp
+--------------- inline-code end------------------
+
+
+Ansehen & Exportieren der Zertifikates:
+Windows: Computerzetifikate verwalten->Eigene Zertifikate...
+
+WICHTIG:
+Damit dem Zertifikat getraut wird, muss es in die vertrauenswürdigen Zertifikate verschoben werden!
+
+Konvertieren/Exportieren in anderes Format (zB key/crt Files):
+1) Exportieren des Zertifikats aus der Windows Zertifikatsverwaltung
+2) mit openssl konvertieren, zB:
+	openssl pkcs12 -in kurt.kniely.pfx -nocerts -out kurt.kniely.pfx.key
+	openssl pkcs12 -in kurt.kniely.pfx -clcerts -nokeys -out kurt.kniely.pfx.crt
+	Achtung: Passwort nötig für Key Export (2x bei Key export, wegen Sicherung des exportierten Keys)
+
+Vom privaten Key das Kennwort entfernen:
+openssl rsa -in .\kurt.kniely.pfx.key -out .\kurt.kniely.pfx-nopwd.key
