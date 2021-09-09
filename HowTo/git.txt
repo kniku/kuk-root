@@ -21,6 +21,11 @@ git merge master
 ... oder remote tracking branch (nicht lokal)
 git merge origin/features/5.4.3000/ft-100293-SqlServer2017
 
+... nur testen (keine commits)
+git merge --no-commit --no-ff BRANCH_TO_MERGE
+... danach komplett rückgängigmachen mit:
+git merge --abort
+
 oder rebasen (besser, keine zusätzlichen merge commits):
 =============================
 git checkout myBranch
