@@ -31,3 +31,10 @@ docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-manag
 docker02: docker run -d --name rabbitmq -p 7299:5672 -p 7298:15672 --restart=unless-stopped rabbitmq:3-management
 docker run -d --hostname my-rabbit --name some-rabbit rabbitmq:3
 docker run -d --hostname my-rabbit --name some-rabbit -p 8080:15672 rabbitmq:3-management
+
+seq (log sink für serilog)
+==========================
+# installieren / kennwort festlegen:
+docker run --rm -i datalust/seq config hash
+# Kennwort eintragen und generierten hash in folgenden Aufruf packen:
+docker run --name seq -d --restart unless-stopped -e ACCEPT_EULA=Y -e SEQ_FIRSTRUN_ADMINPASSWORDHASH="FORVY6tZYcIm/BsC0AVMSbjft+s6DIflAP8pya7ANZToTHi+kw==" -p 8888:80 -p 5341:5341 datalust/seq

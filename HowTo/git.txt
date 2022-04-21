@@ -79,8 +79,8 @@ git merge-base [BRANCH1] [BRANCH2]
 
 welche branches/tags gibt lokal?
 =============================
-branches: git branch -local
-tags: git tag -l
+branches: git branch
+tags: git tag
 
 welche branches/tags gibt es remote tatsächlich?
 =============================

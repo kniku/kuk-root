@@ -15,8 +15,8 @@ check: ng version
 CLI infos
 - Anm.: Benötigt Internetverbindung!!
 - Neues Projekt anlegen:
-	ng new PROJECTNAME --routing --skip-git
-	... Falls beim Install hängt: ng new --skip-install MYPROJECTNAME und danach im Projektordner npm install aufrufen
+	ng new PROJECTNAME --routing --skip-git --style css --minimal
+
 - Projekt kompilieren&starten und Browser öffnen: ng serve --open
 
 Angular schematics CLI installieren (global)
@@ -111,7 +111,8 @@ angular example:
 	
 material design installieren
 =================
-- npm install @angular/material @angular/cdk @angular/animations
+ng add @angular/material
+
 - import NgModules -> app.module.ts:
 	// immer NACH BrowserModule!
 	import {MatButtonModule, MatCheckboxModule} from '@angular/material';

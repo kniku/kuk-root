@@ -5,3 +5,6 @@ powershell core update
 neue Version https://github.com/PowerShell/PowerShell/releases/ (zip Paket) runterladen und C:\knk\Apps\PowerShell damit updaten
 
 
+Auslesen offener Ports inkl. Prozessinfo (Achtung: LISTENING nur auf englischen Systemen - wird lokalisiert)
+======================
+(netstat -ano | findstr "LISTENING"| findstr /v '::') | ForEach-Object { echo "$((Get-Process -Id ($_ -Split "\s+")[5]).ProcessName) $(($_ -Split "\s+")[2])"}
