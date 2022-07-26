@@ -77,13 +77,11 @@ Gemeinsame baseline von zwei branches (1. commit nach Brancherstellung)
 =============================
 git merge-base [BRANCH1] [BRANCH2]
 
-welche branches/tags gibt lokal?
+welche branches/tags gibt lokal/remote?
 =============================
 branches: git branch
 tags: git tag
-
-welche branches/tags gibt es remote tatsächlich?
-=============================
+-- remote
 inkl. tags: git ls-remote
 exkl. tags: git ls-remote --heads
 nur tags: git ls-remote --tags
