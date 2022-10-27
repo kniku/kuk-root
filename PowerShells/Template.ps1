@@ -19,3 +19,5 @@ if ($PSBoundParameters.Count -eq 0) {
 	exit 0
 }
 
+# running script directory
+Write-Host $PSScriptRoot

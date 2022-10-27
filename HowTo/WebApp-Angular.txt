@@ -1,11 +1,9 @@
 Node.js installieren (npm ist inkludiert)
 ================
-zip Paket holen und enpacken, Pfad setzen, z.B.:
-	7z x node-v10.0.0-win-x64.zip
-	set path=%path%;%cd%\node-v10.0.0-win-x64
-oder: msi Paket holen und installieren...
-check: node -v bzw. npm -v
+msi Paket holen und installieren...
+	über https://nodejs.dev/en/download/ (zB.: node-v16.17.0-x64.msi)
 
+check: node -v bzw. npm -v
 
 Angular CLI installieren/updaten (global)
 ================
@@ -18,6 +16,13 @@ CLI infos
 	ng new PROJECTNAME --routing --skip-git --style css --minimal
 
 - Projekt kompilieren&starten und Browser öffnen: ng serve --open
+
+- mit yarn statt npm arbeiten
+	ng new PROJECTNAME --routing --skip-git --style css --minimal --skip-install
+	[ins projekt wechseln]
+	ng config cli.packageManager yarn
+	yarn
+	[optional, falls yarn nicht verfügbar vorher noch: corepack enable]
 
 Angular schematics CLI installieren (global)
 ================
@@ -85,29 +90,17 @@ bootstrap für Projekt installieren (siehe https://www.smashingmagazine.com/2019/
 
 devextreme für Projekt installieren
 =================
-npm install devextreme jszip stream
-bzw. (mit angular paket)
-npm install devextreme devextreme-angular jszip stream
+- cli (global) installieren: npm i -g devextreme-cli
+	Test/Version: devextreme -v
+	... kann mit npx auch ohne verwendet werden: npx -p devextreme-cli devextreme [options]
 
-- style: style.css
-	@import 'devextreme/dist/css/dx.common.css';
-	@import 'devextreme/dist/css/dx.light.css';
-	/* @import 'devextreme/dist/css/dx.light.compact.css'; */
+- Neues DevExtrem Projekt mit angular anlegen:
+	devextreme new angular-app PROJECT_NAME
 
-angular example:
-- app.module.ts:
-	import { DxButtonModule } from 'devextreme-angular';
-	imports: [
-		...
-		DxButtonModule
-	  ],
-- app.component.ts:
-	import notify from 'devextreme/ui/notify';
-	class AppComponent:
-	okClicked (e) { notify("The OK button was clicked") }
+- Default Theme ändern:
+	1. gewünschte Themes in \src\themes\metadata.base.json bzw. \src\themes\metadata.additional.json eintragen
+	2. npm run build-themes
 
-- test: app.component.html
-  <dx-button text="OK" (onClick)="okClicked($event)"></dx-button>
 	
 material design installieren
 =================
