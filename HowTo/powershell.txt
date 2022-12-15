@@ -4,7 +4,7 @@ powershell core update
 ======================
 neue Version https://github.com/PowerShell/PowerShell/releases/ (zip Paket) runterladen und C:\knk\Apps\PowerShell damit updaten
 
-powershell Module (aus PowerShell Gallery)
+powershell Module (aus PowerShell Gallery: https://www.powershellgallery.com/)
 ======================
 Was gibt es für Module?
 Find-Module -Name "*git*"

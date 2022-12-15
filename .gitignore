@@ -7,4 +7,21 @@ obj/
 debug/
 release/
 packages/
-/bankinfo/Test/
+
+# web/angular stuff
+/dist
+/tmp
+/out-tsc
+/node_modules
+/.angular/cache
+/.sass-cache
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
