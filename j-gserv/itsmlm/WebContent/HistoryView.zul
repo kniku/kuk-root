@@ -1,4 +1,0 @@
-<window id="HistoryView" title="History" width="500px" height="350px" apply="controller.HistoryView" closable="true">
-	<listbox id="lb_history" mold="paging" />
-	<button onClick="((Window )self.getRoot()).detach()">Abbruch</button>
-</window>
