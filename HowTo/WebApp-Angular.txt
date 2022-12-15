@@ -23,6 +23,7 @@ CLI infos
 	ng config cli.packageManager yarn
 	yarn
 	[optional, falls yarn nicht verfügbar vorher noch: corepack enable]
+- yarn installieren: npm install --global yarn
 
 Angular schematics CLI installieren (global)
 ================

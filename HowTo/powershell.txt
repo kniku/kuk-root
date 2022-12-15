@@ -4,6 +4,20 @@ powershell core update
 ======================
 neue Version https://github.com/PowerShell/PowerShell/releases/ (zip Paket) runterladen und C:\knk\Apps\PowerShell damit updaten
 
+powershell Module (aus PowerShell Gallery)
+======================
+Was gibt es für Module?
+Find-Module -Name "*git*"
+
+Welche Module sind installiert?
+Get-Module ... in aktueller Session importierte Module
+Get-InstalledModule ... alle installierten Module
+
+Module installieren
+Install-Module posh-git -Scope CurrentUser -Force
+
+Module updaten
+Update-Module posh-git
 
 Auslesen offener Ports inkl. Prozessinfo (Achtung: LISTENING nur auf englischen Systemen - wird lokalisiert)
 ======================
