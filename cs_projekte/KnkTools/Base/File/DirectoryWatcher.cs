@@ -11,6 +11,7 @@ namespace Knk.Base.File
     }
 
     public delegate void WatchedElementChangedEventHandler(object sender, WatchedElementChangedEventArgs e);
+    public delegate void ErrorReceivedEventHandler(object sender, ErrorEventArgs e);
 
     public class DirectoryWatcher : IDisposable
     {
@@ -22,9 +23,14 @@ namespace Knk.Base.File
         private FileSystemWatcher Watcher { get; set; }
 
         public event WatchedElementChangedEventHandler WatchedElementChanged;
+        public event ErrorReceivedEventHandler ErrorReceived;
         void NotifyWatchedElementChanged(WatcherChangeTypes changeType, string fullPath, string fullPathOld)
         {
             WatchedElementChanged?.Invoke(this, new WatchedElementChangedEventArgs() {ChangeType = changeType, FullPath = fullPath, FullPathOld = fullPathOld});
+        }
+        void NotifyErrorReceived(ErrorEventArgs error)
+        {
+            ErrorReceived?.Invoke(this, error);
         }
 
         /// <summary>
@@ -59,7 +65,13 @@ namespace Knk.Base.File
             Watcher.Created += OnChanged;
             Watcher.Deleted += OnChanged;
             Watcher.Renamed += OnRenamed;
+            Watcher.Error += OnError;
             Watcher.EnableRaisingEvents = true;
+        }
+
+        private void OnError(object sender, ErrorEventArgs e)
+        {
+            NotifyErrorReceived(e);
         }
 
         private void OnChanged(object source, FileSystemEventArgs e)

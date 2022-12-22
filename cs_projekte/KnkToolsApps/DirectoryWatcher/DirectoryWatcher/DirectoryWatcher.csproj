@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\..\..\KnkTools\TestWpf\bin\Debug\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -109,6 +106,11 @@
       <Project>{ff681d3c-de6c-4a27-babf-4e9b8e2389a7}</Project>
       <Name>GuiWPF</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="log4net">
+      <Version>2.0.8</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

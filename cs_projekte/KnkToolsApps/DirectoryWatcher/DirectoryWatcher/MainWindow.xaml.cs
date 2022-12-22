@@ -3,6 +3,7 @@ using Knk.GuiWPF;
 using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace DirectoryWatcher
 {
@@ -45,6 +46,11 @@ namespace DirectoryWatcher
                 watcher?.Dispose();
                 watcher = new Knk.Base.File.DirectoryWatcher(tbDirName.Text, true, (cbRecurse.IsChecked != null && cbRecurse.IsChecked.Value));
                 string IgnorePattern = tbIgnorePattern.Text;
+
+                watcher.ErrorReceived += (s, args) =>
+                {
+                    Logger.Fatal($"Error received: {args.GetException()?.Message}");
+                };
 
                 watcher.WatchedElementChanged += (o, args) =>
                 {
