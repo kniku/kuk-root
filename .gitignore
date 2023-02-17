@@ -24,4 +24,7 @@ packages/
 !.vscode/extensions.json
 .history/*
 
+# rider
+.idea
+
 # misc
