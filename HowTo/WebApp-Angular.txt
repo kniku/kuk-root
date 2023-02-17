@@ -97,6 +97,8 @@ devextreme für Projekt installieren
 
 - Neues DevExtrem Projekt mit angular anlegen:
 	devextreme new angular-app PROJECT_NAME
+	! Ggf. ist vorher ein npm config delete registry nötig (siehe oben)
+	! Wenn devextreme falsche registry verwendet: Mit "npx -p devextreme-cli devextreme ..." arbeiten
 
 - Default Theme ändern:
 	1. gewünschte Themes in \src\themes\metadata.base.json bzw. \src\themes\metadata.additional.json eintragen
