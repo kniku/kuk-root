@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using Timer = System.Windows.Forms.Timer;
 
 namespace SimpleStarterGui
@@ -7,6 +8,9 @@ namespace SimpleStarterGui
     {
         private readonly Button _bLogView;
         private readonly Button _bShowConfig;
+        private const int starterButtonHeight = 25;
+        private ToolTip toolTips = new ();
+        IDebugLogger logger = DebugLoggerFactory.GetOrCreate();
 
         public Form1()
         {
@@ -21,12 +25,9 @@ namespace SimpleStarterGui
                 FlatStyle = FlatStyle.Flat
             };
             
-            var toolTips = new ToolTip();
-            var logger = DebugLoggerFactory.GetOrCreate();
-
             var startInfo = Utils.ReadStartInfo();
             var editCommand = new CommandlineParser(Environment.GetCommandLineArgs()).FindOption("editor", "notepad");
-
+            
             if (startInfo?.Name != null)
                 Text += @$": {startInfo.Name}";
 
@@ -34,18 +35,25 @@ namespace SimpleStarterGui
             MaximizeBox = false;
             MinimizeBox = false;
             var yPos = 10;
-            const int starterButtonHeight = 25;
             Width = 200;
 
             if (startInfo?.StartInfos != null)
             {
-                // Height = 50 + (startInfo.StartInfos.Length + 2) * starterButtonHeight;
+                startInfo.Tokens ??= new Dictionary<string, string>();
+                if (!startInfo.Tokens.ContainsKey("editor"))
+                    startInfo.Tokens.Add("editor", editCommand!);
+                editCommand = startInfo.Tokens["editor"];
+
+                startInfo.Tokens.Add("self", Utils.GetFullPathOfExecutingAssemblyWithNewExtension("exe"));
+                
                 Height = 50 + starterButtonHeight;
 
-                Dictionary<string, Button> dictStarterButtons = new Dictionary<string, Button>();
+                var dictStarterButtons = new Dictionary<string, Button>();
 
                 foreach (var info in startInfo.StartInfos)
                 {
+                    ExpandAllTokens(info, startInfo.Tokens);
+                    
                     if (dictStarterButtons.ContainsKey(info.Title))
                     {
                         logger.Error($"Duplicate start information found: [{info.Title}]");
@@ -53,91 +61,11 @@ namespace SimpleStarterGui
                         continue;
                     }
 
-                    var x = new Button
-                    {
-                        Text = info.Title,
-                        Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
-                    };
-                    dictStarterButtons.Add(info.Title, x);
+                    var newControl = CreateControl(info, dictStarterButtons, yPos);
 
-                    x.SetBounds(5, yPos, 175, starterButtonHeight);
-                    if (info.Execution != null)
-                    {
-                        toolTips.SetToolTip(x,
-                            $"{info.Description}\nStart: [{info.Execution.Executable}]\nWith args: [{info.Execution.Arguments}]\nIn: [{info.Execution.WorkingDirectory}]");
-                        x.Click += (_, _) =>
-                        {
-                            if (x.Tag is Process runningProcess)
-                            {
-                                if (MessageBox.Show(
-                                        @$"Killing {info.Title} (pid: {runningProcess.Id})...{Environment.NewLine}Are you sure?",
-                                        @"Warning", MessageBoxButtons.OKCancel) != DialogResult.OK)
-                                    return;
-
-                                logger.Information($"killing {info.Title} (pid: {runningProcess.Id})...");
-                                try
-                                {
-                                    runningProcess.Kill(true);
-                                }
-                                catch (Exception ex)
-                                {
-                                    logger.Error(ex);
-                                    SetError(true);
-                                }
-
-                                return;
-                            }
-
-                            logger.Information($"starting {info.Title}: {info.Execution.Executable}...");
-                            var p = new Process();
-                            p.StartInfo = new ProcessStartInfo
-                            {
-                                FileName = info.Execution.Executable,
-                                Arguments = info.Execution.Arguments,
-                                WorkingDirectory = info.Execution.WorkingDirectory,
-                                UseShellExecute = info.Execution.UseShellExecute
-                            };
-                            try
-                            {
-                                p.Start();
-                                var pid = p.Id;
-                                x.Text += @$" ({pid})";
-                                x.Tag = p;
-                                x.BackColor = Color.LawnGreen;
-                            }
-                            catch (Exception ex)
-                            {
-                                logger.Error(ex);
-                                SetError(true);
-                            }
-                        };
-                    }
-                    else if (info.Executions != null && info.Executions.Any())
-                    {
-                        toolTips.SetToolTip(x, $"Start [{string.Join(", ", info.Executions)}]");
-                        x.Font = new Font(DefaultFont, FontStyle.Bold);
-                        x.Click += (_, _) =>
-                        {
-                            foreach (var execution in info.Executions)
-                            {
-                                if (dictStarterButtons.TryGetValue(execution, out var button))
-                                {
-                                    button.PerformClick();
-                                }
-                            }
-                        };
-                    }
-                    else
-                    {
-                        // used as separator
-                        x.Visible = false;
-                        x.Enabled = false;
-                        x.Height = 10;
-                    }
-
-                    Controls.Add(x);
-                    yPos += x.Height;
-                    Height += x.Height;
+                    Controls.Add(newControl);
+                    yPos += newControl.Height;
+                    Height += newControl.Height;
                 }
 
                 if (dictStarterButtons.Any())
@@ -173,8 +101,8 @@ namespace SimpleStarterGui
                 var p = new Process();
                 p.StartInfo = new ProcessStartInfo
                 {
-                    FileName = (logger as DebugLogger)!.LogFullPath,
-                    UseShellExecute = true
+                    FileName = editCommand,
+                    Arguments = (logger as DebugLogger)!.LogFullPath
                 };
                 try
                 {
@@ -224,6 +152,124 @@ namespace SimpleStarterGui
             }
         }
 
+
+        private readonly Regex _rxTokens = new (@"(%)(\w+)(%)");
+        private string? ExpandTokens(string? iText, Dictionary<string, string>? mappings)
+        {
+            if (string.IsNullOrEmpty(iText) || mappings?.Any() != true)
+                return iText;
+
+            var replaced = _rxTokens.Replace(iText,
+                m => mappings.TryGetValue(m.Groups[2].Value, out var replacement)
+                    ? replacement
+                    : m.Groups[0].Value);
+            
+            return replaced;
+        }
+
+        private void ExpandAllTokens(StartInfoEntryModel info, Dictionary<string, string> mappings)
+        {
+            info.Title = ExpandTokens(info.Title, mappings)!;
+            info.Description = ExpandTokens(info.Description, mappings);
+            if (info.Execution != null)
+            {
+                info.Execution.Executable = ExpandTokens(info.Execution.Executable, mappings)!;
+                info.Execution.Arguments = ExpandTokens(info.Execution.Arguments, mappings)!;
+                info.Execution.WorkingDirectory = ExpandTokens(info.Execution.WorkingDirectory, mappings)!;
+            }
+
+            if (info.Executions?.Any() == true)
+                info.Executions = info.Executions.Select(e => ExpandTokens(e, mappings)).ToArray()!;
+        }
+        
+        private Control CreateControl(StartInfoEntryModel info, Dictionary<string, Button> dictStarterButtons, int yPos)
+        {
+            var x = new Button
+            {
+                Text = info.Title,
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+            };
+
+            dictStarterButtons.Add(info.Title, x);
+
+            x.SetBounds(5, yPos, 175, starterButtonHeight);
+            if (info.Execution != null)
+            {
+                toolTips.SetToolTip(x,
+                    $"{info.Description}\nStart: [{info.Execution.Executable}]\nWith args: [{info.Execution.Arguments}]\nIn: [{info.Execution.WorkingDirectory}]");
+                x.Click += (_, _) =>
+                {
+                    if (x.Tag is Process runningProcess)
+                    {
+                        if (MessageBox.Show(
+                                @$"Killing {info.Title} (pid: {runningProcess.Id})...{Environment.NewLine}Are you sure?",
+                                @"Warning", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                            return;
+
+                        logger.Information($"killing {info.Title} (pid: {runningProcess.Id})...");
+                        try
+                        {
+                            runningProcess.Kill(true);
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.Error(ex);
+                            SetError(true);
+                        }
+
+                        return;
+                    }
+
+                    logger.Information($"starting {info.Title}: {info.Execution.Executable}...");
+                    var p = new Process();
+                    p.StartInfo = new ProcessStartInfo
+                    {
+                        FileName = info.Execution.Executable,
+                        Arguments = info.Execution.Arguments,
+                        WorkingDirectory = info.Execution.WorkingDirectory,
+                        UseShellExecute = info.Execution.UseShellExecute
+                    };
+                    try
+                    {
+                        p.Start();
+                        var pid = p.Id;
+                        x.Text += @$" ({pid})";
+                        x.Tag = p;
+                        x.BackColor = Color.LawnGreen;
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error(ex);
+                        SetError(true);
+                    }
+                };
+            }
+            else if (info.Executions != null && info.Executions.Any())
+            {
+                toolTips.SetToolTip(x, $"Start [{string.Join(", ", info.Executions)}]");
+                x.Font = new Font(DefaultFont, FontStyle.Bold);
+                x.Click += (_, _) =>
+                {
+                    foreach (var execution in info.Executions)
+                    {
+                        if (dictStarterButtons.TryGetValue(execution, out var button))
+                        {
+                            button.PerformClick();
+                        }
+                    }
+                };
+            }
+            else
+            {
+                // used as separator
+                x.Visible = false;
+                x.Enabled = false;
+                x.Height = 10;
+            }
+
+            return x;
+        }
+        
         private void SetError(bool iSet)
         {
             _bLogView.BackColor = iSet ? Color.Firebrick : DefaultBackColor;

@@ -20,7 +20,7 @@ public static class Utils
             return path + $".{iNewExtension}";
         return Path.ChangeExtension(path, iNewExtension);
     }
-    
+
     public static StartInfoModel? ReadStartInfo()
     {
         string? configFile = null;
@@ -30,10 +30,26 @@ public static class Utils
             File.Exists(cfConfig))
             configFile = cfConfig;
 
-        // 2nd - config from working dir
-        if (configFile == null && Path.GetFileName(GetFullPathOfExecutingAssemblyWithNewExtension("config.json")) is
-                { } cfWorkingDir && File.Exists(cfWorkingDir))
-                configFile = cfWorkingDir;
+        // 2nd - config from working dir and below...
+        if (configFile == null)
+        {
+            var di = new DirectoryInfo(Environment.CurrentDirectory);
+            var cfn = Path.GetFileName(GetFullPathOfExecutingAssemblyWithNewExtension("config.json"));
+            do
+            {
+                if (File.Exists(Path.Combine(di.FullName, cfn)))
+                {
+                    configFile = Path.Combine(di.FullName, cfn);
+                    break;
+                }
+
+                di = di.Parent;
+            } while (di != null);
+        }
+        
+        // if (configFile == null && Path.GetFileName(GetFullPathOfExecutingAssemblyWithNewExtension("config.json")) is
+        //         { } cfWorkingDir && File.Exists(cfWorkingDir))
+        //         configFile = cfWorkingDir;
 
         // 3rd - nearby executing assembly
         if (configFile == null && GetFullPathOfExecutingAssemblyWithNewExtension("config.json") is { } cf &&

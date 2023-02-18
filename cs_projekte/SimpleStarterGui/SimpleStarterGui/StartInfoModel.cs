@@ -18,6 +18,7 @@ public class StartInfoEntryModel
 public class StartInfoModel
 {
     public string? Name { get; set; }
+    public Dictionary<string, string>? Tokens { get; set; }
     public StartInfoEntryModel[]? StartInfos { get; set; }
     public string? FullConfigPath { get; set; }
 }
