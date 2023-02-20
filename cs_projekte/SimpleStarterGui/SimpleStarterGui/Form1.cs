@@ -16,9 +16,11 @@ namespace SimpleStarterGui
         {
             InitializeComponent();
 
+            var selfExecutable = Utils.GetFullPathOfExecutingAssemblyWithNewExtension("exe");
+            
             _bLogView = new Button
             {
-                Text = @"show log...",
+                Text = @"log",
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = new Font(DefaultFont, FontStyle.Italic),
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Left,
@@ -44,7 +46,7 @@ namespace SimpleStarterGui
                     startInfo.Tokens.Add("editor", editCommand!);
                 editCommand = startInfo.Tokens["editor"];
 
-                startInfo.Tokens.Add("self", Utils.GetFullPathOfExecutingAssemblyWithNewExtension("exe"));
+                startInfo.Tokens.Add("self", selfExecutable);
                 
                 Height = 50 + starterButtonHeight;
 
@@ -61,6 +63,8 @@ namespace SimpleStarterGui
                         continue;
                     }
 
+                    if (!info.CreateControl) continue;
+                    
                     var newControl = CreateControl(info, dictStarterButtons, yPos);
 
                     Controls.Add(newControl);
@@ -78,7 +82,8 @@ namespace SimpleStarterGui
                         {
                             if (kv.Value.Tag is not Process process || !process.HasExited) continue;
 
-                            kv.Value.ResetBackColor();
+                            if (process.ExitCode == 0) kv.Value.ResetBackColor();
+                            else kv.Value.BackColor = Color.LightCoral;
                             kv.Value.Tag = null;
                             kv.Value.Text = kv.Key;
                         }
@@ -95,7 +100,7 @@ namespace SimpleStarterGui
 
             Height += starterButtonHeight;
             yPos += starterButtonHeight;
-            _bLogView.SetBounds(5, yPos, 85, 25);
+            _bLogView.SetBounds(5, yPos, 57, 25);
             _bLogView.Click += (_, _) =>
             {
                 var p = new Process();
@@ -121,14 +126,14 @@ namespace SimpleStarterGui
             {
                 _bShowConfig = new Button
                 {
-                    Text = @"edit config...",
+                    Text = @"config",
                     TextAlign = ContentAlignment.MiddleLeft,
                     Font = new Font(DefaultFont, FontStyle.Italic),
                     Anchor = AnchorStyles.Bottom | AnchorStyles.Right,
                     FlatStyle = FlatStyle.Flat
                 };
 
-                _bShowConfig.SetBounds(_bLogView.Width + 10, yPos, 85, 25);
+                _bShowConfig.SetBounds(_bLogView.Width + 5 + 1, yPos, 57, 25);
                 _bShowConfig.Click += (_, _) =>
                 {
                     var p = new Process();
@@ -149,6 +154,38 @@ namespace SimpleStarterGui
                     }
                 };
                 Controls.Add(_bShowConfig);
+                
+                var _bRestart = new Button
+                {
+                    Text = @"restart",
+                    TextAlign = ContentAlignment.MiddleLeft,
+                    Font = new Font(DefaultFont, FontStyle.Italic),
+                    Anchor = AnchorStyles.Bottom | AnchorStyles.Right,
+                    FlatStyle = FlatStyle.Flat
+                };
+
+                _bRestart.SetBounds(_bLogView.Width + 5 + 1 + _bShowConfig.Width + 1, yPos, 57, 25);
+                _bRestart.Click += (_, _) =>
+                {
+                    var p = new Process();
+                    p.StartInfo = new ProcessStartInfo
+                    {
+                        FileName = selfExecutable,
+                        WorkingDirectory = Path.GetDirectoryName(startInfo.FullConfigPath)
+                    };
+                    try
+                    {
+                        p.Start();
+                        Application.Exit();
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error(ex);
+                        SetError(true);
+                    }
+                };
+                Controls.Add(_bRestart);
+                
             }
         }
 

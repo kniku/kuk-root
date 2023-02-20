@@ -12,6 +12,7 @@ public class StartInfoEntryModel
 {
     public string Title { get; set; }
     public string? Description { get; set; }
+    public bool CreateControl { get; set; } = true;
     public ExecutionModel? Execution { get; set; }
     public string[]? Executions { get; set; }
 }
