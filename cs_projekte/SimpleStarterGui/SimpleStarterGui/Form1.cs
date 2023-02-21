@@ -63,9 +63,8 @@ namespace SimpleStarterGui
                         continue;
                     }
 
-                    if (!info.CreateControl) continue;
-                    
                     var newControl = CreateControl(info, dictStarterButtons, yPos);
+                    if (!info.ShowControl) continue;
 
                     Controls.Add(newControl);
                     yPos += newControl.Height;
@@ -257,7 +256,7 @@ namespace SimpleStarterGui
                         return;
                     }
 
-                    logger.Information($"starting {info.Title}: {info.Execution.Executable}...");
+                    logger.Information($"starting {info.Title} in {info.Execution.WorkingDirectory}: {info.Execution.Executable} {info.Execution.Arguments}");
                     var p = new Process();
                     p.StartInfo = new ProcessStartInfo
                     {
@@ -266,6 +265,10 @@ namespace SimpleStarterGui
                         WorkingDirectory = info.Execution.WorkingDirectory,
                         UseShellExecute = info.Execution.UseShellExecute
                     };
+                    if (info.Execution.Environment != null)
+                        foreach (var kv in info.Execution.Environment)
+                            p.StartInfo.Environment[kv.Key] = kv.Value;
+                       
                     try
                     {
                         p.Start();

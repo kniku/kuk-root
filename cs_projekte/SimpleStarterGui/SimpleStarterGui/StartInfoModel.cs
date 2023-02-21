@@ -6,13 +6,14 @@ public class ExecutionModel
     public string? Arguments  { get; set; }
     public string? WorkingDirectory { get; set; }
     public bool UseShellExecute { get; set; }
+    public Dictionary<string, string>? Environment { get; set; }
 }
 
 public class StartInfoEntryModel
 {
     public string Title { get; set; }
     public string? Description { get; set; }
-    public bool CreateControl { get; set; } = true;
+    public bool ShowControl { get; set; } = true;
     public ExecutionModel? Execution { get; set; }
     public string[]? Executions { get; set; }
 }

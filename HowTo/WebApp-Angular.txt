@@ -35,6 +35,7 @@ user registrieren:	npm adduser --registry http://ax-dev04:4873
 paket pushen:		npm publish --registry http://ax-dev04:4873
 #set registry:		npm set registry http://ax-dev04:4873 (arbeitet dann auch als proxy!)
 set registry:		npm set registry http://ax-rz-dev-004.ad.automationx.com:4873 (arbeitet dann auch als proxy!)
+set registry:		npm set registry https://ax-rz-dev-004.ad.automationx.com (arbeitet dann auch als proxy!)
 unset:				npm config delete registry (nötig, falls proxy nicht erreichbar)
 config list: 	npm config list
 
