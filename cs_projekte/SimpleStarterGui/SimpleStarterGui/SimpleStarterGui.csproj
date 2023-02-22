@@ -6,11 +6,11 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>Right-Squared.ico</ApplicationIcon>
+    <ApplicationIcon>icons8-anfang-32.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Right-Squared.ico" />
+    <Content Include="icons8-anfang-32.ico" />
   </ItemGroup>
 
 </Project>
