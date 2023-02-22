@@ -7,7 +7,7 @@ namespace SimpleStarterGui
     public sealed partial class Form1 : Form
     {
         private readonly Button _bLogView;
-        private readonly Button _bShowConfig;
+        private readonly Button? _bShowConfig;
         private const int starterButtonHeight = 25;
         private ToolTip toolTips = new ();
         IDebugLogger logger = DebugLoggerFactory.GetOrCreate();
@@ -38,6 +38,7 @@ namespace SimpleStarterGui
             MinimizeBox = false;
             var yPos = 10;
             Width = 200;
+            Height = 60;
 
             if (startInfo?.StartInfos != null)
             {
@@ -48,12 +49,15 @@ namespace SimpleStarterGui
 
                 startInfo.Tokens.Add("self", selfExecutable);
                 
-                Height = 50 + starterButtonHeight;
+                //Height = 50 + starterButtonHeight;
 
                 var dictStarterButtons = new Dictionary<string, Button>();
 
                 foreach (var info in startInfo.StartInfos)
                 {
+                    if (info.Title == null)
+                        info.Title = Guid.NewGuid().ToString();
+
                     ExpandAllTokens(info, startInfo.Tokens);
                     
                     if (dictStarterButtons.ContainsKey(info.Title))
@@ -81,7 +85,7 @@ namespace SimpleStarterGui
                         {
                             if (kv.Value.Tag is not Process process || !process.HasExited) continue;
 
-                            if (process.ExitCode == 0) kv.Value.ResetBackColor();
+                            if (process.ExitCode == 0) kv.Value.BackColor = DefaultBackColor;
                             else kv.Value.BackColor = Color.LightCoral;
                             kv.Value.Tag = null;
                             kv.Value.Text = kv.Key;
@@ -98,7 +102,7 @@ namespace SimpleStarterGui
             }
 
             Height += starterButtonHeight;
-            yPos += starterButtonHeight;
+            yPos += 10; // starterButtonHeight;
             _bLogView.SetBounds(5, yPos, 57, 25);
             _bLogView.Click += (_, _) =>
             {
@@ -220,22 +224,45 @@ namespace SimpleStarterGui
         
         private Control CreateControl(StartInfoEntryModel info, Dictionary<string, Button> dictStarterButtons, int yPos)
         {
-            var x = new Button
+            Control r;
+
+            Button createButton()
             {
-                Text = info.Title,
-                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
-            };
+                var x = new Button
+                {
+                    Text = info.Title,
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+                };
+                dictStarterButtons.Add(info.Title!, x);
+                x.SetBounds(5, yPos, 175, starterButtonHeight);
+                x.TextAlign = ContentAlignment.MiddleLeft;
+                return x;
+            }
+            Label createLabel()
+            {
+                var x = new Label
+                {
+                    Text = "\u2015\u2015 " + info.Title + " \u2015\u2015",
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+                };
+                x.SetBounds(5, yPos, 175, 14);
+                //x.BorderStyle = BorderStyle.None;
+                //x.Margin = new Padding(0);
+                //x.Padding = new Padding(0);
+                x.Font = new Font(x.Font.FontFamily, (float)7.0, FontStyle.Italic);
+                x.TextAlign = ContentAlignment.MiddleCenter;
+                return x;
+            }
 
-            dictStarterButtons.Add(info.Title, x);
 
-            x.SetBounds(5, yPos, 175, starterButtonHeight);
             if (info.Execution != null)
             {
-                toolTips.SetToolTip(x,
+                r = createButton();
+                toolTips.SetToolTip(r,
                     $"{info.Description}\nStart: [{info.Execution.Executable}]\nWith args: [{info.Execution.Arguments}]\nIn: [{info.Execution.WorkingDirectory}]");
-                x.Click += (_, _) =>
+                r.Click += (_, _) =>
                 {
-                    if (x.Tag is Process runningProcess)
+                    if (r.Tag is Process runningProcess)
                     {
                         if (MessageBox.Show(
                                 @$"Killing {info.Title} (pid: {runningProcess.Id})...{Environment.NewLine}Are you sure?",
@@ -273,9 +300,9 @@ namespace SimpleStarterGui
                     {
                         p.Start();
                         var pid = p.Id;
-                        x.Text += @$" ({pid})";
-                        x.Tag = p;
-                        x.BackColor = Color.LawnGreen;
+                        r.Text += @$" ({pid})";
+                        r.Tag = p;
+                        r.BackColor = Color.LawnGreen;
                     }
                     catch (Exception ex)
                     {
@@ -286,9 +313,10 @@ namespace SimpleStarterGui
             }
             else if (info.Executions != null && info.Executions.Any())
             {
-                toolTips.SetToolTip(x, $"Start [{string.Join(", ", info.Executions)}]");
-                x.Font = new Font(DefaultFont, FontStyle.Bold);
-                x.Click += (_, _) =>
+                r = createButton();
+                toolTips.SetToolTip(r, $"Start [{string.Join(", ", info.Executions)}]");
+                r.Font = new Font(DefaultFont, FontStyle.Bold);
+                r.Click += (_, _) =>
                 {
                     foreach (var execution in info.Executions)
                     {
@@ -302,12 +330,13 @@ namespace SimpleStarterGui
             else
             {
                 // used as separator
-                x.Visible = false;
-                x.Enabled = false;
-                x.Height = 10;
+                r = createLabel();
+                // x.Visible = false;
+                //r.Enabled = false;
+                //r.Height = 10;
             }
 
-            return x;
+            return r;
         }
         
         private void SetError(bool iSet)

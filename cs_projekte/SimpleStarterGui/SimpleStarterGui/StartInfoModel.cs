@@ -2,7 +2,7 @@
 
 public class ExecutionModel
 {
-    public string Executable { get; set; }
+    public string? Executable { get; set; }
     public string? Arguments  { get; set; }
     public string? WorkingDirectory { get; set; }
     public bool UseShellExecute { get; set; }
@@ -11,7 +11,7 @@ public class ExecutionModel
 
 public class StartInfoEntryModel
 {
-    public string Title { get; set; }
+    public string? Title { get; set; }
     public string? Description { get; set; }
     public bool ShowControl { get; set; } = true;
     public ExecutionModel? Execution { get; set; }
