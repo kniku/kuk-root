@@ -9,6 +9,7 @@ namespace SimpleStarterGui
         private readonly Button _bLogView;
         private readonly Button? _bShowConfig;
         private const int starterButtonHeight = 25;
+        private const int formWidth = 250;
         private ToolTip toolTips = new ();
         IDebugLogger logger = DebugLoggerFactory.GetOrCreate();
 
@@ -31,13 +32,15 @@ namespace SimpleStarterGui
             var editCommand = new CommandlineParser(Environment.GetCommandLineArgs()).FindOption("editor", "notepad");
             
             if (startInfo?.Name != null)
-                Text += @$": {startInfo.Name}";
+                Text = startInfo.Name;
 
-            TopMost = true;
+            TopMost = false;
             MaximizeBox = false;
-            MinimizeBox = false;
+            MinimizeBox = true;
+            //ControlBox = false;
+            
             var yPos = 10;
-            Width = 200;
+            Width = formWidth;
             Height = 60;
 
             if (startInfo?.StartInfos != null)
@@ -103,7 +106,7 @@ namespace SimpleStarterGui
 
             Height += starterButtonHeight;
             yPos += 10; // starterButtonHeight;
-            _bLogView.SetBounds(5, yPos, 57, 25);
+            _bLogView.SetBounds(5, yPos, (formWidth - 25) / 3 - 1, 25);
             _bLogView.Click += (_, _) =>
             {
                 var p = new Process();
@@ -136,7 +139,7 @@ namespace SimpleStarterGui
                     FlatStyle = FlatStyle.Flat
                 };
 
-                _bShowConfig.SetBounds(_bLogView.Width + 5 + 1, yPos, 57, 25);
+                _bShowConfig.SetBounds(_bLogView.Width + 5 + 1, yPos, (formWidth - 25) / 3 - 1, 25);
                 _bShowConfig.Click += (_, _) =>
                 {
                     var p = new Process();
@@ -167,7 +170,7 @@ namespace SimpleStarterGui
                     FlatStyle = FlatStyle.Flat
                 };
 
-                _bRestart.SetBounds(_bLogView.Width + 5 + 1 + _bShowConfig.Width + 1, yPos, 57, 25);
+                _bRestart.SetBounds(_bLogView.Width + 5 + 1 + _bShowConfig.Width + 1, yPos, (formWidth - 25) / 3 - 1, 25);
                 _bRestart.Click += (_, _) =>
                 {
                     var p = new Process();
@@ -234,7 +237,7 @@ namespace SimpleStarterGui
                     Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
                 };
                 dictStarterButtons.Add(info.Title!, x);
-                x.SetBounds(5, yPos, 175, starterButtonHeight);
+                x.SetBounds(5, yPos, formWidth - 25, starterButtonHeight);
                 x.TextAlign = ContentAlignment.MiddleLeft;
                 return x;
             }
@@ -264,9 +267,9 @@ namespace SimpleStarterGui
                 {
                     if (r.Tag is Process runningProcess)
                     {
-                        if (MessageBox.Show(
+                        if (MessageBox.Show(this,
                                 @$"Killing {info.Title} (pid: {runningProcess.Id})...{Environment.NewLine}Are you sure?",
-                                @"Warning", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                                @"Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
                             return;
 
                         logger.Information($"killing {info.Title} (pid: {runningProcess.Id})...");
