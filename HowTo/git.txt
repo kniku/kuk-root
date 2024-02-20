@@ -1,60 +1,59 @@
 neuen lokalen branch anlegen:
 =============================
-git checkout -b branches/TEST
+	git checkout -b branches/TEST
+aus tag einen branch anlegen:
+	git checkout -b newbranch tags/v1.0
 
 mit remote branch verknüpfen:
 =============================
-git branch --set-upstream-to=origin/<branch> branches/TEST
-...detaching:
-git branch --unset-upstream
+	git branch --set-upstream-to=origin/<branch> branches/TEST
+detaching:
+	git branch --unset-upstream
 
 branch nach remote pushen (inkl. tracking):
 =============================
-git push -u origin branches/TEST
-...oder mit anderem Namen:
-git push -u origin branches/TEST:branches/NEW_NAME
+	git push -u origin branches/TEST
+oder mit anderem Namen:
+	git push -u origin branches/TEST:branches/NEW_NAME
 
 branch mergen:
 =============================
-git checkout myBranch
-git merge master
-... oder remote tracking branch (nicht lokal)
-git merge origin/features/5.4.3000/ft-100293-SqlServer2017
+	git checkout myBranch
+	git merge master
+oder remote tracking branch (nicht lokal)
+	git merge origin/features/5.4.3000/ft-100293-SqlServer2017
 
-... nur testen (keine commits)
-git merge --no-commit --no-ff BRANCH_TO_MERGE
-... danach komplett rückgängigmachen mit:
-git merge --abort
+nur testen (keine commits)
+	git merge --no-commit --no-ff BRANCH_TO_MERGE
+danach komplett rückgängigmachen mit:
+	git merge --abort
 
 oder rebasen (besser, keine zusätzlichen merge commits):
 =============================
-git checkout myBranch
-git rebase master
-...danach zurückmergen in master:
-git checkout master
-git merge myBranch --> fast-forward merge, keine zusätzlichen commits enthalten
+	git checkout myBranch
+	git rebase master
+danach zurückmergen in master:
+	git checkout master
+	git merge myBranch --> fast-forward merge, keine zusätzlichen commits enthalten
 
 branch löschen
 =============================
-git branch -d BRANCH_NAME
-... remote branch löschen
-git push origin --delete BRANCH_NAME
+	git branch -d BRANCH_NAME
+remote branch löschen
+	git push origin --delete BRANCH_NAME
 
-branch umbenennen
+branch umbenennen (lokal und remote)
 =============================
-git branch -m new-name						# Rename branch locally
-git push origin :old_branch					# Delete the old branch
-git push --set-upstream origin new_branch	# Push the new branch, set local branch to track the new remote
--- oder wenn anderer branch ausgecheckt:
-git branch -m old-name new-name
-git push origin :old-name new-name
-git push origin -u new-name
+git checkout <old_name>				# alten branch auschecken
+git branch -m <new_name>			# Rename branch locally
+git push origin -u <new_name>		# neuen branch pushen und tracken
+git push origin --delete <old_name>	# Delete the old branch
 
 auf welchem branch bin ich?
 =============================
-git status
-...oder
-git remote show origin
+	git status
+oder
+	git remote show origin
 
 branch diff
 =============================
@@ -65,13 +64,13 @@ gegen aktuellen branch (summarized):
 
 welche branches sind gemerged/nicht gemerged?
 =============================
-git branch --merged
-git branch --no-merged
-... oder auch anderen als den aktuellen branch bezogen:
-git branch --merged OTHER_BRANCH
-git branch --no-merged OTHER_BRANCH
--- oder über remote branches:
-git branch -r --no-merged origin/<BRANCH_OF_INTEREST>
+	git branch --merged
+	git branch --no-merged
+oder auch anderen als den aktuellen branch bezogen:
+	git branch --merged OTHER_BRANCH
+	git branch --no-merged OTHER_BRANCH
+oder über remote branches:
+	git branch -r --no-merged origin/<BRANCH_OF_INTEREST>
 
 Gemeinsame baseline von zwei branches (1. commit nach Brancherstellung)
 =============================
@@ -94,11 +93,11 @@ tags: git tag -l | xargs git tag -d;git fetch --tags
 
 tag erzeugen
 =============================
-git tag [TAG]
-... oder
-git tag -a [TAG] -m "my version 1.4"
-... nach remote pushen:
-git push origin [TAG]
+	git tag [TAG]
+oder
+	git tag -a [TAG] -m "my version 1.4"
+nach remote pushen:
+	git push origin [TAG]
 
 git commit hook temporär deaktivieren
 =============================
@@ -108,3 +107,11 @@ URL in bestehendem lokalen Repo ändern
 =============================
 git remote set-url origin https://AX-RZ-DEV-001.ad.automationx.com/AutomationX/AX5.git
 
+git stash - temporär Änderungen wegsichern
+=============================
+stashen:
+	git stash -m"optional message..."
+Liste:
+	git stash list --date=local
+stash anwenden:
+	git stash apply	oder (autom. stash entfernen): git stash pop

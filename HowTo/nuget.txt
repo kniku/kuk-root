@@ -6,6 +6,7 @@ system: %ProgramFiles(x86)%\NuGet\Config
 
 nuget sourcen verwalten
 ==========================
+Liste holen: nuget sources
 nuget sources add -name LocalPackageSource -Source C:\nuget_store\
 nuget sources remove|disable -name LocalPackageSource -Source C:\nuget_store\
 nuget sources enable -name axnugettest

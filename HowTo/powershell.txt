@@ -22,3 +22,11 @@ Update-Module posh-git
 Auslesen offener Ports inkl. Prozessinfo (Achtung: LISTENING nur auf englischen Systemen - wird lokalisiert)
 ======================
 (netstat -ano | findstr "LISTENING"| findstr /v '::') | ForEach-Object { echo "$((Get-Process -Id ($_ -Split "\s+")[5]).ProcessName) $(($_ -Split "\s+")[2])"}
+
+History
+======================
+https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_history
+h ... Get-History
+r ... Invoke-History
+F8 ... Anfang tippen und mit F8 ergänzen => Loop-F8
+# ... #{Suchtext}TAB - History nach Suchtext durchsuchen => Loop-TAB

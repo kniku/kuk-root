@@ -5,6 +5,15 @@ msi Paket holen und installieren...
 
 check: node -v bzw. npm -v
 
+Alternativ: Mit nvm (node version manager)
+================
+Siehe https://learn.microsoft.com/de-de/windows/dev-environment/javascript/nodejs-on-windows
+Download: https://github.com/coreybutler/nvm-windows/releases - Setup
+Nach Installation: nvm -v oder nvm ls
+node version installieren, powershell(admin) zB:
+	nvm install 16.20.2
+	nvm use 16.20.2
+
 Angular CLI installieren/updaten (global)
 ================
 npm install -g @angular/cli
@@ -25,6 +34,10 @@ CLI infos
 	[optional, falls yarn nicht verfügbar vorher noch: corepack enable]
 - yarn installieren: npm install --global yarn
 
+Hinweis: Wenn beim install (npm, yarn) Netzwerkproblem auftritt (wegen registry proxy - siehe unten):
+	npm: unset registry
+	yarn: yarn config list checken => nimmt uU C:\Users\kurt.kniely\.npmrc als override!
+
 Angular schematics CLI installieren (global)
 ================
 npm install -g @angular-devkit/schematics-cli
@@ -33,9 +46,8 @@ npm umleiten (AX)
 ================
 user registrieren:	npm adduser --registry http://ax-dev04:4873
 paket pushen:		npm publish --registry http://ax-dev04:4873
-#set registry:		npm set registry http://ax-dev04:4873 (arbeitet dann auch als proxy!)
-set registry:		npm set registry http://ax-rz-dev-004.ad.automationx.com:4873 (arbeitet dann auch als proxy!)
-set registry:		npm set registry https://ax-rz-dev-004.ad.automationx.com (arbeitet dann auch als proxy!)
+set registry:		npm set registry https://ax-rz-dev-004.ad.automationx.com:4873/ (arbeitet dann auch als proxy!)
+Bei Zertifikatproblem: npm config set cafile "C:\views\aXWebUI\ax-web\ad-automationx-com.pem"
 unset:				npm config delete registry (nötig, falls proxy nicht erreichbar)
 config list: 	npm config list
 
