@@ -41,6 +41,10 @@ branch löschen
 	git branch -d BRANCH_NAME
 remote branch löschen
 	git push origin --delete BRANCH_NAME
+lokales cleanup von allen remote removed branches/tags
+	branches: git remote prune origin
+	tags: git tag -l | xargs git tag -d;git fetch --tags
+		oder (powershell):  foreach($x in (git tag -l)){ git tag -d $x};git fetch --tags
 
 branch umbenennen (lokal und remote)
 =============================
@@ -84,12 +88,6 @@ tags: git tag
 inkl. tags: git ls-remote
 exkl. tags: git ls-remote --heads
 nur tags: git ls-remote --tags
-
-lokales cleanup von allen remote removed branches/tags
-=============================
-branches: git remote prune origin
-tags: git tag -l | xargs git tag -d;git fetch --tags
-	oder (powershell):  foreach($x in (git tag -l)){ git tag -d $x};git fetch --tags
 
 tag erzeugen
 =============================
