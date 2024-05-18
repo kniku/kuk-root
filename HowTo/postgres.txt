@@ -1,0 +1,11 @@
+Lokale Installation neuer postgres Server vom zip-File
+==========================
+Download: https://www.enterprisedb.com/download-postgresql-binaries
+
+Tools zur Installation liegen unter $env:OneDrive\Kurt\Dev-Infos\postgres-howto
+
+Installation:
+& $env:OneDrive\Kurt\Dev-Infos\postgres-howto\Kurt\Dev-Infos\postgres-howto\prepare_postgres.ps1 -new_postgres_directory v16 -postgres_zip_package .\postgresql-16.3-1-windows-x64-binaries.zip
+
+Start/Stop:
+Start_Database_Manually.bat / Stop_Database_Manually.bat

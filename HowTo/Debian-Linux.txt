@@ -1,0 +1,12 @@
+Doku: https://www.debian.org/doc/
+
+Pakete aktualisieren:
+	Holen der aktuellen Paket Informationen: apt-get update
+	Alles aktualisieren: apt-get upgrade
+
+
+dotnet installieren:
+	Doku: https://learn.microsoft.com/en-us/dotnet/core/install/linux-debian
+	Anzeige installierter Runtimes: dotnet --list-runtimes
+	
+	
