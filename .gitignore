@@ -28,3 +28,4 @@ packages/
 .idea
 
 # misc
+.local-secret
