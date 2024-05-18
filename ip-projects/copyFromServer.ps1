@@ -5,4 +5,4 @@ Param (
 echo "Transfer root@vmanager8619.premium-vserver.net:$SourceFile => $TargetFile - Ok?"
 pause
 
-Invoke-Expression "$PSScriptRoot\Tools\PSCP.EXE -pwfile $PSScriptRoot\pwd.txt root@vmanager8619.premium-vserver.net:$SourceFile $TargetFile"
+PSCP.EXE -pwfile .local-secret root@vmanager8619.premium-vserver.net:$SourceFile $TargetFile

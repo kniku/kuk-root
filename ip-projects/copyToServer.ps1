@@ -8,4 +8,4 @@ if (!$Forced) {
 	pause
 }
 
-Invoke-Expression "$PSScriptRoot\Tools\PSCP.EXE -pwfile $PSScriptRoot\pwd.txt $SourceFile root@vmanager8619.premium-vserver.net:$TargetFile"
+PSCP.EXE -pwfile .local-secret $SourceFile root@vmanager8619.premium-vserver.net:$TargetFile
