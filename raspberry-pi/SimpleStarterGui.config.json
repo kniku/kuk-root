@@ -1,0 +1,34 @@
+{
+	"Name": "raspberry pi",
+	"Tokens": {
+		"editor": "C:/Program Files/Notepad++/notepad++.exe"
+	},
+	"StartInfos": [
+		{
+			"Title": "pi - Terminal",
+			"_ImagePath": "C:/knk/Icons/Icons8/Windows11/icons8-aufgabenliste-16.png",
+			"Execution": {
+				"Arguments": "-load raspberry-pi -pwfile ./pwd.txt",
+				"WorkingDirectory": "C:/views/knk/raspberry-pi",
+				"Executable": "./Tools/putty"
+			}
+		},
+		{
+			"Title": "links"
+		},
+		{
+			"Title": "🌍 pi-Cockpit",
+			"Execution": {
+				"Executable": "https://10.0.0.30:9090/system",
+				"UseShellExecute": true
+			}
+		},
+		{
+			"Title": "🌍 pi-hole",
+			"Execution": {
+				"Executable": "http://10.0.0.30/admin/index.php",
+				"UseShellExecute": true
+			}
+		}
+	]
+}
