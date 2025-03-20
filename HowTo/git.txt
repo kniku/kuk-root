@@ -88,6 +88,7 @@ tags: git tag
 inkl. tags: git ls-remote
 exkl. tags: git ls-remote --heads
 nur tags: git ls-remote --tags
+branches, die nur lokal existieren: git branch -vv |fgrep -v origin
 
 tag erzeugen
 =============================

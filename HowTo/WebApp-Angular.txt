@@ -57,6 +57,7 @@ Angular Projekt updaten
 =================
 ng update @angular/cli @angular/core
 	falls Zertifikatsfehler (zB. weil hinter proxy): $env:NODE_TLS_REJECT_UNAUTHORIZED=0
+	oder: npm set strict-ssl false
 
 Angular routing
 =================
