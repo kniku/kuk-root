@@ -1,6 +1,6 @@
 {
 	"Name": "raspberry pi",
-	"Tokens": {
+	"xTokens": {
 		"editor": "C:/Program Files/Notepad++/notepad++.exe"
 	},
 	"StartInfos": [
@@ -8,9 +8,9 @@
 			"Title": "pi - Terminal",
 			"_ImagePath": "C:/knk/Icons/Icons8/Windows11/icons8-aufgabenliste-16.png",
 			"Execution": {
-				"Arguments": "-load raspberry-pi -pwfile ./pwd.txt",
-				"WorkingDirectory": "C:/views/knk/raspberry-pi",
-				"Executable": "./Tools/putty"
+				"Arguments": "-pwfile .local-secret kuk@10.0.0.30",
+				"xWorkingDirectory": "C:/views/knk/raspberry-pi",
+				"Executable": "putty"
 			}
 		},
 		{
