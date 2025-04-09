@@ -23,12 +23,12 @@ check: ng version
 CLI infos
 - Anm.: Benötigt Internetverbindung!!
 - Neues Projekt anlegen:
-	ng new PROJECTNAME --routing --skip-git --style css --minimal
+	ng new PROJECTNAME --routing --skip-git --style css --minimal --ssr false
 
-- Projekt kompilieren&starten und Browser öffnen: ng serve --open
+- Projekt kompilieren&starten und Browser öffnen: 	
 
 - mit yarn statt npm arbeiten
-	ng new PROJECTNAME --routing --skip-git --style css --minimal --skip-install
+	ng new PROJECTNAME --routing --skip-git --style css --minimal --ssr false --skip-install
 	[ins projekt wechseln]
 	ng config cli.packageManager yarn
 	yarn
@@ -108,7 +108,7 @@ bootstrap für Projekt installieren (siehe https://www.smashingmagazine.com/2019/
 
 devextreme für Projekt installieren
 =================
-- cli (global) installieren: npm i -g devextreme-cli
+- cli (global) installieren: npm install -g devextreme-cli
 	Test/Version: devextreme -v
 	... kann mit npx auch ohne verwendet werden: npx devextreme-cli [options]
 
@@ -138,6 +138,10 @@ ng add @angular/material
 - style.css: @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 - test: app.component.html
 	<button mat-stroked-button>Click me!</button>
+- Lokalisierung (global)
+	import { MAT_DATE_LOCALE } from '@angular/material/core';
+	providers: [{ provide: MAT_DATE_LOCALE, useValue: 'de-DE' }],
+
 
 Debugging mit Chrome
 =================

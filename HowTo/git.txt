@@ -50,8 +50,8 @@ branch umbenennen (lokal und remote)
 =============================
 git checkout <old_name>				# alten branch auschecken
 git branch -m <new_name>			# Rename branch locally
-git push origin -u <new_name>		# neuen branch pushen und tracken
-git push origin --delete <old_name>	# Delete the old branch
+git push -u origin <new_name>		# neuen branch pushen und tracken
+git push --delete origin <old_name>	# Delete the old branch
 
 auf welchem branch bin ich?
 =============================
