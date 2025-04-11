@@ -8,4 +8,4 @@ if (!$Forced) {
 	pause
 }
 
-PSCP.EXE -pwfile .local-secret $SourceFile root@vmanager8619.premium-vserver.net:$TargetFile
+PSCP.EXE -pwfile $PSScriptRoot\.local-secret $SourceFile root@vmanager8619.premium-vserver.net:$TargetFile
