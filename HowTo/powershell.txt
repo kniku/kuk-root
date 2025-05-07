@@ -16,6 +16,9 @@ Get-InstalledModule ... alle installierten Module
 Module installieren
 Install-Module posh-git -Scope CurrentUser -Force
 
+Module importieren
+Import-Module posh-git
+
 Module updaten
 Update-Module posh-git
 
