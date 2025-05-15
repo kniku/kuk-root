@@ -40,7 +40,7 @@ branch löschen
 =============================
 	git branch -d BRANCH_NAME
 remote branch löschen
-	git push origin --delete BRANCH_NAME
+	git push origin --delete refs/heads/BRANCH_NAME
 lokales cleanup von allen remote removed branches/tags
 	branches: git remote prune origin
 	tags: git tag -l | xargs git tag -d;git fetch --tags
@@ -93,10 +93,19 @@ branches, die nur lokal existieren: git branch -vv |fgrep -v origin
 tag erzeugen
 =============================
 	git tag [TAG]
-oder
+oder (annotated)
 	git tag -a [TAG] -m "my version 1.4"
 nach remote pushen:
 	git push origin [TAG]
+
+tag löschen
+=============================
+lokal: git tag -d [TAG]
+remote: git push --delete origin refs/tags/TEST
+
+lokale tags aktualisieren (überschreiben)
+=============================
+git fetch --tags --force
 
 git commit hook temporär deaktivieren
 =============================
