@@ -1,7 +1,15 @@
-<#
-.Description
-This is a template ps1 script.
+<#PSScriptInfo
+.VERSION 1.0.0
+.GUID 2bf3a9df-611c-4a0b-9b17-2bbe85fb7209
+.AUTHOR kuk
+.COMPANYNAME Privat
 #>
+
+<#
+.DESCRIPTION
+my description
+#>
+
 [CmdletBinding(DefaultParameterSetName = 'seta')] # default parameter set if mutually exclusive parameters used
 Param (
     # Description of: help...

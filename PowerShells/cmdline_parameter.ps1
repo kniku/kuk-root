@@ -2,7 +2,8 @@ Param (
 	[Parameter(Mandatory=$true)][string]$Path,
 	[string]$Name,
 	[string]$ParamWithDefault = 'default',
-	[switch]$Recurse = $false
+	[switch]$Recurse = $false,
+    [ValidateSet('x', 'y', 'z')][string]$MySelection
 )
 
 if (!$Name) {

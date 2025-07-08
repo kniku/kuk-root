@@ -161,6 +161,16 @@ Debugging mit Chrome
 	}
 - F5 startet Debugger...
 
+typescript Projekt aufsetzen
+=================
+mcd my-project
+npm i typescript --save-dev
+npx tsc --init => es entsteht tsconfig.json
+=> file anlegen, zB main.ts => console.log('Hello World');
+npx tsc => es entsteht main.js => Start mit: node main.js
+Debugging:
+	tsconfig.json => sourceMap aktivieren
+	
 
 Tools
 =================
