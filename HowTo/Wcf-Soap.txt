@@ -1,8 +1,0 @@
-Client aus wsdl generieren:
-------------------------------------
-C:\Temp\WSDL-Problem> svcutil.exe .\99570_WSClientInterface.wsdl
-
-REST / POST (Json Content aus File) Method aus powershell
-------------------------------------
-$postParams = (Get-ChildItem x.x) | Get-Content
-Invoke-WebRequest -Uri http://ax-ew-nb-012:8093/DATA.Instance.libTest.RestServer/SqlKeyValuesInsert -Method POST -Body $postParams -Headers @{"Content-Type"="application/json"}

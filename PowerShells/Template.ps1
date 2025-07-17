@@ -23,9 +23,11 @@ Param (
 )
 
 if ($PSBoundParameters.Count -eq 0) {
-	Get-Help $MyInvocation.MyCommand.Source
+	Get-Help $MyInvocation.MyCommand.Source -Detailed
 	exit 0
 }
 
+# current directory
+Write-Host (Get-Location).Path
 # running script directory
 Write-Host $PSScriptRoot
