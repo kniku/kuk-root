@@ -95,6 +95,11 @@ public class Worker : BackgroundService
                 }
             }
         }
+        catch (DirectoryNotFoundException)
+        {
+            // directory has gone somehow
+            r = true;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error deleting file or directory: {DirName}", fileSystemInfo.FullName);
