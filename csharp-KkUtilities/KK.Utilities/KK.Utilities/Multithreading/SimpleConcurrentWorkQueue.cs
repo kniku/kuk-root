@@ -6,7 +6,10 @@ namespace KK.Utilities.Multithreading;
 public class SimpleConcurrentWorkQueue<T>(Action<T> action, int boundedCapacity = -1, long delayMilliseconds = 0)
 {
     private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
-    private BlockingCollection<T> bc = new(boundedCapacity > 0 ? boundedCapacity : -1); // => uses ConcurrentQueue<T>
+
+    private BlockingCollection<T> bc = boundedCapacity > 0
+        ? new BlockingCollection<T>(boundedCapacity)
+        : new BlockingCollection<T>(); // => uses ConcurrentQueue<T>
     private CancellationTokenSource? cancellationTokenSource;
     private Task? taskConsumer;
     private int isRunning;
