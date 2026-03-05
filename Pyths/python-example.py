@@ -64,7 +64,9 @@ print("----- lists fertig -----")
 h = {"x":"X","y":2,"3":5}
 h["b"] = 10
 h["a"] = {1:-1,2:-2,3:-3}
-sk = list(h.keys());
+print('b=', h['b'])
+print('nix=', h.get('nix'))
+sk = list(h.keys())
 sk.sort()
 print(sk,h["3"],h["b"],h["a"])
 if "a" in h:
