@@ -1,4 +1,5 @@
 using KK.Utilities.Multithreading;
+using KK.Utilities.Multithreading.ConcurrentWorkQueue;
 
 namespace KK.Utilities.Utilities;
 
@@ -9,13 +10,13 @@ public interface ISimpleLogger
 
 public abstract class SimpleLogger: ISimpleLogger
 {
-    private readonly SimpleConcurrentWorkQueue<string> _logQueue;
+    private readonly IConcurrentWorkQueue<string> _logQueue;
 
     public static ISimpleLogger Instance { get; private set; } = null!;
 
     protected SimpleLogger()
     {
-        _logQueue = new SimpleConcurrentWorkQueue<string>(LogWriter);
+        _logQueue = ConcurrentWorkQueueFactory.Create<string>(LogWriter);
         _logQueue.Start();
         Instance = this;
     }
