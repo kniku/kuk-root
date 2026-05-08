@@ -1,17 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
     <PropertyGroup>
-        <Version>1.0.0.3</Version>
-        <TargetFramework>net9.0</TargetFramework>
+        <Version>1.1.0.0</Version>
+        <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>dotnet-AsyncDeletionMonitor-30c113f8-df89-452e-8477-e59c52aeaf5f</UserSecretsId>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.7"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="9.0.7" />
-        <PackageReference Include="NLog.Extensions.Logging" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.7" />
+        <PackageReference Include="NLog.Extensions.Logging" Version="6.1.3" />
     </ItemGroup>
 
     <ItemGroup>

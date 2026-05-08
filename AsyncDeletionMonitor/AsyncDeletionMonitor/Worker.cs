@@ -4,20 +4,23 @@ namespace AsyncDeletionMonitor;
 
 public class Worker : BackgroundService
 {
-    private const string SearchPattern = "2del*del2";
+    // private const string SearchPattern = "2del*del2";
+    private const string SafetyFileName = "2del##del2.txt";
+    private bool _whatIfOnly;
     private readonly ILogger<Worker> _logger;
     private readonly List<FileSystemWatcher> _watchers = [];
-    private readonly BlockingCollection<FileSystemInfo> _objects2delete = new ();
+    private readonly BlockingCollection<FileSystemInfo> _objects2Delete = new ();
     private readonly ConcurrentDictionary<string, int> _errorIndex = new ();
 
     public Worker(ILogger<Worker> logger, IConfiguration configuration)
     {
         _logger = logger;
         var dirs = configuration.GetSection("Directories").GetChildren().Select(c => c.Value);
+        _whatIfOnly = configuration.GetValue("WhatIfOnly", true);
         foreach (var path in dirs)
         {
             var dir = string.IsNullOrEmpty(path) ? null : new DirectoryInfo(path);
-            if (dir?.Exists == true)
+            if (dir?.Exists == true && File.Exists(Path.Combine(dir.FullName, SafetyFileName)))
             {
                 _logger.LogInformation("Monitoring: {Dir}", dir.FullName);
                 InitialScanForDeletion(dir);
@@ -25,15 +28,18 @@ public class Worker : BackgroundService
             }
             else
             {
-                _logger.LogWarning("Invalid directory: {Dir}", path);
+                _logger.LogError(
+                    "Invalid directory: \"{Dir}\" - Ensure directory exists and contains safety file \"{SafetyFile}\"", path,
+                    SafetyFileName);
+                Environment.Exit(-1);
             }
         }
     }
 
     private void InitialScanForDeletion(DirectoryInfo directory)
     {
-        foreach (var info in directory.EnumerateFileSystemInfos(SearchPattern, SearchOption.AllDirectories))
-            _objects2delete.Add(info);
+        foreach (var info in directory.EnumerateFileSystemInfos("*", SearchOption.AllDirectories))
+            _objects2Delete.Add(info);
     }
     
     private void StartWatch(DirectoryInfo directory)
@@ -53,7 +59,7 @@ public class Worker : BackgroundService
                               | NotifyFilters.FileName;
         watcher.Created += OnChanged;
         watcher.Renamed += OnChanged;
-        watcher.Filter = SearchPattern;
+        // watcher.Filter = SearchPattern;
         watcher.IncludeSubdirectories = true;
         watcher.EnableRaisingEvents = true;        
         _watchers.Add(watcher);
@@ -65,11 +71,11 @@ public class Worker : BackgroundService
 
         if(File.Exists(e.FullPath))
         {
-            _objects2delete.Add(new FileInfo(e.FullPath));
+            _objects2Delete.Add(new FileInfo(e.FullPath));
         }
         else if(Directory.Exists(e.FullPath))
         {
-            _objects2delete.Add(new DirectoryInfo(e.FullPath));
+            _objects2Delete.Add(new DirectoryInfo(e.FullPath));
         }
         else
         {
@@ -82,16 +88,23 @@ public class Worker : BackgroundService
         var r = true;
         try
         {
-            _logger.LogInformation("Deleting file or directory: {ObjectName}", fileSystemInfo.FullName);
             if (fileSystemInfo.Exists)
             {
                 if (fileSystemInfo is DirectoryInfo directoryInfo)
                 {
-                    directoryInfo.Delete(true);
+                    _logger.LogDebug("Deleting directory: {ObjectName}", directoryInfo.FullName);
+                    if (!_whatIfOnly)
+                        directoryInfo.Delete(true);
+                }
+                else if (fileSystemInfo is FileInfo fileInfo && fileInfo.Name != SafetyFileName)
+                {
+                    _logger.LogDebug("Deleting file: {ObjectName}", fileInfo.FullName);
+                    if (!_whatIfOnly)
+                        fileInfo.Delete();
                 }
                 else
                 {
-                    fileSystemInfo.Delete();
+                    _logger.LogDebug("Skipping file or directory: {ObjectName}", fileSystemInfo.FullName);
                 }
             }
         }
@@ -118,7 +131,7 @@ public class Worker : BackgroundService
             _ = Task.Run(async () =>
             {
                 await Task.Delay(TimeSpan.FromMinutes(.1));
-                _objects2delete.Add(objectInfo);
+                _objects2Delete.Add(objectInfo);
             });
         } else {
             _logger.LogError("Error deleting file after {N} attempts: {ObjectName}", errCount, objectInfo.FullName);
@@ -129,7 +142,7 @@ public class Worker : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            var objectToDelete = _objects2delete.Take(stoppingToken);
+            var objectToDelete = _objects2Delete.Take(stoppingToken);
             if (!SafeDeleteObject(objectToDelete))
                 PushToErrorIndex(objectToDelete);
 
